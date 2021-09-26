@@ -1,0 +1,20 @@
+﻿<Window x:Class="TaxiApp.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaxiApp.Views" xmlns:map="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        mc:Ignorable="d"
+        Title="MainView" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1">
+            <map:Map Name="Map" ZoomLevel="11" Center="40.4093, 49.8671" FontStretch="Medium" CredentialsProvider="6R0IxDWP358w4L2oipKw~VJ_g5voZSARLpE0oSOtzeQ~AlKaFJitrZvHYzYmDxo_adY3KOAEONDYlaLa9H6_VRWRYPaWIVaXyxIM6OtVI4Wc" ></map:Map>
+        </Grid>
+        <Grid></Grid>
+    </Grid>
+</Window>
