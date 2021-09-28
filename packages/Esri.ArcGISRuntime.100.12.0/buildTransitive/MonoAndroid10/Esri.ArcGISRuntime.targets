@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <ItemGroup Condition="'$(DesignTimeBuild)' != 'true' AND '$(DeployArcGISNetworkAnalystResources)'!='false'">
+    <AndroidAsset Include="$(MSBuildThisFileDirectory)..\..\resources\network_analyst\strings.bin" Visible="false">
+      <Link>Assets\arcgisruntime\network_analyst\strings.bin</Link>
+    </AndroidAsset>
+  </ItemGroup>
+  
+</Project>

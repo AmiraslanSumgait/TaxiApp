@@ -1,0 +1,1953 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Esri.ArcGISRuntime.WPF</name>
+    </assembly>
+    <members>
+        <member name="T:Esri.ArcGISRuntime.Internal.D3DImageDpi">
+            <summary>
+            D3DImage that exposes the DPI the D3DImage was created at
+            </summary>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.Internal.DxSurfaceImage">
+            <summary>
+            Class that implements directx (D3DImage or WriteableBitmap) rendering from a source.
+            </summary>
+            <seealso cref="T:Esri.ArcGISRuntime.Internal.HostedSurfaceElement"/>
+            <seealso cref="T:Esri.ArcGISRuntime.Internal.LegacySurface"/>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.Internal.HostedSurfaceElement">
+            <summary>
+            Class that hosts a surface <see cref="T:System.Windows.Controls.Image"/> control drawn with Direct3D within a <see cref="T:System.Windows.Media.HostVisual"/> so
+            it can be used on a secondary UI thread and be added as a <see cref="T:System.Windows.FrameworkElement"/> into the visual tree.
+            </summary>
+            <remarks>
+            - Handles <see cref="E:System.Windows.Media.CompositionTarget.Rendering"/> events on a secondary UI thread for pulsing the surface.
+            </remarks>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.HostedSurfaceElement.#ctor(Esri.ArcGISRuntime.Internal.IDxSurfaceSource)">
+            <summary>Initializes a new instance of the <see cref="T:Esri.ArcGISRuntime.Internal.HostedSurfaceElement"/> class.</summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.HostedSurfaceElement.VisualHost">
+            <summary>Gets or sets the child <see cref="T:System.Windows.Media.Visual"/> that houses the control running on the secondary UI thread.</summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.HostedSurfaceElement.VisualChildrenCount">
+            <inheritdoc/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.HostedSurfaceElement.GetVisualChild(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.HostedSurfaceElement.SurfaceContainer">
+            <summary>Gets the containing control of the hosted surface.</summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.HostedSurfaceElement.IsSurfaceInitialized">
+            <summary>Gets a value indicating whether the surface is initialized</summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.HostedSurfaceElement.IsSurfaceLocked">
+            <summary>Gets a value indicating whether the surface is currently locked and rendering</summary>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.Internal.IDxSurfaceImage">
+            <summary>
+            Interface to define directx surface image rendering properties and methods.
+            </summary>
+            <seealso cref="T:Esri.ArcGISRuntime.Internal.HostedSurfaceElement"/>
+            <seealso cref="T:Esri.ArcGISRuntime.Internal.LegacySurface"/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.IDxSurfaceImage.SurfaceContainer">
+            <summary>Gets the FrameworkElement that contains the surface image.</summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.IDxSurfaceImage.IsSurfaceInitialized">
+            <summary>Gets a value indicating whether the surface has been initialized.</summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.IDxSurfaceImage.IsSurfaceLocked">
+            <summary>Gets a value indicating whether the surface is currently locked and rendering.</summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceImage.StartRendering">
+            <summary>Start rendering the surface image</summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceImage.StopRendering">
+            <summary>Stop rendering the surface image</summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceImage.LockSurfaceRequested(System.Boolean)">
+            <summary>Lock the surface</summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceImage.UnlockSurfaceRequested(System.Boolean)">
+            <summary>Unlock the surface</summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceImage.Pause">
+            <summary>Pause rendering (stop pulsing)</summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceImage.Resume">
+            <summary>Resume rendering (start pulsing)</summary>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.Internal.RenderingMode">
+            <summary>DirectX rendering mode</summary>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.Internal.IDxSurfaceSource">
+            <summary>Interface to manage source specific info and operations for <see cref="T:Esri.ArcGISRuntime.Internal.HostedSurfaceElement"/>.</summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.IDxSurfaceSource.DxRenderingMode">
+            <summary>Gets the DirectX Rendering Mode.</summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.IDxSurfaceSource.SurfaceDpi">
+            <summary>Gets the Display DPI.</summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.IDxSurfaceSource.SurfaceSize">
+            <summary>Gets the DirectX Rendering Surface Size.</summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.IDxSurfaceSource.IsRemoteDesktop">
+            <summary>Gets a value indicating whether the current session is from a remote desktop.</summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceSource.SetSoftwarePixelBuffer(System.IntPtr)">
+            <summary>Sets the pixel buffer for use during software rendering</summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceSource.GetD3DBackBuffer">
+            <summary>Gets the Direct3D back buffer</summary>
+            <returns>IntPtr to the back buffer bytes</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceSource.Pulse">
+            <summary>Pulse / draw the surface</summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceSource.Pause">
+            <summary>Pause map rendering - called when device is lost</summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceSource.ResetDeviceAsync">
+            <summary>Reset the Direct3D device - called when device reacquired after lost</summary>
+            <returns><see cref="T:System.Threading.Tasks.Task"/> of the async operation</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.IDxSurfaceSource.OnDrawException(System.String,System.Exception)">
+            <summary>Code to be executed when a pulse / draw / render exception occurs</summary>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.Internal.LegacySurface">
+            <summary>
+            Class that renders a DirectX surface using the legacy (pre 100.3) rendering strategy (no background UI thread).
+            </summary>
+            <seealso cref="T:Esri.ArcGISRuntime.Internal.IDxSurfaceImage"/>
+            <seealso cref="T:Esri.ArcGISRuntime.Internal.HostedSurfaceElement"/>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.Internal.VisualTargetPresentationSource">
+            <summary>
+            Class to represent the root of a visual subtree owned by a different thread than the visual tree in which is is
+            displayed.
+            </summary>
+            <remarks>
+            A <see cref="T:System.Windows.Media.HostVisual"/> belongs to the same UI thread that owns the visual tree in which it resides. A
+            <see cref="T:System.Windows.Media.HostVisual"/> can reference a <see cref="T:System.Windows.Media.VisualTarget"/> owned by another thread. A
+            <see cref="T:System.Windows.Media.VisualTarget"/> has a root <see cref="T:System.Windows.Media.Visual"/>. <see cref="T:Esri.ArcGISRuntime.Internal.VisualTargetPresentationSource"/> wraps
+            the <see cref="T:System.Windows.Media.VisualTarget"/> and enables basic functionality like Loaded, which depends on a
+            <see cref="T:System.Windows.PresentationSource"/> being available.
+            </remarks>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.VisualTargetPresentationSource.#ctor(System.Windows.Media.HostVisual)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Esri.ArcGISRuntime.Internal.VisualTargetPresentationSource"/> class.
+            </summary>
+            <param name="hostVisual"></param>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.VisualTargetPresentationSource.RootVisual">
+            <inheritdoc/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.VisualTargetPresentationSource.GetCompositionTargetCore">
+            <inheritdoc/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.VisualTargetPresentationSource.IsDisposed">
+            <inheritdoc/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.Internal.DesignTime.IsDesignMode">
+            <summary>
+            Gets a value indicating whether the process is in design mode (running in Blend
+            or Visual Studio).
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.Internal.DispatcherExtensions.RunAsyncAction(System.Windows.Threading.Dispatcher,System.Action,System.Boolean)">
+            <summary>
+            Provides a uniform API for all three APIs to initiate an Async on the Dispatcher thread without waiting
+            </summary>
+            <param name="dispatcher">Dispatcher to use</param>
+            <param name="action">Action to execute</param>
+            <param name="highPriority">flag to indicate this should go at the highest priority if available (its not on windows phone)</param>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.IntObservableCollectionConverter">
+            <summary>
+             *FOR INTERNAL USE ONLY* Provides a way of converting observable collections to and from a string representation
+            </summary>
+            <exclude/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.IntObservableCollectionConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Esri.ArcGISRuntime.UI.IntObservableCollectionConverter" /> class.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.IntObservableCollectionConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+                Returns whether this converter can convert an object of the given type to
+            the type of this converter, using the specified context.
+            </summary>
+            <param name="context">An System.ComponentModel.ITypeDescriptorContext that provides a format context.</param>
+            <param name="sourceType">A System.Type that represents the type you want to convert from.</param>
+            <returns>true if this converter can perform the conversion; otherwise, false.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.IntObservableCollectionConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Returns whether this converter can convert the object to the specified type,
+            using the specified context.
+            </summary>
+            <param name="context">An System.ComponentModel.ITypeDescriptorContext that provides a format context.</param>
+            <param name="destinationType">A System.Type that represents the type you want to convert to.</param>
+            <returns>Returns whether this converter can convert the object to the specified type.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.IntObservableCollectionConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <summary>
+            Converts the given object to the type of this converter, using the specified
+            context and culture information.
+            </summary>
+            <param name="context">An System.ComponentModel.ITypeDescriptorContext that provides a format context.</param>
+            <param name="culture">The System.Globalization.CultureInfo to use as the current culture.</param>
+            <param name="value">The System.Object to convert.</param>
+            <returns>An System.Object that represents the converted value.</returns>
+            <exception cref="T:System.NotSupportedException">The conversion cannot be performed.</exception>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.IntObservableCollectionConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+            Converts the given value object to the specified type, using the specified
+            context and culture information.
+            </summary>
+            <param name="context">An System.ComponentModel.ITypeDescriptorContext that provides a format context.</param>
+            <param name="culture">A System.Globalization.CultureInfo. If <c>null</c> is passed, the current culture is assumed.</param>
+            <param name="value">The System.Object to convert.</param>
+            <param name="destinationType">The System.Type to convert the value parameter to.</param>
+            <returns>An System.Object that represents the converted value.</returns>
+            <exception cref="T:System.NotSupportedException">The conversion cannot be performed.</exception>
+            <exception cref="T:System.ArgumentNullException">The destinationType parameter is <c>null</c>.</exception>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.StringToInt32ArrayConverter">
+            <summary>
+             *FOR INTERNAL USE ONLY* Provides a way of converting String To Int32 Array.
+            </summary>
+            <exclude/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.StringToInt32ArrayConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Esri.ArcGISRuntime.UI.StringToInt32ArrayConverter" /> class.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.StringToInt32ArrayConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Returns whether the type converter can convert an object to the specified type.
+            </summary>
+            <param name="context">An object that provides a format context.</param>
+            <param name="destinationType">The type you want to convert to.</param>
+            <returns>
+            true if this converter can perform the conversion; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.StringToInt32ArrayConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Returns whether the type converter can convert an object from the specified type to the type of this converter.
+            </summary>
+            <param name="context">An object that provides a format context.</param>
+            <param name="sourceType">The type you want to convert from.</param>
+            <returns>
+            true if this converter can perform the conversion; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.StringToInt32ArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <summary>
+            Converts from the specified value to the type of this converter.
+            </summary>
+            <param name="context">An object that provides a format context.</param>
+            <param name="culture">The <see cref="T:System.Globalization.CultureInfo"/> to use as the current culture.</param>
+            <param name="value">The value to convert to the type of this converter.</param>
+            <returns>The converted value.</returns>
+            <exception cref="T:System.NotSupportedException">
+            The conversion cannot be performed.
+            </exception>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.StringToInt32ArrayConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+            Converts the specified value object to the specified type.
+            </summary>
+            <param name="context">An object that provides a format context.</param>
+            <param name="culture">The <see cref="T:System.Globalization.CultureInfo"/> to use as the current culture.</param>
+            <param name="value">The object to convert.</param>
+            <param name="destinationType">The type to convert the object to.</param>
+            <returns>The converted object.</returns>
+            <exception cref="T:System.NotImplementedException">
+                <see cref="M:System.ComponentModel.TypeConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)"/>  not implemented in base <see cref="T:System.ComponentModel.TypeConverter"/>.</exception>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.StringToStringArrayConverter">
+            <summary>
+            *FOR INTERNAL USE ONLY* String To String Array Converter
+            </summary>
+            <exclude/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.StringToStringArrayConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Esri.ArcGISRuntime.UI.StringToStringArrayConverter" /> class.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.StringToStringArrayConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Returns whether the type converter can convert an object to the specified type.
+            </summary>
+            <param name="context">An object that provides a format context.</param>
+            <param name="destinationType">The type you want to convert to.</param>
+            <returns>
+            true if this converter can perform the conversion; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.StringToStringArrayConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Returns whether the type converter can convert an object from the specified type to the type of this converter.
+            </summary>
+            <param name="context">An object that provides a format context.</param>
+            <param name="sourceType">The type you want to convert from.</param>
+            <returns>
+            true if this converter can perform the conversion; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.StringToStringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <summary>
+            Converts from the specified value to the type of this converter.
+            </summary>
+            <param name="context">An object that provides a format context.</param>
+            <param name="culture">The <see cref="T:System.Globalization.CultureInfo"/> to use as the current culture.</param>
+            <param name="value">The value to convert to the type of this converter.</param>
+            <returns>The converted value.</returns>
+            <exception cref="T:System.NotSupportedException">
+            The conversion cannot be performed.
+            </exception>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.StringToStringArrayConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+            Converts the specified value object to the specified type.
+            </summary>
+            <param name="context">An object that provides a format context.</param>
+            <param name="culture">The <see cref="T:System.Globalization.CultureInfo"/> to use as the current culture.</param>
+            <param name="value">The object to convert.</param>
+            <param name="destinationType">The type to convert the object to.</param>
+            <returns>The converted object.</returns>
+            <exception cref="T:System.NotImplementedException">
+            <see cref="M:System.ComponentModel.TypeConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)"/>  not implemented in base <see cref="T:System.ComponentModel.TypeConverter"/>.</exception>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.Controls.GeoView">
+            <summary>
+            A base class for the map control.
+            </summary>
+            <seealso cref="T:Esri.ArcGISRuntime.UI.Controls.MapView"/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.DxRenderingMode">
+            <summary>Gets a value indicating the current DirectX rendering mode.</summary>
+            <remarks>Get this property after the core device has been initialized - Unknown will be returned otherwise.</remarks>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.OnApplyTemplate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.GetScaleFactor">
+            <summary>
+            Gets the scale factor used between device independent units and pixels.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.ApplyPendingResize">
+            <summary>Applies a pending resize to the core geoview</summary>
+            <remarks>
+            Pending resizes are applied before pulse calls to ensure the size of the view does not change during draw.
+            </remarks>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.Esri#ArcGISRuntime#Internal#IDxSurfaceSource#DxRenderingMode">
+            <summary>Gets a value indicating the current DirectX rendering mode.</summary>
+            <remarks>Get this property after the core device has been initialized - Unknown will be returned otherwise.</remarks>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.RequiresSoftwareRendering">
+            <summary>
+            Checks if DirectX software rendering is required.
+            </summary>
+            <remarks>
+            This method checks the ArcGISEnvironment internal flag and system defined settings that force DirectX software
+            rendering. This method is called anytime a new GeoView is loaded (a new dx device is created).
+            </remarks>
+            <returns><c>true</c> if software rendering is required; otherwise <c>false</c></returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.DismissCalloutInternal">
+            <summary>
+            Dismisses a callout if it's open.
+            </summary>
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.IsCalloutVisible"/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.IsCalloutVisibleInternal">
+            <summary>
+            Gets a value indicating whether a callout is currently open
+            </summary>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.GeoView.DismissCallout"/>
+        </member>
+        <member name="E:Esri.ArcGISRuntime.UI.Controls.GeoView.DrawStatusChanged">
+            <summary>
+            Occurs when the <see cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.DrawStatus"/> property of this instance changes.
+            </summary>
+        </member>
+        <member name="E:Esri.ArcGISRuntime.UI.Controls.GeoView.LayerViewStateChanged">
+            <summary>
+            Occurs when the <see cref="T:Esri.ArcGISRuntime.Mapping.LayerViewState"/> of a contained layer changes.
+            </summary>
+        </member>
+        <member name="E:Esri.ArcGISRuntime.UI.Controls.GeoView.SpatialReferenceChanged">
+            <summary>
+            Occurs when spatial reference of the view changes.
+            </summary>
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.SpatialReference"/>
+            <seealso cref="T:Esri.ArcGISRuntime.Geometry.SpatialReference"/>
+        </member>
+        <member name="E:Esri.ArcGISRuntime.UI.Controls.GeoView.ViewpointChanged">
+            <summary>
+            Occurs when the current viewpoint changes.
+            </summary>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.GeoView.GetCurrentViewpoint(Esri.ArcGISRuntime.Mapping.ViewpointType)"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.ShowCalloutForGeoElement(Esri.ArcGISRuntime.Data.GeoElement,System.Windows.Point,Esri.ArcGISRuntime.UI.CalloutDefinition)">
+            <summary>
+            Shows a callout for the given GeoElement at an appropriate location for the tap location by snapping to the geometry of the element.
+            </summary>
+            <remarks>
+            If the <see cref="P:Esri.ArcGISRuntime.UI.CalloutDefinition.Icon"/> property is not set, this method will also attempt to set the Icon property
+            from the symbol used on the GeoElement.
+            </remarks>
+            <param name="element">The GeoElement used to calculate the placement of the callout.</param>
+            <param name="tapPosition">The position the user tapped the view to use for calculating an adjusted callout location.</param>
+            <param name="definition">The callout definition.</param>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.CalloutDefinition.#ctor(Esri.ArcGISRuntime.Data.GeoElement)"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.ShowCalloutAt(Esri.ArcGISRuntime.Geometry.MapPoint,Esri.ArcGISRuntime.UI.CalloutDefinition)">
+            <summary>
+            Shows a callout based on a <see cref="T:Esri.ArcGISRuntime.UI.CalloutDefinition"/> at the given location.
+            </summary>
+            <param name="location">Location to anchor the callout to.</param>
+            <param name="definition">The callout definition.</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.ShowCalloutAt(Esri.ArcGISRuntime.Geometry.MapPoint,System.Windows.UIElement,System.Windows.Point)">
+            <summary>
+            Shows a callout at the given location with Visual Element as content
+            </summary>
+            <param name="location">Location to anchor the callout to.</param>
+            <param name="calloutContent">The content of the callout</param>
+            <param name="leaderOffset">Adds additional offset to the Callout in pixels relative to the location</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.DismissCallout">
+            <summary>
+            Dismisses a callout if it's open.
+            </summary>
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.IsCalloutVisible"/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.IsCalloutVisible">
+            <summary>
+            Gets a value indicating whether a callout is currently open
+            </summary>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.GeoView.DismissCallout"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.ExportImageAsync">
+            <summary>
+            Creates an image snapshot of the current map view
+            </summary>
+            <returns>Task&lt;RuntimeImage&gt;.</returns>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.GraphicsOverlays">
+            <summary>
+            Gets or sets the GraphicsOverlayCollection.
+            </summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.GeoView.GraphicsOverlaysProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.GraphicsOverlays"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.GetCurrentViewpoint(Esri.ArcGISRuntime.Mapping.ViewpointType)">
+            <summary>
+            Gets the current Viewpoint of the view.
+            </summary>
+            <param name="viewpointType">Type of Viewpoint</param>
+            <returns>
+              A <see cref="T:Esri.ArcGISRuntime.Mapping.Viewpoint"/> if this view is initialized and has a loaded <see cref="T:Esri.ArcGISRuntime.Mapping.Map"/> or <see cref="T:Esri.ArcGISRuntime.Mapping.Scene"/>;
+              otherwise, <c>null</c>.
+            </returns>
+            <remarks>
+            To change the view viewpoint, you can use the <see cref="M:Esri.ArcGISRuntime.UI.Controls.GeoView.SetViewpointAsync(Esri.ArcGISRuntime.Mapping.Viewpoint)"/> method available on the view.
+            </remarks>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.SetViewpoint(Esri.ArcGISRuntime.Mapping.Viewpoint)">
+            <summary>
+            Sets the view to the given Viewpoint location
+            </summary>
+            <param name="viewpoint">Viewpoint object.</param>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.GeoView.SetViewpointAsync(Esri.ArcGISRuntime.Mapping.Viewpoint)"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.SetViewpointAsync(Esri.ArcGISRuntime.Mapping.Viewpoint)">
+            <summary>
+            Animates the view to the given Viewpoint location
+            </summary>
+            <param name="viewpoint">Viewpoint object</param>
+            <returns><c>True</c> if the set view animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.GeoView.SetViewpoint(Esri.ArcGISRuntime.Mapping.Viewpoint)"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.SetViewpointAsync(Esri.ArcGISRuntime.Mapping.Viewpoint,System.TimeSpan)">
+            <summary>
+            Animates the view to the given Viewpoint location
+            </summary>
+            <param name="viewpoint">Viewpoint object</param>
+            <param name="duration">Duration of the animation</param>
+            <returns><c>True</c> if the set view animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.GeoView.SetViewpointAsync(Esri.ArcGISRuntime.Mapping.Viewpoint)"/>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.GeoView.SetViewpoint(Esri.ArcGISRuntime.Mapping.Viewpoint)"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.SetBookmarkAsync(Esri.ArcGISRuntime.Mapping.Bookmark)">
+            <summary>
+            Sets the GeoView's viewpoint with the bookmark's value.
+            </summary>
+            <param name="bookmark">The <see cref="T:Esri.ArcGISRuntime.Mapping.Bookmark"/> containing the new viewpoint for the map.</param>
+            <returns>
+            <c>True</c> if the set bookmark animation completed, <c>false</c> if it was interrupted by another view navigation.
+            </returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.CancelSetViewpointOperations">
+            <summary>Cancels any pending or currently running SetViewpointAsync operations.</summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.GetLayerViewState(Esri.ArcGISRuntime.Mapping.Layer)">
+            <summary>
+            Gets the <see cref="T:Esri.ArcGISRuntime.Mapping.LayerViewState"/> for the given layer.
+            </summary>
+            <param name="layer">Layer</param>
+            <returns>LayerViewState</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyGraphicsOverlayAsync(Esri.ArcGISRuntime.UI.GraphicsOverlay,System.Windows.Point,System.Double,System.Boolean)">
+            <summary>Initiates an identify operation on the specified graphics overlay which will return the visible topmost graphic.</summary>
+            <param name="graphicsOverlay">The overlay on which to run the identify.</param>
+            <param name="screenPoint">The location at which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <returns>A task that represents the asynchronous identify operation on the specified graphics overlay.
+            The value of the TResult parameter contains a read-only collection of <see cref="T:Esri.ArcGISRuntime.UI.Graphic"/></returns>
+            <exception cref="T:System.ArgumentNullException">graphicsOverlay</exception>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyGraphicsOverlayAsync(Esri.ArcGISRuntime.UI.GraphicsOverlay,System.Windows.Point,System.Double,System.Boolean,System.Int64)">
+            <summary>Initiates an identify operation on the specified graphics overlay.</summary>
+            <param name="graphicsOverlay">The overlay on which to run the identify.</param>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <param name="maximumResults">The maximum size of the result set to return.</param>
+            <param name="screenPoint">The location at which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <returns>A task that represents the asynchronous identify operation on the specified graphics overlay.
+            The value of the TResult parameter contains a read-only collection of <see cref="T:Esri.ArcGISRuntime.UI.Graphic"/></returns>
+            <exception cref="T:System.ArgumentNullException">graphicsOverlay</exception>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyGraphicsOverlaysAsync(System.Windows.Point,System.Double,System.Boolean)">
+            <summary>Initiate an identify operation on all graphics overlays which will return the single visible topmost graphic per overlay only.</summary>
+            <param name="screenPoint">The location on which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <returns>A task that represents the asynchronous identify operation on all graphics overlays in the view
+            The value of the TResult parameter contains a read-only collection of <see cref="T:Esri.ArcGISRuntime.Data.IdentifyGraphicsOverlayResult"/> in top to bottom order.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyGraphicsOverlaysAsync(System.Windows.Point,System.Double,System.Boolean,System.Int64)">
+            <summary>Initiate an identify operation on all graphics overlays.</summary>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <param name="maximumResultsPerOverlay">The maximum number of graphics to return per overlay..</param>
+            <param name="screenPoint">The location on which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <returns>A task that represents the asynchronous identify operation on all graphics overlays in the view
+            The value of the TResult parameter contains a read-only collection of <see cref="T:Esri.ArcGISRuntime.Data.IdentifyGraphicsOverlayResult"/> in top to bottom order.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyLayerAsync(Esri.ArcGISRuntime.Mapping.Layer,System.Windows.Point,System.Double,System.Boolean)">
+            <summary>Initiates an identify operation on the specified layer which will return the single visible topmost GeoElement only.</summary>
+            <param name="layer">The layer on which to run the identify.</param>
+            <param name="screenPoint">The location at which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <returns>A task that represents the asynchronous identify operation on the specified layer.
+            The value of the TResult parameter contains <see cref="T:Esri.ArcGISRuntime.Data.IdentifyLayerResult"/></returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyLayerAsync(Esri.ArcGISRuntime.Mapping.Layer,System.Windows.Point,System.Double,System.Boolean,System.Threading.CancellationToken)">
+            <summary>Initiates an identify operation on the specified layer which will return the single visible topmost GeoElement only.</summary>
+            <param name="layer">The layer on which to run the identify.</param>
+            <param name="screenPoint">The location at which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the asynchronous identify operation on the specified layer.
+            The value of the TResult parameter contains <see cref="T:Esri.ArcGISRuntime.Data.IdentifyLayerResult"/></returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyLayerAsync(Esri.ArcGISRuntime.Mapping.Layer,System.Windows.Point,System.Double,System.Boolean,System.Int64)">
+            <summary>Initiates an identify operation on the specified layer.</summary>
+            <param name="layer">The layer on which to run the identify.</param>
+            <param name="maximumResults">The maximum size of the result set of GeoElements.</param>
+            <param name="screenPoint">The location at which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <returns>A task that represents the asynchronous identify operation on the specified layer.
+            The value of the TResult parameter contains <see cref="T:Esri.ArcGISRuntime.Data.IdentifyLayerResult"/></returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyLayerAsync(Esri.ArcGISRuntime.Mapping.Layer,System.Windows.Point,System.Double,System.Boolean,System.Int64,System.Threading.CancellationToken)">
+            <summary>Initiates an identify operation on the specified layer.</summary>
+            <param name="layer">The layer on which to run the identify.</param>
+            <param name="maximumResults">The maximum size of the result set of GeoElements.</param>
+            <param name="screenPoint">The location at which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the asynchronous identify operation on the specified layer.
+            The value of the TResult parameter contains <see cref="T:Esri.ArcGISRuntime.Data.IdentifyLayerResult"/></returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyLayersAsync(System.Windows.Point,System.Double,System.Boolean)">
+            <summary>Initiates an identify operation on all layers in the view which will return the single visible topmost GeoElement per layer only.</summary>
+            <param name="screenPoint">The location on which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <returns>A task that represents the asynchronous identify operation on all layers in the view
+            The value of the TResult parameter contains a read-only collection of <see cref="T:Esri.ArcGISRuntime.Data.IdentifyLayerResult"/> in top to bottom order.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyLayersAsync(System.Windows.Point,System.Double,System.Boolean,System.Threading.CancellationToken)">
+            <summary>Initiates an identify operation on all layers in the view which will return the single visible topmost GeoElement per layer only.</summary>
+            <param name="screenPoint">The location on which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the asynchronous identify operation on all layers in the view
+            The value of the TResult parameter contains a read-only collection of <see cref="T:Esri.ArcGISRuntime.Data.IdentifyLayerResult"/> in top to bottom order.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyLayersAsync(System.Windows.Point,System.Double,System.Boolean,System.Int64)">
+            <summary>Initiates an identify operation on all layers in the view.</summary>
+            <param name="screenPoint">The location on which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <param name="maximumResultsPerLayer">The maximum number of GeoElements to return per layer.</param>
+            <returns>A task that represents the asynchronous identify operation on all layers in the view
+            The value of the TResult parameter contains a read-only collection of <see cref="T:Esri.ArcGISRuntime.Data.IdentifyLayerResult"/> in top to bottom order.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.IdentifyLayersAsync(System.Windows.Point,System.Double,System.Boolean,System.Int64,System.Threading.CancellationToken)">
+            <summary>Initiates an identify operation on all layers in the view.</summary>
+            <param name="screenPoint">The location on which to run identify in screen coordinates.</param>
+            <param name="tolerance">The width and height in screen coordinates of the square centered on screen coordinate that will be used in the identify.</param>
+            <param name="returnPopupsOnly">Controls whether the graphics property of the result is populated.</param>
+            <param name="maximumResultsPerLayer">The maximum number of GeoElements to return per layer.</param>
+            <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+            <returns>A task that represents the asynchronous identify operation on all layers in the view
+            The value of the TResult parameter contains a read-only collection of <see cref="T:Esri.ArcGISRuntime.Data.IdentifyLayerResult"/> in top to bottom order.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.FindLayerByCoreLayer(RuntimeCoreNet.GeneratedWrappers.CoreLayer)">
+            <summary>
+            Find a layer in the layer collections that matches the given CoreLayer or null if not found.
+            </summary>
+            <remarks>
+            To be overridden by GeoView derived classes (MapView, SceneView)
+            </remarks>
+            <param name="coreLayer"></param>
+            <returns>Layer</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.SetIsInteracting(System.Boolean,System.Boolean)">
+            <summary>
+            Sets the interaction flag in core. Use this method instead of setting the interaction flag
+            directly on the core instance
+            </summary>
+            <param name="isInteracting">Value indicating whether a user is interacting or not.</param>
+            <param name="autoReset">Whether to auto-reset the flag back to false after a short amount of inactivity where this method hasn't been called.</param>
+        </member>
+        <member name="E:Esri.ArcGISRuntime.UI.Controls.GeoView.GeoViewTapped">
+            <summary>
+            Occurs when an otherwise unhandled Tap interaction occurs over the hit test
+            area of the view.
+            </summary>
+        </member>
+        <member name="E:Esri.ArcGISRuntime.UI.Controls.GeoView.GeoViewDoubleTapped">
+            <summary>
+            Occurs when an otherwise unhandled DoubleTap interaction occurs over the hit test
+            area of the view.
+            </summary>
+        </member>
+        <member name="E:Esri.ArcGISRuntime.UI.Controls.GeoView.GeoViewHolding">
+            <summary>
+            Occurs when an otherwise unhandled holding interaction occurs over the hit test
+            area of the view.
+            </summary>
+            <remarks>
+            For WPF, this event only works with touch and not mouse.
+            </remarks>
+        </member>
+        <member name="E:Esri.ArcGISRuntime.UI.Controls.GeoView.DragCompleted">
+            <summary>
+            Occurs when dragging that caused no navigation is completed.
+            Currently, only raised by MapView when magnifier is collapsed.
+            </summary>
+        </member>
+        <member name="E:Esri.ArcGISRuntime.UI.Controls.GeoView.System#ComponentModel#INotifyPropertyChanged#PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+            <remarks>
+            The PropertyChanged event can indicate all properties on the object have changed by using
+            either <c>null</c> or <see cref="F:System.String.Empty"/> as the property name in the <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/>.
+            </remarks>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.IsAttributionTextVisible">
+            <summary>
+            Gets or sets a value indicating whether Esri attribution text is visible.
+            </summary>
+            <remarks>
+            If your application uses data served by Esri through ArcGIS Online, you must display this logo.
+            </remarks>
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.AttributionText"/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.AttributionText">
+            <summary>Gets the full attribution text for all active layers, concatenated into a single string.</summary>
+            <returns>A string with all the attribution contributors concatenated together</returns>
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.IsAttributionTextVisible"/>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.GeoView.IsAttributionTextVisibleProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.IsAttributionTextVisible"/> Dependency Property
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.SpatialReference">
+            <summary>
+            Gets the current spatial reference of the map.
+            </summary>
+            <remarks>
+            <para>You can observe changes to this property by listening to the <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event.</para>
+            </remarks>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.IsWrapAroundEnabled">
+            <summary>
+            Gets a value indicating whether the wrap around feature is currently active. For wrap around to be
+            active the <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.WrapAroundMode"/> property must be set to true and the SpatialReference
+            of the MapView control must be a SpatialReference that supports wrapping.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.IsNavigating">
+            <summary>
+            Gets a value indicating whether the map is currently navigating.
+            when navigation has finished the <see cref="E:Esri.ArcGISRuntime.UI.Controls.GeoView.NavigationCompleted"/> event will be raised.
+            </summary>
+            <value>
+            <c>true</c> if this instance is navigating; otherwise, <c>false</c>.
+            </value>
+            <seealso cref="E:Esri.ArcGISRuntime.UI.Controls.GeoView.NavigationCompleted"/>
+        </member>
+        <member name="E:Esri.ArcGISRuntime.UI.Controls.GeoView.NavigationCompleted">
+            <summary>
+            When navigation on the map has completed this event will be raised.
+            </summary>
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.IsNavigating"/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.DrawStatus">
+            <summary>
+            Gets the current draw status.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.ViewInsets">
+            <summary>
+            Gets or sets the viewport inset padding.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.ViewInsets"/> reduces the "safe area" of the view, so zoom-to, center, rotation etc will be appropriately offset when panels are partially overlaying the view.
+            For example if you pull out a side-panel that partially covers the map's left side and want to zoom to a geometry without the side-panel blocks the view of the panel,
+            add some left-view padding equivalent to the width of the side-panel. Ex: <c>mapView.ViewInsets = new Thickness(sidePanel.Width, 0, 0, 0);</c>.
+            </para>
+            <para>If you just want to zoom to a geometry and leave a bit of padding around it, use the <see cref="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointGeometryAsync(Esri.ArcGISRuntime.Geometry.Geometry,System.Double)"/> method instead.</para>
+            <para>
+            The ViewInsets setting currently only applies to <see cref="T:Esri.ArcGISRuntime.UI.Controls.MapView" />, and is ignored on <see cref="T:Esri.ArcGISRuntime.UI.Controls.SceneView"/>.
+            </para>
+            </remarks>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointGeometryAsync(Esri.ArcGISRuntime.Geometry.Geometry,System.Double)"/>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.GeoView.ViewInsetsProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.ViewInsets"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.GetAttributionHeight">
+            <summary>
+            Gets the height of the (collapsed) attribution area in DIPs
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.TimeExtent">
+            <summary>
+            Gets or sets the time extent that is applied to layers within the view
+            </summary>
+            <remarks>
+            The Time Extent of the GeoView defines how time-enabled data is displayed.
+            Participating layers filter their data to only show data within the time
+            extent set on the GeoView (see <see cref="T:Esri.ArcGISRuntime.ITimeAware"/>
+            for details). The range of the time extent includes the start and end values
+            (a feature at 10/24/2016 would be included in a time extent defined as
+            10/24/2016 - 11/14/2016). Time filtering is not enabled until a non-<c>null</c>
+            time extent is set on the GeoView. When the time extent is <c>null</c> on the
+            GeoView, no time filtering is applied.
+            </remarks>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.GeoView.TimeExtentProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.TimeExtent"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.Overlays">
+            <summary>
+            Gets or sets the XAML elements that can be used to overlay on the map, and placed using the <see cref="F:Esri.ArcGISRuntime.UI.Controls.GeoView.ViewOverlayAnchorProperty">.</see>
+            attached property.
+            </summary>
+            <remarks>
+            <para>
+            The term 'overlay' in the ArcGIS Runtime .NET SDK may be new to some developers. In other Esri SDK's the concept of an overlay is often termed a
+            'MapTip'. A MapTip is a user-assistance component that displays an on-screen description of a map feature when the mouse is paused over or
+            a users taps on a feature.
+            </para>
+            <para>
+            In order to maintain good performance in your application it is recommended to not place too many or overly complex UIElement objects within the
+            UIElementCollection. These graphical UIElement objects are drawn via software rendering of the Operating System and performance can vary across
+            devices. Keeping UIElements to a minimum, say under 20, should not impact the performance of your application when setting the MapView.Overlays
+            Property.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.GeoView.OverlaysProperty">
+            <summary>
+            Identifies the Overlays dependency property.
+            </summary>
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.Overlays"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.GetViewOverlayAnchor(System.Windows.FrameworkElement)">
+            <summary>
+            Gets the value of the ViewOverlayAnchor XAML attached property from the specified <see cref="T:System.Windows.FrameworkElement"/>.
+            </summary>
+            <param name="element">The element from which to read the property value.</param>
+            <returns>The value of the ViewOverlayAnchor XAML attached property on the target element.</returns>
+            <seealso cref="T:Esri.ArcGISRuntime.UI.IViewOverlay"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoView.SetViewOverlayAnchor(System.Windows.FrameworkElement,Esri.ArcGISRuntime.Geometry.MapPoint)">
+            <summary>
+            Sets the value of the ViewOverlayAnchor XAML attached property on the specified <see cref="T:System.Windows.FrameworkElement"/>.
+            </summary>
+            <param name="element">The target element on which to set the ViewOverlayAnchor XAML attached property.</param>
+            <param name="anchor">The property value to set.</param>
+            <seealso cref="T:Esri.ArcGISRuntime.UI.IViewOverlay"/>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.GeoView.ViewOverlayAnchorProperty">
+            <summary>
+            Identifies the ViewOverlayAnchor dependency property.
+            </summary>
+            <seealso cref="T:Esri.ArcGISRuntime.UI.IViewOverlay"/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.SelectionProperties">
+            <summary>
+            Gets or sets the selection properties that is applied to graphic overlays and layers within the view.
+            </summary>
+            <remarks>
+            The selection properties of the GeoView defines how features are rendered when selected.
+            </remarks>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.GeoView.SelectionPropertiesProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.SelectionProperties"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoView.Labeling">
+            <summary>
+            Gets or sets the <see cref="T:Esri.ArcGISRuntime.UI.ViewLabelProperties"/>.
+            </summary>
+            <value>The <see cref="T:Esri.ArcGISRuntime.UI.ViewLabelProperties"/></value>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.GeoView.LabelingProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.Labeling"/> Dependency Property
+            </summary>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.Controls.MapView">
+            <summary>
+            The MapView is a container that holds a <see cref="T:Esri.ArcGISRuntime.Mapping.Map">Map</see>. It is the mapping component of
+            the ArcGIS Runtime .NET SDK. It can contain mapping layers and responds to user interaction (touch, mouse, keyboard) and
+            provides behavior for map navigation. It has multiple properties such as its extent, scale, zoom factor, rotation, etc.
+            </summary>
+            <remarks>
+            <para>
+            The MapView is a container that holds a <see cref="T:Esri.ArcGISRuntime.Mapping.Map">Map</see>. A Map holds a collection of
+            operational layers and <see cref="T:Esri.ArcGISRuntime.Mapping.Basemap"/>.
+            Layers are visual representations of geographic information and come in many forms. The types of layers that are displayed
+            in a MapView are two dimensional in nature; meaning they are displayed in X/Y (a.k.a. Latitude/Longitude) coordinate space.
+            </para>
+            <para>
+            There is only one Map per MapView and it is set by the <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.Map">MapView.Map</see> Property.
+            Multiple Map objects can be created and swapped out dynamically as the application is running in the MapView.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.OnApplyTemplate">
+            <inheritdoc />
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.OnCreateAutomationPeer">
+            <inheritdoc />
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Esri.ArcGISRuntime.UI.Controls.MapView"/> class.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.ScreenToLocation(System.Windows.Point)">
+            <summary>
+            Converts a screen point relative to the upper left of the map into a location on the map.
+            </summary>
+            <param name="screenPoint">Screen point relative to the upper left</param>
+            <returns>
+              A <see cref="T:Esri.ArcGISRuntime.Geometry.MapPoint"/> in map coordinates if this view is initialzied and has a loaded <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.Map"/>; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.LocationToScreen(Esri.ArcGISRuntime.Geometry.MapPoint)">
+            <summary>
+            Converts a location in map coordinates to a screen coordinate relative to the
+            upper-left corner of the map.
+            </summary>
+            <param name="location">The location in map coordinates to convert to screen coordinate.</param>
+            <returns>
+            Screen location in this map control's local display coordinate system
+            </returns>
+            <remarks>
+            <para>
+            The screen location returned is relative to the upper left corner of
+            the map control. If you need a location relative to another visual
+            element, use the TransformToVisual method to
+            create a transformation between the map and another visual element.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointAsync(Esri.ArcGISRuntime.Mapping.Viewpoint,System.TimeSpan,Esri.ArcGISRuntime.UI.AnimationCurve)">
+            <summary>
+            Animates the view to the given Viewpoint location using the provided animation curve
+            </summary>
+            <param name="viewpoint">Viewpoint object</param>
+            <param name="duration">Duration of the animation</param>
+            <param name="animationCurve">The animation curve for controlling the acceleration and deceleration of the animation.</param>
+            <returns><c>True</c> if the set view animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointCenterAsync(Esri.ArcGISRuntime.Geometry.MapPoint)">
+            <summary>
+            Centers the view on the provided point.
+            </summary>
+            <param name="center">Point to center the view on.</param>
+            <returns><c>True</c> if the set view animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointCenterAsync(System.Double,System.Double)">
+            <summary>
+            Centers the view on the provided point.
+            </summary>
+            <param name="latitude">Latitude in a WGS84 geographic coordinate system</param>
+            <param name="longitude">Longitude in a WGS84 geographic coordinate system</param>
+            <returns><c>True</c> if the set view animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointCenterAsync(Esri.ArcGISRuntime.Geometry.MapPoint,System.Double)">
+            <summary>
+            Centers the view on the provided point and zooms to the provided scale.
+            </summary>
+            <param name="center">Point to center the view on.</param>
+            <param name="scale">The reference scale to zoom to</param>
+            <returns><c>True</c> if the set view animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointCenterAsync(System.Double,System.Double,System.Double)">
+            <summary>
+            Centers the view on the provided point and zooms to the provided scale.
+            </summary>
+            <param name="latitude">Latitude in a WGS84 geographic coordinate system</param>
+            <param name="longitude">Longitude in a WGS84 geographic coordinate system</param>
+            <param name="scale">The reference scale to zoom to</param>
+            <returns><c>True</c> if the set view animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointScaleAsync(System.Double)">
+            <summary>
+            Zooms to the given scale.
+            </summary>
+            <param name="scale">The scale to zoom to, ie '50000' to zoom to 1:50,000 scale.</param>
+            <returns><c>True</c> if the zoom animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointRotationAsync(System.Double)">
+            <summary>
+            Sets the rotation angle of the map
+            </summary>
+            <param name="angleDegrees">Rotation angle in degrees.</param>
+            <returns><c>True</c> if the rotation animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+            <remarks>
+            Angle will be normalized between 0 and 360 degrees.
+            </remarks>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointGeometryAsync(Esri.ArcGISRuntime.Geometry.Geometry)">
+            <summary>
+            Zooms to the provided geometry.
+            </summary>
+            <param name="boundingGeometry">The geometry to zoom to. </param>
+            <returns><c>True</c> if the zoom animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+            <remarks>
+            If you want to center and zoom on a point, use <see cref="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointCenterAsync(Esri.ArcGISRuntime.Geometry.MapPoint,System.Double)"/>.
+            </remarks>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointGeometryAsync(Esri.ArcGISRuntime.Geometry.Geometry,System.Double)">
+            <summary>
+            Zooms to the provided geometry and leaves some padding around the geometry.
+            </summary>
+            <param name="boundingGeometry">The geometry to zoom to. </param>
+            <param name="padding">Minimum amount of padding around the bounding geometry in pixels.</param>
+            <returns><c>True</c> if the zoom animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+            <remarks>
+            If you want to center and zoom on a point, use <see cref="M:Esri.ArcGISRuntime.UI.Controls.MapView.SetViewpointCenterAsync(Esri.ArcGISRuntime.Geometry.MapPoint,System.Double)"/>.
+            </remarks>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.CancelSetViewpointOperations">
+            <inheritdoc cref="M:Esri.ArcGISRuntime.UI.Controls.GeoView.CancelSetViewpointOperations" />
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapView.Map">
+            <summary>
+            Gets or sets the map the view is rendering.
+            </summary>
+            <value>The map the view renders.</value>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.MapView.MapProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.Map"/> dependency property
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapView.MapScale">
+            <summary>
+            Gets the current scale of the map
+            </summary>
+            <remarks>
+            Returns <see cref="F:System.Double.NaN"/> if the map isn't in a ready-state.
+            <para>You can observe changes to this property by listening to the <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event.</para>
+            </remarks>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapView.MapRotation">
+            <summary>
+            Gets the current rotational heading of the map
+            </summary>
+            <remarks>
+            <para>You can observe changes to this property by listening to the <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event.</para>
+            </remarks>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapView.UnitsPerPixel">
+            <summary>
+            Gets the current size of each device independent pixel in map units.
+            </summary>
+            <remarks>
+            Returns <see cref="F:System.Double.NaN"/> if the map isn't in a ready-state.
+            <para>You can observe changes to this property by listening to the <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event.</para>
+            </remarks>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapView.VisibleArea">
+            <summary>
+            Gets the view's visible area.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapView.WrapAroundMode">
+            <summary>
+            Gets or sets a whether the map will do continuous pan across the antimeridian
+            </summary>
+            <remarks>
+            Note that not all spatial references supports this mode, and setting it to true in those cases,
+            this property will have no effect. You can check the <see cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.IsWrapAroundEnabled"/> property
+            to determine if this MapView is wrapping.
+            </remarks>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapView.LocationDisplay">
+            <summary>
+            Gets the location display settings used for display the device's current location.
+            </summary>
+            <value>
+            The location display settings.
+            </value>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.MapView.LocationDisplayProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.LocationDisplay"/> Dependency Property
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapView.BackgroundGrid">
+            <summary>
+            Gets or sets the background grid rendered behind the map data.
+            </summary>
+            <remarks>
+            <para>
+            The background grid determines the color and context grid of a map view when no <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.Map"/> has been set.
+            </para>
+            <para>
+            The <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.Map"/> displays on top of the background grid or the optional <see cref="P:Esri.ArcGISRuntime.Mapping.Map.BackgroundColor"/> to
+            determine what is displayed under transparent areas of the map. If <see cref="P:Esri.ArcGISRuntime.Mapping.Map.BackgroundColor"/> is not
+            <c>null</c>, then <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.BackgroundGrid"/> is ignored and <see cref="P:Esri.ArcGISRuntime.Mapping.Map.BackgroundColor"/> will be used as
+            the background color of the map.
+            </para>
+            </remarks>
+            <seealso cref="P:Esri.ArcGISRuntime.Mapping.Map.BackgroundColor"/>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.MapView.BackgroundGridProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.BackgroundGrid"/> Dependency Property
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapView.Grid">
+            <summary>
+            Gets or sets the grid that is available to the map for display.
+            </summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.MapView.GridProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.Grid"/> Dependency Property
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapView.SketchEditor">
+            <summary>
+            Gets or sets the sketch editor used for drawing and editing on the map.
+            </summary>
+            <value>
+            The sketch editor.
+            </value>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.MapView.SketchEditorProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.SketchEditor"/> Dependency Property
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapView.InteractionOptions">
+            <summary>
+            Gets or sets a set of properties that control user interaction with the MapView.
+            </summary>
+            <value>
+            Map view interaction options.
+            </value>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.MapView.InteractionOptionsProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.MapView.InteractionOptions"/> Dependency Property
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapView.OnTouchMove(System.Windows.Input.TouchEventArgs)">
+            <inheritdoc />
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.Controls.Callout">
+            <summary>
+            A callout control used for rendering a Callout on top of the GeoView
+            </summary>
+            <remarks>
+            The Callout control is used by the GeoView when displaying a single callout using the ShowCallout* methods.
+            However the callout can also be used as a control inside the <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.Overlays"/> collection. This
+            control implements the <seealso cref="T:Esri.ArcGISRuntime.UI.IViewOverlay"/> interface, that allows it to adapt to the placement on screen
+            and re-flow the location of the leader arrow that points to the location.
+            </remarks>
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.Overlays"/>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.GeoView.ShowCalloutAt(Esri.ArcGISRuntime.Geometry.MapPoint,Esri.ArcGISRuntime.UI.CalloutDefinition)"/>
+            <seealso cref="T:Esri.ArcGISRuntime.UI.IViewOverlay"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.Callout.#ctor">
+            <summary>
+            Initializes a new instance of the <seealso cref="T:Esri.ArcGISRuntime.UI.Controls.Callout"/> class.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.Callout.OnApplyTemplate">
+            <inheritdoc />
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.Callout.OnStyleChanged(System.Windows.Style,System.Windows.Style)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.Callout.RebuildBorder">
+            <summary>
+            Creates a border that surrounds the content, and sets margins.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.Callout.LeaderOffsetX">
+            <summary>
+            Gets or sets the horizontal leader offset
+            </summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.Callout.LeaderOffsetXProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.Callout.LeaderOffsetX"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.Callout.LeaderOffsetY">
+            <summary>
+            Gets or sets the vertical leader offset
+            </summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.Callout.LeaderOffsetYProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.Callout.LeaderOffsetY"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.Callout.LeaderPosition">
+            <summary>
+            Gets or sets the placement of the leader
+            </summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.Callout.LeaderPositionProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.Callout.LeaderPosition"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.Callout.Esri#ArcGISRuntime#UI#IViewOverlay#ArrangeOverlay(Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters)">
+            <inheritdoc />
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.Callout.OnArrangeOverlay(Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters)">
+            <summary>
+            Called when the callout is about to be repositioned on the view
+            </summary>
+            <param name="parameters">Information about the screen arrangement</param>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.IViewOverlay.ArrangeOverlay(Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters)"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.Callout.UpdateAlignment(System.Double,System.Double,System.Windows.Point)">
+            <summary>
+            Respond to changes in GeoView size and anchor position, to see if leader needs to be moved.
+            </summary>
+            <param name="viewWidth">Available GeoView width in DIPs</param>
+            <param name="viewHeight">Available GeoView height in DIPs</param>
+            <param name="anchor">Screen point that the callout is anchored to, in DIPs. Does not include leader offset.</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.Callout.CheckAlignment(System.Boolean)">
+            <summary>
+            Aligns the callout and its leader within the viewport, rebuilding the border as needed.
+            </summary>
+            <param name="forceRebuildBorder">If true, border will be re-created even if alignment stayed the same.</param>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.Controls.GeoViewInputEventArgs">
+            <summary>
+            Event argument used by the <see cref="E:Esri.ArcGISRuntime.UI.Controls.GeoView.GeoViewHolding"/>,
+            <see cref="E:Esri.ArcGISRuntime.UI.Controls.GeoView.GeoViewTapped"/> and <see cref="E:Esri.ArcGISRuntime.UI.Controls.GeoView.GeoViewDoubleTapped"/> events.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoViewInputEventArgs.Position">
+            <summary>
+            Gets the screen position on the view where the event occurred.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoViewInputEventArgs.Location">
+            <summary>
+            Gets the location on the view where the event occurred.
+            </summary>
+            <remarks>
+            <para>
+              Location may be <c>null</c> if the <see cref="T:Esri.ArcGISRuntime.UI.Controls.GeoView"/> is still initializing,
+              if it has no <see cref="T:Esri.ArcGISRuntime.Mapping.Map"/> or <see cref="T:Esri.ArcGISRuntime.Mapping.Scene"/> set,
+              or if its <see cref="T:Esri.ArcGISRuntime.Mapping.Map"/> or <see cref="T:Esri.ArcGISRuntime.Mapping.Scene"/> is still loading.
+            </para>
+            <para>
+              It will also be <c>null</c> on the <see cref="T:Esri.ArcGISRuntime.UI.Controls.SceneView"/>
+              if the current <see cref="P:Esri.ArcGISRuntime.UI.Controls.GeoViewInputEventArgs.Position"/> does not have a corresponding location
+              on the surface of the scene (for example when the sky is tapped).
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.GeoViewInputEventArgs.Handled">
+            <summary>
+            Gets or sets a value indicating whether the router event should continue to bubble
+            as it travels the route.</summary>
+            <value>
+             If setting, set to <c>true</c> if the event is to be marked handled; otherwise <c>false</c>.
+             If reading this value, true indicates that either a class handler, or some
+             instance handler along the route, has already marked this event handled.
+             <c>false</c> indicates that no such handler has marked the event handled. The default
+             value is <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.Controls.GeoViewAutomationPeer">
+            <summary>
+            Base class for MapView and SceneView automation peers
+            </summary>
+            <seealso cref="T:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.GeoViewAutomationPeer.Complete">
+            <summary>
+            Completes an interaction session immediately.
+            </summary>
+            <remarks>
+            During interaction with the view, the view renders in a performance optimized way. When interactions are complete, it's important
+            to call this to signal the view that it can perform a more high-quality render.
+            </remarks>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer">
+            <summary>
+            Automation peer for controlling the camera in a <see cref="T:Esri.ArcGISRuntime.UI.Controls.MapView"/>
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.#ctor(Esri.ArcGISRuntime.UI.Controls.MapView)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer"/> class.
+            </summary>
+            <param name="owner">The owner element to create for.</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.GetPattern(System.Windows.Automation.Peers.PatternInterface)">
+            <inheritdoc />
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.GetClassNameCore">
+            <inheritdoc />
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.Pan(System.Double,System.Double)">
+            <summary>
+            Pans the map the number of pixels provided
+            </summary>
+            <param name="deltaX">Horizontal pan amount in pixels.</param>
+            <param name="deltaY">Vertical pan amount in pixels.</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.PanFlick(System.Double,System.Double)">
+            <summary>
+            Initiates a flick animation in the direction provided
+            </summary>
+            <param name="deltaX">Horizontal pan speed.</param>
+            <param name="deltaY">Vertical pan speed.</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.Rotate(System.Double,System.Windows.Point)">
+            <summary>
+            Rotates the MapView around the provided center point
+            </summary>
+            <param name="angleDegrees">Delta rotation in degrees</param>
+            <param name="centerPoint">Center point on the screen relative to the MapView</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.Zoom(System.Double,System.Windows.Point)">
+            <summary>
+            Zooms the MapView by a factor around the provided point.
+            </summary>
+            <param name="factor">Zoom factor</param>
+            <param name="centerPoint">Center point on the screen relative to the MapView</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.ZoomOutAnimated(System.Windows.Point)">
+            <summary>
+            Performs a zoom animation around the provided center point
+            </summary>
+            <param name="centerPoint">Center point on the screen relative to the MapView</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.ZoomInAnimated(System.Windows.Point)">
+            <summary>
+            Performs a zoom animation around the provided center point
+            </summary>
+            <param name="centerPoint">Center point on the screen relative to the MapView</param>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.System#Windows#Automation#Provider#ITransformProvider#CanMove">
+            <inheritdoc />
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.System#Windows#Automation#Provider#ITransformProvider#CanResize">
+            <inheritdoc />
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.System#Windows#Automation#Provider#ITransformProvider#CanRotate">
+            <inheritdoc />
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.System#Windows#Automation#Provider#ITransformProvider#Move(System.Double,System.Double)">
+            <inheritdoc />
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.System#Windows#Automation#Provider#ITransformProvider#Resize(System.Double,System.Double)">
+            <inheritdoc />
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.MapViewAutomationPeer.System#Windows#Automation#Provider#ITransformProvider#Rotate(System.Double)">
+            <inheritdoc />
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.Controls.OverlayItem">
+            <summary>
+            This class helps with the task to create the target item to be presented when a template is provided.
+            This target item will have bindings to the MapOverlay.
+            When the item has been resolved (from template + content), this class will take care of creating the bindings.
+            When there is no template and the content is the UI, it will follow the same pattern
+            to wait until item is visible before binding the dependency properties.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItem.#ctor(System.Object,System.Windows.DataTemplate,System.Windows.Controls.DataTemplateSelector)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Esri.ArcGISRuntime.UI.Controls.OverlayItem"/> class
+            </summary>
+            <param name="content">Content to be used</param>
+            <param name="contentTemplate">Content template</param>
+            <param name="selector">Content template selector</param>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection">
+            <summary>
+            Holds the items in an <see cref="T:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl" />
+            </summary>
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl.Items" />
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.Overlays" />
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.System#Collections#IList#IsReadOnly">
+            <summary>
+            Gets a value indicating whether the IList is read-only.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.System#Collections#Generic#ICollection{System#Object}#IsReadOnly">
+            <summary>
+            Gets a value indicating whether the ICollection is read-only.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the OverlayItemsCollection is read-only.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.IsInternalCall">
+            <summary>
+            Gets or sets a value indicating whether the next call should be treated as internal.
+            Used to determine whether the operation/call is done from internal types.
+            When done so, it will bypass the read only checks that are only used for client calls.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.AddRange(System.Collections.IEnumerable)">
+            <summary>
+            Copy the elements from the source
+            </summary>
+            <param name="source">Source enumerable collection</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.AddInternal(System.Object)">
+            <summary>
+            Add the item to the collection.
+            Read only check will be bypassed
+            </summary>
+            <param name="item">Item to be added</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.InsertInternal(System.Int32,System.Object)">
+            <summary>
+            Insert the item at the specified index.
+            Read only check will be bypassed
+            </summary>
+            <param name="index">Index at which item should be inserted</param>
+            <param name="item">Item to be inserted</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.MoveInternal(System.Int32,System.Int32)">
+            <summary>
+            Move the item at the old index to the new index within the collection
+            Read only check will be bypassed
+            </summary>
+            <param name="oldIndex">Old index of the item to be moved</param>
+            <param name="newIndex">New index at which the item should be moved</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.RemoveAtInternal(System.Int32)">
+            <summary>
+            Remove the item at the specific index
+            Read only check will be bypassed
+            </summary>
+            <param name="index">Index of the element to be removed</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.RemoveInternal(System.Object)">
+            <summary>
+            Remove the item at the specific index
+            Read only check will be bypassed
+            </summary>
+            <param name="item">Element to be removed</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.ClearInternal">
+            <summary>
+            Clears the collection
+            Read only check will be bypassed
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.InsertItem(System.Int32,System.Object)">
+            <summary>
+            Insert the item at the specified index.
+            </summary>
+            <param name="index">Index at which item should be inserted</param>
+            <param name="item">Item to be inserted</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.MoveItem(System.Int32,System.Int32)">
+            <summary>
+            Move the item at the old index to the new index within the collection.
+            </summary>
+            <param name="oldIndex">Old index of the item to be moved</param>
+            <param name="newIndex">New index at which the item should be moved</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.RemoveItem(System.Int32)">
+            <summary>
+            Remove the item at the specific index
+            </summary>
+            <param name="index">Index of the element to be removed</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.SetItem(System.Int32,System.Object)">
+            <summary>
+            Set the item at the specified index
+            </summary>
+            <param name="index">Index of the element to be set</param>
+            <param name="item">Item to be set</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.ClearItems">
+            <summary>
+            Clears the collection.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsCollection.CheckCanWriteAndRaiseExceptionIfNecessary">
+            <summary>
+            Will check the internal state, including writeable property and whether
+            the call comes from an internal call. It will throw if necessary
+            </summary>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl">
+            <summary>
+            Holds the overlays in a MapView
+            </summary>
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.Overlays"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl" /> class.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl.MapLayer">
+            <summary>
+            Gets or sets the MapLayer used to map the input
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl.Items">
+            <summary>
+            Gets the collection used to generate the content of the control.
+            </summary>
+            <remarks>
+            This collection is read only if the <see cref="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl.ItemsSource"/> property is in use.
+            </remarks>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl.ItemsSource">
+            <summary>
+            Gets or sets a collection used to generate the content of the <see cref="T:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl"/>.
+            </summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl.ItemsSourceProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl.ItemsSource"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl.ItemTemplate">
+            <summary>
+            Gets or sets the <see cref="T:System.Windows.DataTemplate"/> used to display each item.
+            </summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl.ItemTemplateProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.OverlayItemsControl.ItemTemplate"/> dependency property.
+            </summary>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.Controls.SceneView">
+            <summary>
+            The SceneView is a container that holds a <see cref="T:Esri.ArcGISRuntime.Mapping.Scene">Scene</see>. It is the 3d mapping component of
+            the ArcGIS Runtime .NET SDK. It can contain mapping layers and responds to user interaction (touch, mouse, keyboard) and
+            provides behavior for scene navigation. It has multiple properties.
+            </summary>
+            <remarks>
+            <para>
+            The SceneView is a container that holds a <see cref="T:Esri.ArcGISRuntime.Mapping.Scene">Scene</see>. A Scene holds a collection of
+            operational layers and <see cref="T:Esri.ArcGISRuntime.Mapping.Basemap"/>.
+            Layers are visual representations of geographic information and come in many forms. The types of layers that are displayed
+            in a SceneView are three dimensional.
+            </para>
+            <para>
+            There is only one Scene per SceneView and it is set by the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.Scene">SceneView.Scene</see> Property.
+            Multiple Scene objects can be created and swapped out dynamically as the application is running in the SceneView.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Esri.ArcGISRuntime.UI.Controls.SceneView"/> class.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.ScreenToBaseSurface(System.Windows.Point)">
+            <summary>
+            Converts a screen coordinate (in pixels) to a coordinate on the scene view's base surface.
+            </summary>
+            <param name="screenPoint">Screen point relative to the upper left.</param>
+            <returns>
+              A <see cref="T:Esri.ArcGISRuntime.Geometry.MapPoint"/> on the base surface of the scene;
+              or <c>null</c> if <paramref name="screenPoint"/> does not touch the base surface
+              (for example when the sky is tapped).
+            </returns>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.ScreenToLocationAsync(System.Windows.Point)"/>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.LocationToScreen(Esri.ArcGISRuntime.Geometry.MapPoint)"/>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.LocationToScreen(Esri.ArcGISRuntime.Geometry.MapPoint,Esri.ArcGISRuntime.UI.LocationVisibility@)"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.LocationToScreen(Esri.ArcGISRuntime.Geometry.MapPoint)">
+            <summary>
+            Converts a location in map coordinates to a screen coordinate relative to the
+            upper-left corner of the scene.
+            </summary>
+            <param name="location">The location in world coordinates to convert to screen coordinate.</param>
+            <returns>
+            Screen location in this scene view control's local display coordinate system
+            </returns>
+            <remarks>
+            <para>
+            The screen location returned is relative to the upper left corner of
+            the scene view control. If you need a location relative to another visual
+            element, use the TransformToVisual method to
+            create a transformation between the map and another visual element.
+            </para>
+            </remarks>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.ScreenToBaseSurface(System.Windows.Point)"/>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.ScreenToLocationAsync(System.Windows.Point)"/>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.LocationToScreen(Esri.ArcGISRuntime.Geometry.MapPoint,Esri.ArcGISRuntime.UI.LocationVisibility@)"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.LocationToScreen(Esri.ArcGISRuntime.Geometry.MapPoint,Esri.ArcGISRuntime.UI.LocationVisibility@)">
+            <summary>
+            Converts a location in map coordinates to a screen coordinate relative to the
+            upper-left corner of the scene.
+            </summary>
+            <param name="location">The location in world coordinates to convert to screen coordinate.</param>
+            <param name="visibility">The visibility of the point on the screen.</param>
+            <returns>
+            Screen location in this scene view control's local display coordinate system.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">location</exception>
+            <remarks>
+            The screen location returned is relative to the upper left corner of
+            the scene view control. If you need a location relative to another visual
+            element, use the TransformToVisual method to
+            create a transformation between the map and another visual element.
+            </remarks>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.ScreenToBaseSurface(System.Windows.Point)"/>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.ScreenToLocationAsync(System.Windows.Point)"/>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.LocationToScreen(Esri.ArcGISRuntime.Geometry.MapPoint)"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.ScreenToLocationAsync(System.Windows.Point)">
+             <summary>
+             Async method to convert a screen point relative to the upper left of the SceneView into a location
+             accounting for 3D features within the Scene.
+             </summary>
+             <remarks>
+             This method checks for intersection between the input screen point and visible 3D features on the Scene.
+             It returns a point with X, Y and Z values matching the intersection point. If the input point does not
+             intersect a visible 3D feature, the Scene surface
+             is used to retrieve the point values. If the input point does not intersect the Scene surface or
+             any visible 3D features a <c>null</c> value is returned.
+            
+             This method differs from <see cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.ScreenToBaseSurface(System.Windows.Point)"/> in that the latter only uses the Scene Surface and
+             ignores visible 3D features. The algorithm is inherently slower than ScreenToBaseSurface and is therefore an
+             async operation.
+             </remarks>
+             <param name="screenPoint">Screen point relative to the upper left.</param>
+             <returns>
+               A <see cref="T:Esri.ArcGISRuntime.Geometry.MapPoint"/> on the base surface of the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.Scene"/>, if this view is initialized
+               and has a loaded scene; otherwise <c>null</c>. This may also return <c>null</c> if the given
+               <paramref name="screenPoint"/> is not on the base surface at all (for example, if the sky is drawn at those coordinates).
+             </returns>
+             <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.ScreenToBaseSurface(System.Windows.Point)"/>
+             <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.LocationToScreen(Esri.ArcGISRuntime.Geometry.MapPoint)"/>
+             <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.LocationToScreen(Esri.ArcGISRuntime.Geometry.MapPoint,Esri.ArcGISRuntime.UI.LocationVisibility@)"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.SetFieldOfView(System.Double)">
+            <summary>Sets the horizontal field of view of the scene view in degrees.</summary>
+            <param name="angle">The field of view on the scene view in degrees.</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.SetFieldOfView(System.Double,System.Double)">
+            <summary>
+            Sets the field of view on the scene view in degrees and determines how much the vertical field of view is distorted.
+            </summary>
+            <remarks>
+            A distortion factor of 1.0 is default. A distortion factor less than 1.0 will cause the visuals to be stretched taller in
+            comparison to their width. A distortion factor greater than 1.0 will cause the visuals to be shrunk shorter in comparison
+            to their width.
+            </remarks>
+            <param name="angle">The field of view on the scene view in degrees.</param>
+            <param name="distortionRatio">The field of view vertical distortion ratio.</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.SetFieldOfView(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Esri.ArcGISRuntime.UI.DeviceOrientation)">
+            <summary>
+            Allows for matching the field of view of the scene view to the field of view of a camera lens using the lens intrinsics
+            characteristics.
+            </summary>
+            <param name="xFocalLength">The pixel focal length along the x axis. The units are in pixels. xFocal and yFocal should be identical for square pixels.</param>
+            <param name="xPrincipal">The distance along the x axis between the principal point and the top-left corner of the image frame. The units are in pixels.</param>
+            <param name="yFocalLength">The pixel focal length along the y axis. The units are in pixels. xFocal and yFocal should be identical for square pixels.</param>
+            <param name="yPrincipal">The distance along the y axis between the principal point and the top-left corner of the image frame. The units are in pixels.</param>
+            <param name="xImageSize">The x value of the image size captured by the camera. The units are in pixels.</param>
+            <param name="yImageSize">The y value of the image size captured by the camera. The units are in pixels.</param>
+            <param name="deviceOrientation">Describes the orientation of the device.</param>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.SetViewpointCamera(Esri.ArcGISRuntime.Mapping.Camera)">
+            <summary>
+            Sets the viewpoint camera in the scene view.
+            </summary>
+            <param name="camera">The new camera information for the scene view.</param>
+            <exception cref="T:System.ArgumentNullException">camera</exception>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.SetViewpointCameraAsync(Esri.ArcGISRuntime.Mapping.Camera)">
+            <summary>
+            Changes the scene view to the new camera viewpoint asynchronously.
+            </summary>
+            <param name="camera">The new camera information for the scene view.</param>
+            <returns><c>True</c> if the set view animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+            <exception cref="T:System.ArgumentNullException">camera</exception>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.SetViewpointCameraAsync(Esri.ArcGISRuntime.Mapping.Camera,System.TimeSpan)">
+            <summary>
+            Changes the scene view to the new camera viewpoint asynchronously using the specified duration to arrive.
+            </summary>
+            <param name="camera">The new camera information for the scene view.</param>
+            <param name="duration">Duration of the animation</param>
+            <returns><c>True</c> if the set view animation completed, <c>false</c> if it was interrupted by another view navigation.</returns>
+            <exception cref="T:System.ArgumentNullException">camera</exception>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.Controls.SceneView.CancelSetViewpointOperations">
+            <inheritdoc cref="M:Esri.ArcGISRuntime.UI.Controls.GeoView.CancelSetViewpointOperations" />
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.Scene">
+            <summary>
+            Gets or sets the scene the view is rendering.
+            </summary>
+            <value>The scene the view renders.</value>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.SceneView.SceneProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.Scene"/> dependency property
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.AnalysisOverlays">
+            <summary>Gets or sets the analysis overlay collection containing the analysis overlay objects.</summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.SceneView.AnalysisOverlaysProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.AnalysisOverlays"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.ImageOverlays">
+            <summary>
+            Gets or sets the collection of overlays for displaying images in the scene view.
+            </summary>
+            <remarks>
+            <para>
+            An image overlay collection cannot belong to more that one <see cref="T:Esri.ArcGISRuntime.UI.Controls.SceneView"/>.
+            </para>
+            <para>
+            If the collection contains multiple image overlays, they display in the order in
+            which they were added to the collection. So, the first overlay in the collection
+            (at index 0) displays at the bottom and each one that follows displays on top of
+            the previous ones.
+            </para>
+            <para>
+            If the <see cref="T:Esri.ArcGISRuntime.UI.Controls.SceneView"/> also has a <see cref="T:Esri.ArcGISRuntime.UI.GraphicsOverlay"/>, it displays
+            on top of the <see cref="T:Esri.ArcGISRuntime.UI.ImageOverlay"/>.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.SceneView.ImageOverlaysProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.ImageOverlays"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.Camera">
+            <summary>
+            Gets the current Camera for the view.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.FieldOfView">
+            <summary>Gets the horizontal field of view of the scene view in degrees.</summary>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.SetFieldOfView(System.Double)"/>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.SetFieldOfView(System.Double,System.Double)"/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.FieldOfViewDistortionRatio">
+            <summary>
+            Gets how much the vertical field of view is distorted.
+            </summary>
+            <remarks>
+            A distortion factor of 1.0 is default. A distortion factor less than 1.0 will cause the visuals to be
+            stretched taller in comparison to their width. A distortion factor greater than 1.0 will cause the
+            visuals to be shrunk shorter in comparison to their width.
+            </remarks>
+            <seealso cref="M:Esri.ArcGISRuntime.UI.Controls.SceneView.SetFieldOfView(System.Double,System.Double)"/>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.CameraController">
+            <summary>
+            Gets or sets the SceneView camera controller which determines the camera interaction and navigation model.
+            </summary>
+            <remarks>
+            Setting this value to <c>null</c> sets the <see cref="T:Esri.ArcGISRuntime.UI.Controls.SceneView"/> to use default
+            <see cref="T:Esri.ArcGISRuntime.UI.GlobeCameraController" /> functionality.
+            </remarks>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.SceneView.CameraControllerProperty">
+            <summary>Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.CameraController"/> dependency property</summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.AtmosphereEffect">
+            <summary>
+            Gets or sets the effect applied to the scene's atmosphere.
+            </summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.SceneView.AtmosphereEffectProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.AtmosphereEffect"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.SunLighting">
+            <summary>
+            Gets or sets the type of lighting applied to the scene view.
+            </summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.SceneView.SunLightingProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.SunLighting"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.SunTime">
+            <summary>
+            Gets or sets the position of the Sun.
+            </summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.SceneView.SunTimeProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.SunTime"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.AmbientLightColor">
+            <summary>
+            Gets or sets the ambient light.
+            </summary>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.SceneView.AmbientLightColorProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.AmbientLightColor"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.SpaceEffect">
+            <summary>Gets or sets a value indicating whether outer space is black with stars or transparent in the scene view.</summary>
+            <remarks>
+            Setting the background to none will hide the starry sky effect and make the background color completely transparent.
+            The atmosphere effect will remain unchanged. Default is <see cref="F:Esri.ArcGISRuntime.UI.SpaceEffect.Stars" />. To create an augmented reality experience set this to <see cref="F:Esri.ArcGISRuntime.UI.SpaceEffect.None" /> to render through to the camera view behind it.
+            </remarks>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.SceneView.SpaceEffectProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.SpaceEffect"/> dependency property.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.Controls.SceneView.InteractionOptions">
+            <summary>
+            Gets or sets a set of properties that control user interaction with the SceneView.
+            </summary>
+            <value>
+            Scene view interaction options.
+            </value>
+        </member>
+        <member name="F:Esri.ArcGISRuntime.UI.Controls.SceneView.InteractionOptionsProperty">
+            <summary>
+            Identifies the <see cref="P:Esri.ArcGISRuntime.UI.Controls.SceneView.InteractionOptions"/> Dependency Property.
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.DesktopDeviceInteractionHandler.IsWithinFuzzyTapThreshold(System.Double,System.Double,System.TimeSpan)">
+            <summary>
+            This method is used to dynamically increase the tolerance for a tap
+            event when user is clicking rapidly across the screen which may cause
+            an unintentional drag when a tap was intended.
+            </summary>
+            <param name="dx">the horizontal distance the mouse has traveled in DIPs
+            since the mouse down event.</param>
+            <param name="dy">the vertical distance the mouse has traveled in DIPs
+            since the mouse down event.</param>
+            <param name="time">the time elapsed since mouse down.</param>
+            <returns>true if the event should be considered a tap event and
+            false if it should be a drag event.</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.FlickCalculationHandler.GetFlickSpeed(System.Int32,System.Int32)">
+            <summary>
+            Calculates the weighted moving average of the mouse cursor
+            over the up to last 10 mouse locations. Weight is based on the time of the events
+            </summary>
+            <param name="currentTime">The current time, as measured in the platform's motion event units</param>
+            <param name="maxGestureAge">The temporal threshold that all events in the calculation set must be within to be considered a
+             flick. When the oldest event in the set is older than this value, the flick speed will not be calculated.</param>
+            <returns>A point containing the the weighted average in the X and Y directions if the events contained within the calculation set
+            are determined to be a flick.  Otherwise, default(<see cref="T:System.Windows.Point"/>).</returns>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.IViewOverlay">
+            <summary>
+            Overlay interface for building advanced map overlay controls.
+            </summary>
+            <remarks>
+            Use this interface to create advanced map tip controls that automatically re-arrange themselves
+            when the map changes its extent.
+            </remarks>
+            <seealso cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.Overlays"/>
+            <seealso cref="T:Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters"/>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.IViewOverlay.ArrangeOverlay(Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters)">
+            <summary>
+            Provides the behavior for the ArrangeOverlay pass of layout. Controls can implement
+            this method to define their own ArrangeOverlay pass behavior for when they are part
+            of the <see cref="P:Esri.ArcGISRuntime.UI.Controls.GeoView.Overlays"/> collection.
+            </summary>
+            <param name="parameters">Arrange parameters</param>
+            <seealso cref="M:System.Windows.FrameworkElement.ArrangeOverride(System.Windows.Size)"/>
+            <seealso cref="M:System.Windows.FrameworkElement.MeasureOverride(System.Windows.Size)"/>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters">
+            <summary>
+            Parameters used for <see cref="M:Esri.ArcGISRuntime.UI.IViewOverlay.ArrangeOverlay(Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters)"/> pass.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters.Viewpoint">
+            <summary>
+            Gets the current view of the viewport the overlay is being arranged in.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters.ViewportSize">
+            <summary>
+            Gets the size of the viewport in device independent units.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters.OverlayAnchor">
+            <summary>
+            Gets the anchor location in the viewport in device independent units.
+            </summary>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters.Scale">
+            <summary>
+            Gets the current scale in the viewport, or <see cref="F:System.Double.NaN"/> if not available.
+            </summary>
+            <remarks>
+            This value always returns <see cref="F:System.Double.NaN"/> for a SceneView.
+            </remarks>
+        </member>
+        <member name="P:Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters.Visibility">
+            <summary>
+            Gets the visibility of the <see cref="P:Esri.ArcGISRuntime.UI.ViewOverlayArrangeParameters.OverlayAnchor"/> in the current view
+            </summary>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.UI.RuntimeImageExtensions">
+            <summary>
+            Provides conversions of the <see cref="T:Esri.ArcGISRuntime.UI.RuntimeImage"/> generic type to a platform specific image type
+            </summary>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.RuntimeImageExtensions.ToRuntimeImageAsync(System.Windows.Media.ImageSource)">
+            <summary>
+            Converts a native platform image to a runtime image data container type
+            </summary>
+            <param name="image">The input input</param>
+            <returns>Image data container</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.RuntimeImageExtensions.ToImageSourceAsync(Esri.ArcGISRuntime.UI.RuntimeImage)">
+            <summary>
+            Converts a <see cref="T:Esri.ArcGISRuntime.UI.RuntimeImage"/> to a platform-native image type.
+            </summary>
+            <param name="image">Runtime Image to convert</param>
+            <returns>A native platform bitmap image</returns>
+        </member>
+        <member name="M:Esri.ArcGISRuntime.UI.UserInteractionHandler.OnKeyDown(System.String,System.Boolean)">
+            <summary>
+            Handles the key down event
+            </summary>
+            <param name="keyName">Name of the key</param>
+            <param name="isRepeat">Whether this event is triggered by a repeat</param>
+            <returns>Only return true from OnGeoViewKeyDown, if you want to monitor the key for continuous repeat hold of the key</returns>
+        </member>
+        <member name="T:Esri.ArcGISRuntime.ArcGISDirectXException">
+            <summary>An exception that is thrown if a DirectX exception occurs at the graphics rendering level.</summary>
+        </member>
+        <member name="T:RuntimeCoreNet.ICoreCallback_GeoView_LockSurface">
+            <summary>Native callbacks for locking and unlocking the DirectX surface.</summary>
+        </member>
+        <member name="M:RuntimeCoreNet.ICoreCallback_GeoView_LockSurface.LockSurfaceRequested(System.Boolean)">
+            <summary>Native callback for requesting a lock of the DirectX surface.</summary>
+            <param name="wasResized">Flag to indicate if the core surface was resized from the previous draw iteration.</param>
+        </member>
+        <member name="M:RuntimeCoreNet.ICoreCallback_GeoView_LockSurface.UnlockSurfaceRequested(System.Boolean)">
+            <summary>Native callback for requesting an unlock of the DirectX surface.</summary>
+            <param name="wasResized">Flag to indicate if the core surface was resized from the previous draw iteration.</param>
+        </member>
+        <member name="T:RuntimeCoreNet.ICoreCallback_GeoView_PauseCompleted">
+            <summary>
+            callback interface for waiting for pause completion
+            </summary>
+        </member>
+        <member name="M:RuntimeCoreNet.ICoreCallback_GeoView_PauseCompleted.PauseCompleted">
+            <summary>
+            Called when the pause has completed
+            </summary>
+        </member>
+    </members>
+</doc>

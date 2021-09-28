@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <ArcGISRuntimeFolder>ArcGISRuntime100.12</ArcGISRuntimeFolder>
+    <DeployArcGISx86 Condition="'$(PlatformTarget)' == 'x86' OR '$(PlatformTarget)' == 'AnyCPU' OR '$(PlatformTarget)' == ''">true</DeployArcGISx86>
+    <DeployArcGISx64 Condition="'$(PlatformTarget)' == 'x64' OR (('$(PlatformTarget)' == 'AnyCPU' AND '$(Prefer32Bit)' != 'true') OR '$(PlatformTarget)' == '')">true</DeployArcGISx64>
+  </PropertyGroup>
+  
+  <Target Name="AGSProjectTypeCheck" BeforeTargets="Build;Rebuild">
+    <Error Condition="'$(ProjectTypeGuids)'!='' AND $(ProjectTypeGuids.ToLowerInvariant().Contains('{349c5851-65df-11da-9384-00065b846f21}'))"
+           Text="The 'Esri.ArcGISRuntime' nuget package is not supported for the project type 'Web Application' in the '$(MSBuildProjectName)' project." />
+  </Target>
+  
+  <Target Name="AGSArchitectureCheck" BeforeTargets="Build;Rebuild">
+    <Error Condition="'$(DeployArcGISx86)' != 'true' AND '$(DeployArcGISx64)' != 'true'"
+           Text="The 'Esri.ArcGISRuntime.runtimes.win' package requires the 'PlatformTarget' property to be either 'x86', 'x64' or 'AnyCPU'" />
+  </Target>
+  
+  <!-- Link resource files, to include them in the output directory and application manifest. -->
+  <ItemGroup Condition="'$(DeployArcGISx86)' == 'true' AND '$(DeployArcGISx64)' == 'true'">
+    <Content Include="$(MSBuildThisFileDirectory)..\..\runtimes\win-x86\native\*.*">
+      <Link>$(ArcGISRuntimeFolder)\client32\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>False</Visible>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)..\..\runtimes\win-x64\native\*.*">
+      <Link>$(ArcGISRuntimeFolder)\client64\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>False</Visible>
+    </Content>
+  </ItemGroup>
+  <ItemGroup Condition="'$(DeployArcGISx86)' == 'true' AND '$(DeployArcGISx64)' != 'true'">
+    <Content Include="$(MSBuildThisFileDirectory)..\..\runtimes\win-x86\native\*.*">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>False</Visible>
+    </Content>
+  </ItemGroup>
+  <ItemGroup Condition="'$(DeployArcGISx86)' != 'true' AND '$(DeployArcGISx64)' == 'true'">
+    <Content Include="$(MSBuildThisFileDirectory)..\..\runtimes\win-x64\native\*.*">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Visible>False</Visible>
+    </Content>
+  </ItemGroup>
+</Project>
