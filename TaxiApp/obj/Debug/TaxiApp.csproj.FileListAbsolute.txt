@@ -20,7 +20,6 @@ C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.csproj.AssemblyRefe
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\MainView.g.cs
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\App.g.cs
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp_MarkupCompile.cache
-C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp_MarkupCompile.lref
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.exe
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.pdb
 C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\TaxiApp.exe.config
