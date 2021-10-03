@@ -18,7 +18,7 @@ namespace TaxiApp
             base.OnStartup(e);
             // Note: it is not best practice to store API keys in source code.
             // The API key is referenced here for the convenience of this tutorial.
-            Esri.ArcGISRuntime.ArcGISRuntimeEnvironment.ApiKey = "AAPK1ed067b1087947c5a219c1af529228336-P4cbZb45ioS_6m9tpWvfT6LhFjAnkM8Xthkvhvm_gwLI6gYuVxBTyXCSpbwwa0";
+            Esri.ArcGISRuntime.ArcGISRuntimeEnvironment.ApiKey = "AAPK05697dddd05e413aa166a2cf15573966NNDobD2hsZDKKr1Mq-zxdTDY7vREnq9-2h6VaNBP_oJXDIHaADW4kinEV6hxeZdO";
         }
     }
 }
