@@ -203,8 +203,6 @@ namespace TaxiApp.ViewModels
             var result = await routeTask.SolveRouteAsync(parameters);
             _routeResult = await routeTask.SolveRouteAsync(parameters);
             _route = _routeResult.Routes[0];
-
-
             if (result?.Routes?.FirstOrDefault() is Route routeResult)
             {
                 _currentState = RouteBuilderStatus.NotStarted;
@@ -218,7 +216,6 @@ namespace TaxiApp.ViewModels
             _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, System.Drawing.Color.LightBlue, 5) };
 
             // Create a graphic (solid) to represent the route that's been traveled (initially empty).
-
 
             // Add the route graphics to the map view.
             MapView_temp.GraphicsOverlays[0].Graphics.Add(_routeAheadGraphic);

@@ -628,7 +628,6 @@ C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\zh-CN\Esri.ArcGISRunti
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\zh-Hans\Esri.ArcGISRuntime.resources.dll
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\zh-HK\Esri.ArcGISRuntime.resources.dll
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\zh-TW\Esri.ArcGISRuntime.resources.dll
-C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp_Content.g.cs
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp_MarkupCompile.lref
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\CommonServiceLocator.dll
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.dll
