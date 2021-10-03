@@ -4,15 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+        xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Title="MainView" Height="450" Width="800">
+
 
     <Grid>
         <esri:MapView x:Name="MyMapView" 
                       Map="{Binding MyMap}" 
-                      GraphicsOverlays="{Binding GraphicsOverlays}"
-                      GeoViewTapped="MainMapView_GeoViewTapped"
-                      />
+                      
+                      GraphicsOverlays="{Binding GraphicsOverlays}"  >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="GeoViewTapped">
+                    <cmd:EventToCommand Command="{Binding gvtapped}" PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </esri:MapView>
         <Border>
             <Grid>
                 <Grid.RowDefinitions>
@@ -30,7 +38,7 @@
                         Margin="5"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
-                        Click="StartNavigation"
+                        Command="{Binding StartNavigationCommand}"
                         Content="Navigate route"
                         IsEnabled="False" />
                     <Button
@@ -39,7 +47,7 @@
                         Margin="5"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
-                        Click="RecenterButton_Click"
+                       Command="{Binding RecenterCommand}"
                         Content="Recenter"
                         IsEnabled="False" />
                 </Grid>

@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace TaxiApp.Command
 {
-    public class RelayCommand : ICommand
+    public class RelayCommandMain : ICommand
     {
 
         public event EventHandler CanExecuteChanged
@@ -17,7 +17,7 @@ namespace TaxiApp.Command
         }
         private Action<object> _execute { get; set; }
         private Predicate<object> _canExecute { get; set; }
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
+        public RelayCommandMain(Action<object> execute, Predicate<object> canExecute = null)
         {
             if (execute == null)
             {
