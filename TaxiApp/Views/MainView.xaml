@@ -6,75 +6,361 @@
         xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
         xmlns:cmd="http://www.galasoft.ch/mvvmlight"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="MainView" Height="600" 
+        Width="1000" 
+        WindowStartupLocation="CenterScreen"
+        Background="{x:Null}">
 
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="CanvasMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="100"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"></EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
 
-    <Grid>
-        <esri:MapView x:Name="MyMapView" 
-                      Map="{Binding MyMap}" 
-                      
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames
+                Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="CanvasMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="100"></EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="buttonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"></BeginStoryboard>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="buttonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"></BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
+   
+        <Grid >
+            <esri:MapView x:Name="MyMapView" 
+                      Map="{Binding MyMap}"                       
                       GraphicsOverlays="{Binding GraphicsOverlays}"  >
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="GeoViewTapped">
-                    <cmd:EventToCommand Command="{Binding gvtapped}" PassEventArgsToCommand="True" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </esri:MapView>
-        <Border Background="LightBlue"
-                HorizontalAlignment="Center" VerticalAlignment="Top"
-                Width="300" Height="60"
-                Margin="0,10">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="30" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button
-                        x:Name="StartNavigationButton"
-                        Grid.Column="0"
-                      Margin="-241,139,141,-128"
-                    Background="red"
-                       Height="20"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                        Command="{Binding StartNavigationCommand}"
-                        Content="Navigate route"
-                        IsEnabled="False" Grid.Row="1" />
-                <Button
-                        x:Name="RecenterButton"
-                        Margin="118,139,-214,-128"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Center"
-                       Command="{Binding RecenterCommand}"
-                        Content="Recenter"
-                        IsEnabled="False" Grid.Row="1" Height="20" Grid.ColumnSpan="2" />
-                <TextBlock Text="Search for an address"
-                           Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                           TextAlignment="Center" VerticalAlignment="Center"
-                           FontWeight="SemiBold" />
-                <TextBox x:Name="AddressTextBox"
-                         Grid.Row="1" Grid.Column="0"
-                         Margin="5"
-                         Text=""/>
-                <Button x:Name="SearchAddressButton"
-                        Grid.Row="1" Grid.Column="1"
-                        Margin="5"
-                        Content="Search"
-                       Command="{Binding SearchAdressCommand}" />
-                <TextBlock
-                    Margin="-221,209,191,-308"
-                    x:Name="MessagesTextBlock"
-                    Grid.Row="1"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    TextWrapping="Wrap" />
-            </Grid>
-        </Border>
-    </Grid>
-</Window>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="GeoViewTapped">
+                        <cmd:EventToCommand Command="{Binding gvtapped}" PassEventArgsToCommand="True" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </esri:MapView>
+            <Border>
+                <Grid x:Name="grid_menu">
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.24*" x:Name="girc_column0"/>
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
 
+                    <Canvas 
+                          Grid.Column="0" 
+                          Background="#1b1b1b"
+                          x:Name="CanvasMenu">
+
+                        <Button
+                            Background="Transparent"                          
+                            Height="40"
+                            Width="50"
+                            Canvas.Right="10"
+                            Canvas.Top="10"
+                            Name="buttonOpenMenu"
+                            Command="{Binding MenuOpenCommand}"
+                            >
+                            <materialDesign:PackIcon
+                                    Kind="Menu"
+                                    Height="30"
+                                    Width="40"
+                                 Margin="-11,0,0,0"
+                                 
+                                Foreground="White"
+                            >
+
+                            </materialDesign:PackIcon>
+
+                        </Button>
+
+                        <Button
+                            Background="Transparent"                          
+                            Height="40"
+                            Width="50"
+                            Canvas.Right="0"
+                            Name="buttonCloseMenu"
+                            Visibility="Collapsed"
+                            Command="{Binding MenuCloseCommand}"
+                            >
+                            <materialDesign:PackIcon
+                                    Kind="ArrowLeft"
+                                    Height="30"
+                                    Width="40"
+                                 Margin="-11,0,0,0"
+                                 
+                                Foreground="White"
+                            >
+
+                            </materialDesign:PackIcon>
+
+                        </Button>
+
+                        <Button
+                            Background="Transparent"                          
+                            Height="40"
+                            Width="50"
+                            Canvas.Top="140"
+                            Canvas.Left="20"
+                            >
+                            <materialDesign:PackIcon
+                                
+                              Kind="CreditCardOutline"
+                              Height="30"
+                              Width="40"
+                              Margin="-15,0,0,0"
+                                 
+                              Foreground="White"
+                            >
+
+                            </materialDesign:PackIcon>
+
+                        </Button>
+
+                        <Label 
+                            Foreground="White"
+                            Content="Payment"
+                            FontSize="20"
+                            Height="40"
+                            Width="120"
+                            Canvas.Top="140"
+                            Canvas.Left="70"
+                            x:Name="lbl_payment"
+                            Visibility="Collapsed">
+                            
+                        </Label>
+
+                        <Button
+                            Background="Transparent"                          
+                            Height="40"
+                            Width="50"
+                            Canvas.Top="220"
+                            Canvas.Left="20" 
+                            >
+                            <materialDesign:PackIcon
+                                
+                              Kind="History"
+                              Height="30"
+                              Width="40"
+                              Margin="-15,0,0,0"
+                                 
+                              Foreground="White"
+                            >
+
+                            </materialDesign:PackIcon>
+
+                        </Button>
+
+                        <Label 
+                            Foreground="White"
+                            Content="Ride History"
+                            FontSize="20"
+                            Height="40"
+                            Width="200"
+                            Canvas.Top="220"
+                            Canvas.Left="70"
+                            x:Name="lbl_rideHistory"
+                            Visibility="Collapsed">
+
+                        </Label>
+
+                        <Button
+                            Background="Transparent"                          
+                            Height="40"
+                            Width="50"
+                            Canvas.Top="300"
+                            Canvas.Left="20" 
+                            >
+                            <materialDesign:PackIcon
+                                
+                              Kind="ChatQuestionOutline"
+                              Height="30"
+                              Width="40"
+                              Margin="-15,0,0,0"
+                                 
+                              Foreground="White"
+                            >
+
+                            </materialDesign:PackIcon>
+
+                        </Button>
+
+                        <Label 
+                            Foreground="White"
+                            Content="Support"
+                            FontSize="20"
+                            Height="40"
+                            Width="100"
+                            Canvas.Top="300"
+                            Canvas.Left="70"
+                            x:Name="lbl_support"
+                            Visibility="Collapsed">
+
+                        </Label>
+
+                        <Button
+                            Background="Transparent"                          
+                            Height="40"
+                            Width="50"
+                            Canvas.Top="380"
+                            Canvas.Left="20" 
+                            >
+                            <materialDesign:PackIcon
+                                
+                              Kind="InformationOutline"
+                              Height="30"
+                              Width="40"
+                              Margin="-15,0,0,0"
+                                 
+                              Foreground="White"
+                            >
+
+                            </materialDesign:PackIcon>
+
+                        </Button>
+
+                        <Label 
+                            Foreground="White"
+                            Content="About"
+                            FontSize="20"
+                            Height="40"
+                            Width="120"
+                            Canvas.Top="380"
+                            Canvas.Left="70"
+                            Name="lbl_about"
+                            Visibility="Collapsed">
+
+                        </Label>
+
+                        <Button
+                            Background="Transparent"                          
+                            Height="40"
+                            Width="50"
+                            Canvas.Top="460"
+                            Canvas.Left="20" 
+                            >
+                            <materialDesign:PackIcon
+                                
+                              Kind="ExitToApp"
+                              Height="30"
+                              Width="40"
+                              Margin="-15,0,0,0"
+                                 
+                              Foreground="White"
+                            >
+
+                            </materialDesign:PackIcon>
+
+                        </Button>
+
+                        <Label 
+                            Foreground="White"
+                            Content="Exit App"
+                            FontSize="20"
+                            Height="40"
+                            Width="120"
+                            Canvas.Top="460"
+                            Canvas.Left="70"
+                            x:Name="lbl_exit"
+                            Visibility="Collapsed">
+
+                        </Label>
+
+                    </Canvas>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4*"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Button
+                              x:Name="StartNavigationButton"
+                              Height="30"
+                              Margin="300,400,0,0"
+                              Width="100"
+                              Command="{Binding StartNavigationCommand}"
+                              Content="Navigate route"
+                              IsEnabled="False"
+                              Background="Aqua" >
+
+
+
+                            </Button>
+
+                            
+
+                            <Button                           
+                              x:Name="RecenterButton"
+                              Height="30"
+                              Width="100"
+                              Margin="550,400,0,0"
+                              Command="{Binding RecenterCommand}"
+                              Content="Recenter"
+                              IsEnabled="False"
+                              Background="Aqua"
+                              >
+                            </Button>
+
+                            <Border                            
+                               Height="50"
+                               Width="330"
+                               Background="LightGreen"
+                               CornerRadius="30"
+                               Margin="280,0,0,400">
+
+                                <Grid>
+                                    <TextBox 
+                                      x:Name="AddressTextBox"
+                                      Height="30"
+                                      Width="200"
+                                      Margin="0,0,60,0"
+                                      Text=""/>
+
+                                    <Button 
+                                  x:Name="SearchAddressButton"
+                                  Content="Search"
+                                  Height="30"
+                                  Width="70"
+                                  Margin="240,0,0,0"
+                                  Command="{Binding SearchAdressCommand}" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+
+                            <TextBlock
+                               x:Name="MessagesTextBlock"
+                               HorizontalAlignment="Stretch"
+                               Height="50"
+                               Width="200"
+                               Margin="300,0,0,20"
+                               VerticalAlignment="Stretch"
+                               TextWrapping="Wrap" />
+
+                        </Grid>
+
+
+                    </Grid>
+
+                </Grid>
+            </Border>
+        </Grid>
+    
+    
+</Window>

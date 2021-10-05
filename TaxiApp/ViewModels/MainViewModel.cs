@@ -38,6 +38,9 @@ namespace TaxiApp.ViewModels
         public RelayCommandMain StartNavigationCommand { get; set; }
         public RelayCommandMain RecenterCommand { get; set; }
         public RelayCommandMain SearchAdressCommand { get; set; }
+        public RelayCommandMain MenuOpenCommand { get; set; }
+        public RelayCommandMain MenuCloseCommand { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -96,22 +99,24 @@ namespace TaxiApp.ViewModels
         public Button StartNavigationButton { get; set; }
         public Button RecenterButton { get; set; }
         public Button SearchAdressButton { get; set; }
+        public Button CloseMenuButton { get; set; }
         public TextBlock MessageTextBlock { get; set; }
         public TextBox AdressTextBox { get; set; }
         public MainView MainView { get; set; }
 
         public MainViewModel(MapView mapView, Button startnavigation, Button recenterbutton,Button searchAdressButton,TextBox adressTextBox, TextBlock messagetextblock, MainView mainView)
         {
+            
             MapView_temp = mapView;
             StartNavigationButton = startnavigation;
             RecenterButton = recenterbutton;
-            SearchAdressButton = searchAdressButton;
+            SearchAdressButton = searchAdressButton;          
             MessageTextBlock = messagetextblock;
             AdressTextBox = adressTextBox;
             MainView = mainView;
             Initialize();
 
-
+            
             StartNavigationCommand = new RelayCommandMain(
                action => { StartNavigation(); },
                p => true
@@ -124,6 +129,17 @@ namespace TaxiApp.ViewModels
             action => { SearchAddressButton_Click(); },
             p => true
             );
+
+            MenuOpenCommand = new RelayCommandMain(
+              action => { OpenMenuButton_Click(); },
+              p => true
+              );
+
+            MenuCloseCommand = new RelayCommandMain(
+             action => { CloseMenuButton_Click(); },
+             p => true
+             );
+
             MainView.DataContext = this;
             gvtapped = new RelayCommand<Esri.ArcGISRuntime.UI.Controls.GeoViewInputEventArgs>(Ongvtapped);
             MyMap = new Map(BasemapStyle.ArcGISNavigation);
@@ -427,6 +443,31 @@ namespace TaxiApp.ViewModels
 
             // Stop the location data source.
             MapView_temp.LocationDisplay?.DataSource?.StopAsync();
+        }
+
+        private void CloseMenuButton_Click()
+        {
+            MainView.buttonOpenMenu.Visibility = Visibility.Visible;
+            MainView.buttonCloseMenu.Visibility = Visibility.Collapsed;
+            MainView.lbl_about.Visibility = Visibility.Collapsed;
+            MainView.lbl_exit.Visibility = Visibility.Collapsed;
+            MainView.lbl_payment.Visibility = Visibility.Collapsed;
+            MainView.lbl_rideHistory.Visibility = Visibility.Collapsed;
+            MainView.lbl_support.Visibility = Visibility.Collapsed;
+
+            Canvas.SetLeft(MainView.buttonOpenMenu,13);
+            
+        }
+
+        private void OpenMenuButton_Click()
+        {
+            MainView.buttonOpenMenu.Visibility = Visibility.Collapsed;
+            MainView.buttonCloseMenu.Visibility = Visibility.Visible;
+            MainView.lbl_about.Visibility = Visibility.Visible;
+            MainView.lbl_exit.Visibility = Visibility.Visible;
+            MainView.lbl_payment.Visibility = Visibility.Visible;
+            MainView.lbl_rideHistory.Visibility = Visibility.Visible;
+            MainView.lbl_support.Visibility = Visibility.Visible;
         }
     }
 
