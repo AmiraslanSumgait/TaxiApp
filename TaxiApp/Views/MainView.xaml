@@ -21,40 +21,55 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </esri:MapView>
-        <Border>
+        <Border Background="LightBlue"
+                HorizontalAlignment="Center" VerticalAlignment="Top"
+                Width="300" Height="60"
+                Margin="0,10">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="100" />
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Button
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button
                         x:Name="StartNavigationButton"
                         Grid.Column="0"
-                        Margin="5"
+                      Margin="-241,139,141,-128"
+                    Background="red"
+                       Height="20"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         Command="{Binding StartNavigationCommand}"
                         Content="Navigate route"
-                        IsEnabled="False" />
-                    <Button
+                        IsEnabled="False" Grid.Row="1" />
+                <Button
                         x:Name="RecenterButton"
-                        Grid.Column="1"
-                        Margin="5"
+                        Margin="118,139,-214,-128"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                        Command="{Binding RecenterCommand}"
                         Content="Recenter"
-                        IsEnabled="False" />
-                </Grid>
+                        IsEnabled="False" Grid.Row="1" Height="20" Grid.ColumnSpan="2" />
+                <TextBlock Text="Search for an address"
+                           Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                           TextAlignment="Center" VerticalAlignment="Center"
+                           FontWeight="SemiBold" />
+                <TextBox x:Name="AddressTextBox"
+                         Grid.Row="1" Grid.Column="0"
+                         Margin="5"
+                         Text=""/>
+                <Button x:Name="SearchAddressButton"
+                        Grid.Row="1" Grid.Column="1"
+                        Margin="5"
+                        Content="Search"
+                       Command="{Binding SearchAdressCommand}" />
                 <TextBlock
+                    Margin="-221,209,191,-308"
                     x:Name="MessagesTextBlock"
-                    Grid.Row="3"
-                    Margin="5"
+                    Grid.Row="1"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     TextWrapping="Wrap" />
@@ -62,3 +77,4 @@
         </Border>
     </Grid>
 </Window>
+

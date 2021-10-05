@@ -641,3 +641,4 @@ C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Ext
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Platform.xml
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\App.baml
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp_Content.g.cs
