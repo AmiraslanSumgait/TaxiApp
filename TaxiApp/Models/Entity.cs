@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TaxiApp.Models
 {
-    class Entity
+    public class Entity
     {
+        public int Id { get; set; }
     }
 }
