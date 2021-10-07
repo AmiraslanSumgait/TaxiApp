@@ -95,6 +95,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Services\RouteTrackerDisplayLocationService.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
@@ -154,9 +155,7 @@
     <Folder Include="Repository\" />
   </ItemGroup>
   <ItemGroup>
-
     <Resource Include="Views\taxiapp.png" />
-
     <Resource Include="Images\exit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

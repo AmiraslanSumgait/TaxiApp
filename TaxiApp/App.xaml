@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:TaxiApp" 
              d1p1:Ignorable="d" 
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             StartupUri="Views/MainView.xaml">
+             StartupUri="Views/SignInPage.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

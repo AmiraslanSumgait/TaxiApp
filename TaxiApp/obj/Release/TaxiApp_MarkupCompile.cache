@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Release\
 TaxiApp
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\App.xaml
 31849811818
-150368873991
+41480825112
 12-1514839497
 132-883426161
 Views\MainView.xaml;Views\SignInPage.xaml;Views\SignUpPage.xaml;
 
-False
+True
 
