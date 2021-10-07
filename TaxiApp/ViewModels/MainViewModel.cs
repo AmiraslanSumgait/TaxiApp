@@ -100,25 +100,25 @@ namespace TaxiApp.ViewModels
         public MapView MapView_temp { get; set; }
         public Button StartNavigationButton { get; set; }
         public Button RecenterButton { get; set; }
-        public Button SearchAdressButton { get; set; }
+        public Button SearchAddressButton { get; set; }
         public Button CloseMenuButton { get; set; }
         public TextBlock MessageTextBlock { get; set; }
-        public TextBox AdressTextBox { get; set; }
+        public TextBox AddressTextBox { get; set; }
         public MainView MainView { get; set; }
         PictureMarkerSymbol locationSymbol = new PictureMarkerSymbol(_locationUri)
         {
             Height = 27,
             Width = 24
         };
-        public MainViewModel(MapView mapView, Button startNavigation, Button recenterButton, Button searchAdressButton, TextBox adressTextBox, TextBlock messageTextBlock, Button exitAppButton, MainView mainView)
+        public MainViewModel(MapView mapView, Button startNavigation, Button recenterButton, Button searchAdressButton, TextBox addressTextBox, TextBlock messageTextBlock, Button exitAppButton, MainView mainView)
         {
 
             MapView_temp = mapView;
             StartNavigationButton = startNavigation;
             RecenterButton = recenterButton;
-            SearchAdressButton = searchAdressButton;
+            SearchAddressButton = searchAdressButton;
             MessageTextBlock = messageTextBlock;
-            AdressTextBox = adressTextBox;
+            AddressTextBox = addressTextBox;
             MainView = mainView;
             Initialize();
 
@@ -213,31 +213,38 @@ namespace TaxiApp.ViewModels
         }
         private async void SearchAddressButton_Click()
         {
-
-            // Get the MapViewModel from the page (defined as a static resource).
-
-
-            // Call SearchAddress on the view model, pass the address text and the map view's spatial reference.
-            try
+            if (AddressTextBox.Text != string.Empty)
             {
-                MapView_temp.GraphicsOverlays[0].Graphics.Remove(_routeAheadGraphic);
-                _routeAheadGraphic = null;
 
-                MapPoint addressPoint = await SearchAddress(AdressTextBox.Text, MapView_temp.SpatialReference);
-                _endGraphic.Geometry = Marker.Geometry;
-                _startGraphic.Geometry = MapView_temp.LocationDisplay.Location.Position;
-                await FindRoute();
-                // If a result was found, center the display on it.
-                if (addressPoint != null)
+                // Get the MapViewModel from the page (defined as a static resource).
+
+
+                // Call SearchAddress on the view model, pass the address text and the map view's spatial reference.
+                try
                 {
-                    await MapView_temp.SetViewpointCenterAsync(addressPoint);
+                    MapView_temp.GraphicsOverlays[0].Graphics.Remove(_routeAheadGraphic);
+                    _routeAheadGraphic = null;
+
+                    MapPoint addressPoint = await SearchAddress(AddressTextBox.Text, MapView_temp.SpatialReference);
+                    _endGraphic.Geometry = Marker.Geometry;
+                    _startGraphic.Geometry = MapView_temp.LocationDisplay.Location.Position;
+                    await FindRoute();
+                    // If a result was found, center the display on it.
+                    if (addressPoint != null)
+                    {
+                        await MapView_temp.SetViewpointCenterAsync(addressPoint);
+                    }
+
+
                 }
+                catch (Exception)
+                {
 
-
+                }
             }
-            catch (Exception)
+            else
             {
-                //MessageBox.Show("Adress isnt find");
+                MessageBox.Show("Please enter your address destination.");
             }
         }
         public Graphic Marker { get; set; }
