@@ -30,6 +30,7 @@ namespace TaxiApp.Views
 
     public partial class MainView : Window
     {
+<<<<<<< HEAD
 
         public MainViewModel MainViewModel { get; set; }
         public MainView()
@@ -39,5 +40,12 @@ namespace TaxiApp.Views
 
         }
 
+=======
+        public MainView()
+        {
+            InitializeComponent();
+            MainViewModel mainViewModel = new MainViewModel(MyMapView, StartNavigationButton, RecenterButton,SearchAddressButton, AddressTextBox, MessagesTextBlock,this);
+        }
+>>>>>>> a7fc0c65240d445a3821ec1c6987798b1db0a80e
     }
 }

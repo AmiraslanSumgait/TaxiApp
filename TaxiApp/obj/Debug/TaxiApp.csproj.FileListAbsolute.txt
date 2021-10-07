@@ -640,6 +640,7 @@ C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Ext
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Platform.xml
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\App.baml
+<<<<<<< HEAD
 C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\CommonServiceLocator.dll
 C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.dll
 C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Extras.dll
@@ -662,3 +663,24 @@ C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\MaterialDesignThemes.Wpf.xm
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\SignInPage.baml
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\SignUpPage.g.cs
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\SignUpPage.baml
+=======
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp_Content.g.cs
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp_MarkupCompile.lref
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\CommonServiceLocator.dll
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.dll
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.pdb
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.xml
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\App.baml
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\MaterialDesignColors.dll
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\MaterialDesignThemes.Wpf.xml
+>>>>>>> a7fc0c65240d445a3821ec1c6987798b1db0a80e
