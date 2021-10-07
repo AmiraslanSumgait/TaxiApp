@@ -27,17 +27,17 @@ using TaxiApp.ViewModels;
 
 namespace TaxiApp.Views
 {
-   
+
     public partial class MainView : Window
     {
 
-       
+        public MainViewModel MainViewModel { get; set; }
         public MainView()
         {
             InitializeComponent();
-            MainViewModel mainViewModel = new MainViewModel(MyMapView, StartNavigationButton, RecenterButton, MessagesTextBlock, this);
-           
+            MainViewModel = new MainViewModel(MyMapView, StartNavigationButton, RecenterButton, SearchAddressButton, AddressTextBox, MessagesTextBlock, ExitAppButton, this);
+
         }
-       
+
     }
 }
