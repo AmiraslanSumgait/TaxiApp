@@ -4,30 +4,17 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
-C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\
-=======
-C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\
->>>>>>> a7fc0c65240d445a3821ec1c6987798b1db0a80e
+C:\Users\Amiraslan\Source\Repos\TaxiApp1\TaxiApp\obj\Debug\
 TaxiApp
 none
 false
 DEBUG;TRACE
-<<<<<<< HEAD
-C:\Users\user\source\repos\TaxiApp\TaxiApp\App.xaml
+C:\Users\Amiraslan\Source\Repos\TaxiApp1\TaxiApp\App.xaml
 31849811818
-150135641861
+150-1236536582
 111232839212
-1321337906467
+132-1394025397
 Views\MainView.xaml;Views\SignInPage.xaml;Views\SignUpPage.xaml;
-=======
-C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\App.xaml
-11811751144
-150-801978591
-7-1289371213
-132-970694
-Views\MainView.xaml;
->>>>>>> a7fc0c65240d445a3821ec1c6987798b1db0a80e
 
 False
 

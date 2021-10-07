@@ -154,17 +154,16 @@
     <Folder Include="Repository\" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
+
     <Resource Include="Views\taxiapp.png" />
-=======
+
     <Resource Include="Images\exit.png" />
->>>>>>> a7fc0c65240d445a3821ec1c6987798b1db0a80e
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Esri.ArcGISRuntime.runtimes.win.100.12.0\build\net461\Esri.ArcGISRuntime.runtimes.win.targets" Condition="Exists('..\packages\Esri.ArcGISRuntime.runtimes.win.100.12.0\build\net461\Esri.ArcGISRuntime.runtimes.win.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+      <errortext>this project references nuget package(s) that are missing on this computer. use nuget package restore to download them.  for more information, see http://go.microsoft.com/fwlink/?linkid=322105. the missing file is {0}.</errortext>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Esri.ArcGISRuntime.runtimes.win.100.12.0\build\net461\Esri.ArcGISRuntime.runtimes.win.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Esri.ArcGISRuntime.runtimes.win.100.12.0\build\net461\Esri.ArcGISRuntime.runtimes.win.targets'))" />
     <Error Condition="!Exists('..\packages\Esri.ArcGISRuntime.100.12.0\build\net461\Esri.ArcGISRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Esri.ArcGISRuntime.100.12.0\build\net461\Esri.ArcGISRuntime.targets'))" />
