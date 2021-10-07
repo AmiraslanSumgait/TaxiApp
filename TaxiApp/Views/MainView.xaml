@@ -10,9 +10,10 @@
         mc:Ignorable="d"
         Title="MainView" 
         WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
         Height="600"
         Width="1000" 
-        Background="{x:Null}" >
+        AllowsTransparency="True" >
 
     <!--Qalsin burda lazim olcag BY KENAN-->
     <!--<Window.Triggers>
@@ -53,36 +54,113 @@
         </EventTrigger>
     </Window.Triggers>
 
-    <Grid >
-        <esri:MapView x:Name="MyMapView"
+    <materialDesign:Card>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="16*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="Black">
+
+                <Button
+                   Background="Transparent"                          
+                   Height="25"
+                   Width="45"
+                   Margin="0,0,0,0"
+                   HorizontalAlignment="Right"
+                   BorderThickness="0"
+                >
+                    <materialDesign:PackIcon
+                                
+                      Kind="WindowClose"
+                      Height="25"
+                      Width="40"
+                      Margin="-19,-5,0,0"
+                         
+                      Foreground="White"
+                  >
+
+                    </materialDesign:PackIcon>
+
+                </Button>
+                <Button
+                   Background="Transparent"                          
+                   Height="25"
+                   Width="45"
+                   Margin="0,0,30,0"
+                   HorizontalAlignment="Right"
+                   x:Name="btn_max"
+                    BorderThickness="0"
+                >
+                    <materialDesign:PackIcon
+                                
+                     Kind="WindowMaximize"
+                     Height="25"
+                     Width="40"
+                     Margin="-19,-5,0,0"
+                        
+                     Foreground="White"
+                  >
+
+                    </materialDesign:PackIcon>
+
+                </Button>
+                <Button
+                   Background="Transparent"                          
+                   Height="25"
+                   Width="45"
+                   Margin="0,0,60,0"
+                   HorizontalAlignment="Right"
+                     BorderThickness="0"
+                >
+                    <materialDesign:PackIcon
+                                
+                      Kind="WindowMinimize"
+                      Height="25"
+                      Width="40"
+                      Margin="-19,-5,0,0"
+                         
+                      Foreground="White"
+                  >
+
+                    </materialDesign:PackIcon>
+
+                </Button>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <esri:MapView x:Name="MyMapView"
                       Map="{Binding MyMap}"
                       GraphicsOverlays="{Binding GraphicsOverlays}"  >
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="GeoViewTapped">
-                    <cmd:EventToCommand Command="{Binding gvtapped}" PassEventArgsToCommand="True" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </esri:MapView>
-        <Border>
-            <Grid x:Name="grid_menu">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="GeoViewTapped">
+                            <cmd:EventToCommand Command="{Binding gvtapped}" PassEventArgsToCommand="True" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </esri:MapView>
+                <Border>
+                    <Grid x:Name="grid_menu">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.24*" x:Name="girc_column0"/>
-                    <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.24*" x:Name="girc_column0"/>
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
 
-                <!--Background="#363636"-->
-                <!--Background="#8B94A3"-->
-                <!--Background="#2D3047"-->
-                <!--Background="#424242"-->
-                <!--Background="#36413E"-->
-                <!--Background="#383D3B"-->
-                <!--Background="#415D43"-->
-                <Canvas
+                        <!--Background="#363636"-->
+                        <!--Background="#8B94A3"-->
+                        <!--Background="#2D3047"-->
+                        <!--Background="#424242"-->
+                        <!--Background="#36413E"-->
+                        <!--Background="#383D3B"-->
+                        <!--Background="#415D43"-->
+                        <Canvas
                     Grid.Column="0"
                     Background="#333333"
                     x:Name="CanvasMenu">
-                    <Button
+                            <Button
                         Background="Transparent"
                         BorderThickness="0"
                         Height="40"
@@ -91,15 +169,15 @@
                         Canvas.Top="10"
                         Name="buttonOpenMenu"
                         Command="{Binding MenuOpenCommand}">
-                        <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                                     Kind="Menu"
                                     Height="30"
                                     Width="40"
                                  Margin="-11,0,0,0"
                                 Foreground="White"/>
-                    </Button>
+                            </Button>
 
-                    <Button
+                            <Button
                             Background="Transparent"
                             Height="40"
                             Width="50"
@@ -108,18 +186,18 @@
                             BorderThickness="0"
                             Visibility="Collapsed"
                             Command="{Binding MenuCloseCommand}">
-                        <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                                     Kind="ArrowLeft"
                                     Height="30"
                                     Width="40"
                                     Margin="-11,0,0,0"
                                     Foreground="White">
 
-                        </materialDesign:PackIcon>
+                                </materialDesign:PackIcon>
 
-                    </Button>
+                            </Button>
 
-                    <Button
+                            <Button
                             Background="Transparent"
                             BorderThickness="0"
                             Height="40"
@@ -127,7 +205,7 @@
                             Canvas.Top="140"
                             Canvas.Left="20">
 
-                        <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                                 
                               Kind="CreditCardOutline"
                               Height="30"
@@ -136,11 +214,11 @@
                                  
                               Foreground="White">
 
-                        </materialDesign:PackIcon>
+                                </materialDesign:PackIcon>
 
-                    </Button>
+                            </Button>
 
-                    <Label
+                            <Label
                             Foreground="White"
                             Content="Payment"
                             FontSize="20"
@@ -151,14 +229,14 @@
                             x:Name="lbl_payment"
                             Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"/>
 
-                    <Button
+                            <Button
                             Background="Transparent"
                             BorderThickness="0"
                             Height="40"
                             Width="50"
                             Canvas.Top="220"
                             Canvas.Left="20">
-                        <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                                 
                               Kind="History"
                               Height="30"
@@ -166,9 +244,9 @@
                               Margin="-15,0,0,0"
                               Foreground="White"/>
 
-                    </Button>
+                            </Button>
 
-                    <Label
+                            <Label
                             Foreground="White"
                             Content="Ride History"
                             FontSize="20"
@@ -179,23 +257,23 @@
                             x:Name="lbl_rideHistory"
                             Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"/>
 
-                    <Button
+                            <Button
                             Background="Transparent"
                             Height="40"
                             BorderThickness="0"
                             Width="50"
                             Canvas.Top="300"
                             Canvas.Left="20">
-                        <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                                 BorderThickness="0"
                               Kind="ChatQuestionOutline"
                               Height="30"
                               Width="40"
                               Margin="-15,0,0,0"
                               Foreground="White"/>
-                    </Button>
+                            </Button>
 
-                    <Label
+                            <Label
                             Foreground="White"
                             Content="Support"
                             FontSize="20"
@@ -206,23 +284,23 @@
                             x:Name="lbl_support"
                             Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"/>
 
-                    <Button
+                            <Button
                             Background="Transparent"
                             Height="40"
                         BorderThickness="0"
                             Width="50"
                             Canvas.Top="380"
                             Canvas.Left="20">
-                        <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                               Kind="InformationOutline"
                               Height="30"
                               Width="40"
                               Margin="-15,0,0,0"
                                  
                               Foreground="White"/>
-                    </Button>
+                            </Button>
 
-                    <Label
+                            <Label
                             Foreground="White"
                             Content="About"
                             FontSize="20"
@@ -233,7 +311,7 @@
                             Name="lbl_about"
                             Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"/>
 
-                    <Button
+                            <Button
                         x:Name="ExitAppButton"
                         Background="Transparent"
                         Height="40"
@@ -242,15 +320,15 @@
                         Canvas.Top="460"
                         Canvas.Left="20"
                         Command="{Binding ExitAppCommand}">
-                        <materialDesign:PackIcon
+                                <materialDesign:PackIcon
                               Kind="ExitToApp"
                               Height="30"
                               Width="40"
                               Margin="-15,0,0,0"
                               Foreground="White"/>
-                    </Button>
+                            </Button>
 
-                    <Label
+                            <Label
                             Foreground="White"
                             Content="Exit App"
                             FontSize="20"
@@ -261,16 +339,16 @@
                             x:Name="lbl_exit"
                             Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"/>
 
-                </Canvas>
+                        </Canvas>
 
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="4*"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <Button
+                            <Grid Grid.Row="0">
+                                <Button
                               x:Name="StartNavigationButton"
                               Height="30"
                               Margin="300,400,0,0"
@@ -280,7 +358,7 @@
                               IsEnabled="False"
                               Background="Aqua"/>
 
-                        <Button
+                                <Button
                               x:Name="RecenterButton"
                               Height="30"
                               Width="100"
@@ -291,11 +369,11 @@
                               Background="Aqua"/>
 
 
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Border Margin="0,10,0,0" CornerRadius="15 0 0 15" Background="White" VerticalAlignment="Top" Width="35" Height="40">
-                                <materialDesign:PackIcon HorizontalAlignment="Center" Kind="Search" VerticalAlignment="Center" Height="25" Width="20"/>
-                            </Border>
-                            <TextBox
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Border Margin="0,10,0,0" CornerRadius="15 0 0 15" Background="White" VerticalAlignment="Top" Width="35" Height="40">
+                                        <materialDesign:PackIcon HorizontalAlignment="Center" Kind="Search" VerticalAlignment="Center" Height="25" Width="20"/>
+                                    </Border>
+                                    <TextBox
                               x:Name="AddressTextBox"
                             Margin="0,10,0,0"
                                 VerticalAlignment="Top"
@@ -308,14 +386,14 @@
                             FontSize="14"
                             materialDesign:TextFieldAssist.HasClearButton="True"
                             materialDesign:TextFieldAssist.UnderlineCornerRadius="15">
-                                <materialDesign:HintAssist.Hint>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Search destination" Padding="5 0 0 0" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </materialDesign:HintAssist.Hint>
-                            </TextBox>
-                            <Border>
-                                <Button
+                                        <materialDesign:HintAssist.Hint>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Search destination" Padding="5 0 0 0" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </materialDesign:HintAssist.Hint>
+                                    </TextBox>
+                                    <Border>
+                                        <Button
                                     x:Name="SearchAddressButton"
                                     Content="Search"
                                     Height="40"
@@ -325,13 +403,13 @@
                                     materialDesign:ButtonAssist.CornerRadius="0 15 15 0"
                                     Margin="0,10,35,0"
                                     Command="{Binding SearchAdressCommand}" RenderTransformOrigin="0.114,4.067"/>
-                            </Border>
-                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
 
-                    </Grid>
+                            </Grid>
 
-                    <Grid Grid.Row="1">
-                        <TextBlock
+                            <Grid Grid.Row="1">
+                                <TextBlock
                                x:Name="MessagesTextBlock"
                                HorizontalAlignment="Stretch"
                                Height="50"
@@ -339,9 +417,12 @@
                                Margin="300,0,0,20"
                                VerticalAlignment="Stretch"
                                TextWrapping="Wrap"/>
+                            </Grid>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Border>
             </Grid>
-        </Border>
-    </Grid>
+        </Grid>
+    </materialDesign:Card>
+    
 </Window>
