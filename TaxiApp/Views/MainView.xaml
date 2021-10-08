@@ -13,7 +13,8 @@
         WindowStyle="None"
         Height="600"
         Width="1000" 
-        AllowsTransparency="True" >
+        AllowsTransparency="True"
+        Background="{x:Null}">
 
     <!--Qalsin burda lazim olcag BY KENAN-->
     <!--<Window.Triggers>
@@ -54,9 +55,9 @@
         </EventTrigger>
     </Window.Triggers>
 
-    <materialDesign:Card>
+    <materialDesign:Card UniformCornerRadius="10">
         <Grid>
-
+           
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="16*"></RowDefinition>
@@ -67,17 +68,21 @@
                 <Button
                    Background="Transparent"                          
                    Height="25"
-                   Width="45"
-                   Margin="0,0,0,0"
+                   Width="25"
+                   Margin="0,0,10,0"
+                   Padding="0,0,0,0"
                    HorizontalAlignment="Right"
                    BorderThickness="0"
+                   x:Name="btn_close"
+                   Command="{Binding ExitAppCommand}"
                 >
                     <materialDesign:PackIcon
                                 
                       Kind="WindowClose"
                       Height="25"
-                      Width="40"
-                      Margin="-19,-5,0,0"
+                      Width="25"
+                      
+                      
                          
                       Foreground="White"
                   >
@@ -88,18 +93,20 @@
                 <Button
                    Background="Transparent"                          
                    Height="25"
-                   Width="45"
-                   Margin="0,0,30,0"
+                   Width="25"
+                   Margin="0,0,41,0"
+                   Padding="0,0,0,0"
                    HorizontalAlignment="Right"
                    x:Name="btn_max"
-                    BorderThickness="0"
+                   BorderThickness="0"
+                   Command="{Binding MaximizeAppCommand}"
                 >
                     <materialDesign:PackIcon
                                 
                      Kind="WindowMaximize"
                      Height="25"
-                     Width="40"
-                     Margin="-19,-5,0,0"
+                     Width="25"
+                    
                         
                      Foreground="White"
                   >
@@ -110,18 +117,19 @@
                 <Button
                    Background="Transparent"                          
                    Height="25"
-                   Width="45"
-                   Margin="0,0,60,0"
+                   Width="25"
+                   Margin="0,0,72,0"
+                   Padding="0,0,0,0"
                    HorizontalAlignment="Right"
-                     BorderThickness="0"
+                   BorderThickness="0"
+                   x:Name="btn_min"
+                    Command="{Binding MinimizeAppCommand}"
                 >
                     <materialDesign:PackIcon
                                 
                       Kind="WindowMinimize"
                       Height="25"
-                      Width="40"
-                      Margin="-19,-5,0,0"
-                         
+                      Width="23"     
                       Foreground="White"
                   >
 
