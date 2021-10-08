@@ -42,7 +42,7 @@ namespace TaxiApp.ViewModels
         public RelayCommandMain MenuOpenCommand { get; set; }
         public RelayCommandMain MenuCloseCommand { get; set; }
         public RelayCommandMain ExitAppCommand { get; set; }
-
+       
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -90,12 +90,13 @@ namespace TaxiApp.ViewModels
         // Graphics to show progress along the route.
         private Graphic _routeAheadGraphic;
         private  static Uri _locationUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/361a937b56c542549083460f47a5caf3/data");
-        private Uri _taxiUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/fabb958336e7475e844dda83b54dec47/data");
+        private static Uri _taxiUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/fabb958336e7475e844dda83b54dec47/data");
         private Uri _personUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/4bb29cac50bd46b3b8f63edb949a0db6/data");
 
         private readonly Uri _routingUri = new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
         //------------------------------------------------------------------
-        private readonly MapPoint _conventionCenter = new MapPoint(49.651630, 40.609029, SpatialReferences.Wgs84);
+        private readonly MapPoint _taxi1 = new MapPoint(49.721081, 40.566875, SpatialReferences.Wgs84);
+        private readonly MapPoint _taxi2 = new MapPoint(49.705630, 40.555296, SpatialReferences.Wgs84);
         //----------------------------------------------------------------------
         public MapView MapView_temp { get; set; }
         public Button StartNavigationButton { get; set; }
@@ -110,6 +111,12 @@ namespace TaxiApp.ViewModels
             Height = 27,
             Width = 24
         };
+        PictureMarkerSymbol taxiSymbol = new PictureMarkerSymbol(_taxiUri)
+        {
+           Height=40,
+            Width = 40
+        };
+       
         public MainViewModel(MapView mapView, Button startNavigation, Button recenterButton, Button searchAdressButton, TextBox addressTextBox, TextBlock messageTextBlock, Button exitAppButton, MainView mainView)
         {
 
@@ -175,14 +182,14 @@ namespace TaxiApp.ViewModels
                 Size = 18,
                 Outline = startOutlineSymbol
             }
-            );
-            _endGraphic = new Graphic(null, locationSymbol);
-            routeAndStopsOverlay.Graphics.AddRange(new[] { _startGraphic, _endGraphic });
+            ); _endGraphic = new Graphic(null, locationSymbol);
+            Graphic graphicTaxi1 = new Graphic(_taxi1, taxiSymbol);
+            Graphic graphicTaxi2 = new Graphic(_taxi2, taxiSymbol);
+            routeAndStopsOverlay.Graphics.AddRange(new[] { _startGraphic, _endGraphic, graphicTaxi1,graphicTaxi2 });
         }
         private async void Ongvtapped(GeoViewInputEventArgs e)
         {
             ++count;
-            // MessageBox.Show(MapView_temp.LocationDisplay.Location.Position.X.ToString());
             try
             {
                 if (count != 1)
@@ -215,10 +222,7 @@ namespace TaxiApp.ViewModels
         {
             if (AddressTextBox.Text != string.Empty)
             {
-
                 // Get the MapViewModel from the page (defined as a static resource).
-
-
                 // Call SearchAddress on the view model, pass the address text and the map view's spatial reference.
                 try
                 {
@@ -234,7 +238,6 @@ namespace TaxiApp.ViewModels
                     {
                         await MapView_temp.SetViewpointCenterAsync(addressPoint);
                     }
-
 
                 }
                 catch (Exception)
