@@ -35,9 +35,8 @@ namespace TaxiApp.Views
         public MainView()
         {
             InitializeComponent();
-            MainViewModel = new MainViewModel(MyMapView, StartNavigationButton, RecenterButton, SearchAddressButton, AddressTextBox, MessagesTextBlock, ExitAppButton, this);
+            MainViewModel = new MainViewModel(this);
 
         }
-
     }
 }

@@ -62,7 +62,7 @@
                 <RowDefinition Height="16*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Background="Black">
+            <Grid x:Name="gridHead" Grid.Row="0" Background="Black" >
 
                 <Button
                    Background="Transparent"                          
@@ -196,6 +196,13 @@
                                 </materialDesign:PackIcon>
 
                             </Button>
+
+                            <TextBlock 
+                                FontSize="17" 
+                                Foreground="White"
+                                Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"
+                                Canvas.Top="15"
+                                Canvas.Left="10"/>
 
                             <Button
                             Background="Transparent"
@@ -375,7 +382,7 @@
                                     </Border>
                                     <TextBox
                               x:Name="AddressTextBox"
-                            Margin="0,10,0,0"
+                            Margin="0,10,1,0"
                                 VerticalAlignment="Top"
                             Style="{StaticResource MaterialDesignTextBoxBase}"
                             VerticalContentAlignment="Center"
@@ -392,17 +399,17 @@
                                             </StackPanel>
                                         </materialDesign:HintAssist.Hint>
                                     </TextBox>
-                                    <Border>
+                                    <Border VerticalAlignment="Top">
                                         <Button
-                                    x:Name="SearchAddressButton"
-                                    Content="Search"
-                                    Height="40"
-                                    Background="#508CA4"
-                                    BorderThickness="0"
-                                    VerticalAlignment="Top"
-                                    materialDesign:ButtonAssist.CornerRadius="0 15 15 0"
-                                    Margin="0,10,35,0"
-                                    Command="{Binding SearchAdressCommand}" RenderTransformOrigin="0.114,4.067"/>
+                                            x:Name="SearchAddressButton"
+                                            Content="Search"
+                                            Height="38"
+                                            Background="#508CA4"
+                                            HorizontalAlignment="Center"
+                                            BorderThickness="0"
+                                            materialDesign:ButtonAssist.CornerRadius="0 15 15 0"
+                                            Margin="0,11,35,0"
+                                            Command="{Binding SearchAdressCommand}" RenderTransformOrigin="0.114,4.067"/>
                                     </Border>
                                 </StackPanel>
 
@@ -424,5 +431,5 @@
             </Grid>
         </Grid>
     </materialDesign:Card>
-    
+
 </Window>

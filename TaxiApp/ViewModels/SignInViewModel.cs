@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TaxiApp.Command;
+using TaxiApp.Data;
+using TaxiApp.Models;
 using TaxiApp.Views;
 
 namespace TaxiApp.ViewModels
@@ -18,6 +20,9 @@ namespace TaxiApp.ViewModels
         public RelayCommandMain SignInCommand { get; set; }
 
         public SignInPage SignInPage { get; set; }
+
+        public UserContext UserContext { get; set; }
+        public User CurrentUser { get; set; }
 
         public SignInViewModel(SignInPage signInPage)
         {
@@ -41,10 +46,18 @@ namespace TaxiApp.ViewModels
             SignInCommand = new RelayCommandMain(
                 action =>
                 {
-                    MainView mainView = new MainView();
-                    Window window = (Window)SignInPage.Parent;
-                    window.Close();
-                    mainView.ShowDialog();
+                    UserContext = new UserContext();
+                    if (UserContext.Users.Any(u => u.Email == SignInPage.tbEmail.Text && u.Password == SignInPage.pbPassword.Password))
+                    {
+                        MainView mainView = new MainView();
+                        Window window = (Window)SignInPage.Parent;
+                        window.Close();
+                        mainView.ShowDialog();
+                    }
+                    else if (UserContext.Users.Any(u => u.Email == SignInPage.tbEmail.Text && u.Password != SignInPage.pbPassword.Password))
+                        MessageBox.Show("That's not the right password. Please try again.");
+                    else
+                        MessageBox.Show("Couldn’t find a Taxi app account associated with this email. Please try again.");
                 },
                 pre => true);
         }
