@@ -14,7 +14,7 @@
         Height="600"
         Width="1000" 
         AllowsTransparency="True"
-        Background="{x:Null}">
+        Background="{x:Null}"  >
 
     <!--Qalsin burda lazim olcag BY KENAN-->
     <!--<Window.Triggers>
@@ -31,7 +31,7 @@
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames
                 Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="CanvasMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="100"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0" Value="74"></EasingDoubleKeyFrame>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"></EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
@@ -40,7 +40,7 @@
             <DoubleAnimationUsingKeyFrames
                 Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="CanvasMenu">
                 <EasingDoubleKeyFrame KeyTime="0" Value="200"></EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="100"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="74"></EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
