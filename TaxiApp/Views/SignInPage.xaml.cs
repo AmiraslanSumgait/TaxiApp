@@ -13,6 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TaxiApp.ViewModels;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Position;
+using ToastNotifications.Messages;
 
 namespace TaxiApp.Views
 {
@@ -33,7 +37,27 @@ namespace TaxiApp.Views
             //SignInViewModel.MainViewModel = MainView.MainViewModel;
             //SignInViewModel.SignInPage = this;
 
-
         }
+
+       
+
+
+
+
+        //private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        //{
+        //    if (cbPassword.IsChecked == true)
+        //    {
+        //        tbPassword.Visibility = Visibility.Visible;
+        //        pbPassword.Visibility = Visibility.Hidden;
+
+
+        //    }
+        //    else
+        //    {
+        //        tbPassword.Visibility = Visibility.Hidden;
+        //        pbPassword.Visibility = Visibility.Visible;
+        //    }
+        //}
     }
 }
