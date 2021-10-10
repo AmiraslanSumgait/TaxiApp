@@ -5,7 +5,8 @@
              xmlns:local="clr-namespace:TaxiApp" 
              d1p1:Ignorable="d" 
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             StartupUri="Views/MainView.xaml">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             StartupUri="Views/SignUpPage.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -13,6 +14,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+
+                <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
 
@@ -69,6 +72,17 @@
                     </EventTrigger>
                 </Style.Triggers>
             </Style>
+
+            <ControlTemplate x:Key="errorTemplate">
+                <Border BorderBrush="OrangeRed" BorderThickness="0">
+                    <Grid>
+                        <AdornedElementPlaceholder/>
+                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="OrangeRed"
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Margin="0,0,4,0"/>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

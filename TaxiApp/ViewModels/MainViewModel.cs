@@ -11,20 +11,13 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
-using System.Device.Location;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TaxiApp.Command;
 using TaxiApp.Services;
 using TaxiApp.Views;
@@ -33,7 +26,6 @@ namespace TaxiApp.ViewModels
     public class MainViewModel
     {
         public int count = 0;
-        public int countCliclMaximize;
         public ICommand gvtapped { get; set; }
         private Graphic _startGraphic;
         private Graphic _endGraphic;
@@ -43,9 +35,6 @@ namespace TaxiApp.ViewModels
         public RelayCommandMain MenuOpenCommand { get; set; }
         public RelayCommandMain MenuCloseCommand { get; set; }
         public RelayCommandMain ExitAppCommand { get; set; }
-        public RelayCommandMain MinimizeAppCommand { get; set; }
-        public RelayCommandMain MaximizeAppCommand { get; set; }
-        public RelayCommandMain InfoDestinationCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -93,8 +82,7 @@ namespace TaxiApp.ViewModels
 
         // Graphics to show progress along the route.
         private Graphic _routeAheadGraphic;
-        private  static Uri _locationUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/361a937b56c542549083460f47a5caf3/data");
-        private  static Uri _currentLocationUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/22198fcdc2f5443b8303e97b0044aebe/data");
+        private static Uri _locationUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/361a937b56c542549083460f47a5caf3/data");
         private Uri _taxiUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/fabb958336e7475e844dda83b54dec47/data");
         private Uri _personUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/4bb29cac50bd46b3b8f63edb949a0db6/data");
 
@@ -102,26 +90,17 @@ namespace TaxiApp.ViewModels
         //------------------------------------------------------------------
         private readonly MapPoint _conventionCenter = new MapPoint(49.651630, 40.609029, SpatialReferences.Wgs84);
         //----------------------------------------------------------------------
-        public MapView MapView_temp { get; set; }
         public MainView MainView { get; set; }
         PictureMarkerSymbol locationSymbol = new PictureMarkerSymbol(_locationUri)
         {
             Height = 27,
             Width = 24
         };
-        PictureMarkerSymbol currentLocationSymbol = new PictureMarkerSymbol(_currentLocationUri)
+        public MainViewModel(MainView mainView)
         {
-            Height = 27,
-            Width = 24
-        };
-        public MainViewModel(MapView mapView,MainView mainView)
-        {
-
-            MapView_temp = mapView;
             MainView = mainView;
+            mainView.gridHead.MouseLeftButtonDown += Grid_MouseLeftButtonDown;
             Initialize();
-
-
             StartNavigationCommand = new RelayCommandMain(
                 action => { StartNavigation(); },
                 pRE => true
@@ -144,34 +123,18 @@ namespace TaxiApp.ViewModels
                 action => { CloseMenuButton_Click(); },
                 pre => true
              );
-
             ExitAppCommand = new RelayCommandMain(
                 action => { ExitAppButton_Click(); },
                 pre => true
                 );
 
-            MinimizeAppCommand = new RelayCommandMain(
-                action => { MinimizeAppButton_Click(); },
-                pre => true
-                );
-
-            MaximizeAppCommand = new RelayCommandMain(
-                action => { MaximizeAppButton_Click(); },
-                pre => true
-                );
-            InfoDestinationCommand = new RelayCommandMain(
-               action => { MainView.InfoUcPanel.UserControl.Visibility = Visibility.Visible; 
-                           MainView.btn_info.Visibility = Visibility.Collapsed; },
-               pre => true
-               );
-
             MainView.DataContext = this;
             gvtapped = new RelayCommand<Esri.ArcGISRuntime.UI.Controls.GeoViewInputEventArgs>(Ongvtapped);
             MyMap = new Map(BasemapStyle.ArcGISNavigation);
-            mapView.LocationDisplay.IsEnabled = true;
-            mapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Recenter;
-            mapView.LocationDisplay.CourseSymbol = new PictureMarkerSymbol(_taxiUri);
-            mapView.LocationDisplay.DefaultSymbol = new PictureMarkerSymbol(_personUri);
+            MainView.MyMapView.LocationDisplay.IsEnabled = true;
+            MainView.MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Recenter;
+            MainView.MyMapView.LocationDisplay.CourseSymbol = new PictureMarkerSymbol(_taxiUri);
+            MainView.MyMapView.LocationDisplay.DefaultSymbol = new PictureMarkerSymbol(_personUri);
             SetupMap();
         }
         GraphicsOverlay routeAndStopsOverlay = new GraphicsOverlay();
@@ -182,16 +145,15 @@ namespace TaxiApp.ViewModels
             {
                routeAndStopsOverlay
             };
-            //var startOutlineSymbol = new SimpleLineSymbol(style: SimpleLineSymbolStyle.Solid, color: System.Drawing.Color.White, width: 2);
-            //_startGraphic = new Graphic(null, new SimpleMarkerSymbol
-            //{
-            //    Style = SimpleMarkerSymbolStyle.Circle,
-            //    Color = System.Drawing.Color.Red,
-            //    Size = 18,
-            //    Outline = startOutlineSymbol
-            //}
-            //);
-            _startGraphic = new Graphic(null, currentLocationSymbol);
+            var startOutlineSymbol = new SimpleLineSymbol(style: SimpleLineSymbolStyle.Solid, color: System.Drawing.Color.White, width: 2);
+            _startGraphic = new Graphic(null, new SimpleMarkerSymbol
+            {
+                Style = SimpleMarkerSymbolStyle.Circle,
+                Color = System.Drawing.Color.Red,
+                Size = 18,
+                Outline = startOutlineSymbol
+            }
+            );
             _endGraphic = new Graphic(null, locationSymbol);
             routeAndStopsOverlay.Graphics.AddRange(new[] { _startGraphic, _endGraphic });
         }
@@ -238,17 +200,17 @@ namespace TaxiApp.ViewModels
                 // Call SearchAddress on the view model, pass the address text and the map view's spatial reference.
                 try
                 {
-                    MapView_temp.GraphicsOverlays[0].Graphics.Remove(_routeAheadGraphic);
+                    MainView.MyMapView.GraphicsOverlays[0].Graphics.Remove(_routeAheadGraphic);
                     _routeAheadGraphic = null;
 
-                    MapPoint addressPoint = await SearchAddress(MainView.AddressTextBox.Text, MapView_temp.SpatialReference);
+                    MapPoint addressPoint = await SearchAddress(MainView.AddressTextBox.Text, MainView.MyMapView.SpatialReference);
                     _endGraphic.Geometry = Marker.Geometry;
-                    _startGraphic.Geometry = MapView_temp.LocationDisplay.Location.Position;
+                    _startGraphic.Geometry = MainView.MyMapView.LocationDisplay.Location.Position;
                     await FindRoute();
                     // If a result was found, center the display on it.
                     if (addressPoint != null)
                     {
-                        await MapView_temp.SetViewpointCenterAsync(addressPoint);
+                        await MainView.MyMapView.SetViewpointCenterAsync(addressPoint);
                     }
 
 
@@ -321,7 +283,7 @@ namespace TaxiApp.ViewModels
                 case RouteBuilderStatus.NotStarted:
                     ResetState();
                     _endGraphic.Geometry = tappedPoint;
-                    _startGraphic.Geometry = MapView_temp.LocationDisplay.Location.Position;
+                    _startGraphic.Geometry = MainView.MyMapView.LocationDisplay.Location.Position;
                     _currentState = RouteBuilderStatus.SelectedStartAndEnd;
                     await FindRoute();
                     break;
@@ -361,11 +323,11 @@ namespace TaxiApp.ViewModels
             // Create a graphic (solid) to represent the route that's been traveled (initially empty).
 
             // Add the route graphics to the map view.
-            MapView_temp.GraphicsOverlays[0].Graphics.Add(_routeAheadGraphic);
+            MainView.MyMapView.GraphicsOverlays[0].Graphics.Add(_routeAheadGraphic);
 
 
             // Set the map viewpoint to show the entire route.
-            await MapView_temp.SetViewpointGeometryAsync(_route.RouteGeometry, 100);
+            await MainView.MyMapView.SetViewpointGeometryAsync(_route.RouteGeometry, 100);
 
             // Enable the navigation button.
             MainView.StartNavigationButton.IsEnabled = true;
@@ -373,8 +335,7 @@ namespace TaxiApp.ViewModels
         }
         private void StartNavigation()
         {
-            MainView.InfoUcPanel.UserControl.Visibility = Visibility.Collapsed;
-            MainView.btn_info.Visibility = Visibility.Visible;
+
             // Disable the start navigation button.
             MainView.StartNavigationButton.IsEnabled = false;
             // Get the directions for the route.
@@ -386,21 +347,21 @@ namespace TaxiApp.ViewModels
             // Handle route tracking status changes.
             _tracker.TrackingStatusChanged += TrackingStatusUpdated;
             // Turn on navigation mode for the map view.
-            MapView_temp.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
-            MapView_temp.LocationDisplay.AutoPanModeChanged += AutoPanModeChanged;
+            MainView.MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
+            MainView.MyMapView.LocationDisplay.AutoPanModeChanged += AutoPanModeChanged;
 
             // Add a data source for the location display.
             var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 50.0);
             var simulatedDataSource = new SimulatedLocationDataSource();
             simulatedDataSource.SetLocationsWithPolyline(_route.RouteGeometry, simulationParameters);
-            MapView_temp.LocationDisplay.DataSource = new RouteTrackerDisplayLocationService(simulatedDataSource, _tracker);
+            MainView.MyMapView.LocationDisplay.DataSource = new RouteTrackerDisplayLocationService(simulatedDataSource, _tracker);
 
             // Use this instead if you want real location:
 
             //MyMapView.LocationDisplay.DataSource = new RouteTrackerLocationDataSource(_tracker, new SystemLocationDataSource());
 
             // Enable the location display (this wil start the location data source).
-            MapView_temp.LocationDisplay.IsEnabled = true;
+            MainView.MyMapView.LocationDisplay.IsEnabled = true;
         }
 
         private void TrackingStatusUpdated(object sender, RouteTrackerTrackingStatusChangedEventArgs e)
@@ -447,7 +408,7 @@ namespace TaxiApp.ViewModels
                     MainView.Dispatcher.BeginInvoke((Action)delegate ()
                     {
                         // Stop the simulated location data source.
-                        MapView_temp.LocationDisplay.DataSource.StopAsync();
+                        MainView.MyMapView.LocationDisplay.DataSource.StopAsync();
                     });
                 }
             }
@@ -467,7 +428,7 @@ namespace TaxiApp.ViewModels
         private void RecenterButton_Click()
         {
             // Change the mapview to use navigation mode.
-            MapView_temp.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
+            MainView.MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
         }
 
         private void SampleUnloaded(object sender, RoutedEventArgs e)
@@ -480,7 +441,7 @@ namespace TaxiApp.ViewModels
                 _tracker = null;
             }
             // Stop the location data source.
-            MapView_temp.LocationDisplay?.DataSource?.StopAsync();
+            MainView.MyMapView.LocationDisplay?.DataSource?.StopAsync();
         }
         private void CloseMenuButton_Click()
         {
@@ -494,16 +455,12 @@ namespace TaxiApp.ViewModels
         private void OpenMenuButton_Click()
         {
             MainView.buttonOpenMenu.Visibility = Visibility.Collapsed;
-            MainView.buttonCloseMenu.Visibility = Visibility.Visible;  
+            MainView.buttonCloseMenu.Visibility = Visibility.Visible;
         }
 
         private void ExitAppButton_Click() => MainView.Close();
-        private void MaximizeAppButton_Click() {
-            ++countCliclMaximize;
-            if (countCliclMaximize % 2 == 1) MainView.WindowState = WindowState.Maximized;
-            else MainView.WindowState = WindowState.Normal;
-        }
-        private void MinimizeAppButton_Click() => MainView.WindowState=WindowState.Minimized;
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => MainView.DragMove();
     }
 
     // This location data source uses an input data source and a route tracker.

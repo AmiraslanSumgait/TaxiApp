@@ -4,10 +4,19 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using TaxiApp.Command;
+using TaxiApp.Data;
+using TaxiApp.Models;
 using TaxiApp.Views;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace TaxiApp.ViewModels
 {
@@ -18,6 +27,9 @@ namespace TaxiApp.ViewModels
         public RelayCommandMain SignInCommand { get; set; }
 
         public SignInPage SignInPage { get; set; }
+
+        public UserContext UserContext { get; set; } = new UserContext();
+        public User CurrentUser { get; set; }
 
         public SignInViewModel(SignInPage signInPage)
         {
@@ -38,16 +50,52 @@ namespace TaxiApp.ViewModels
                     SignInPage.NavigationService.Navigate(signUpPage);
                 },
                 pre => true);
+
             SignInCommand = new RelayCommandMain(
                 action =>
                 {
-                    MainView mainView = new MainView();
-                    Window window = (Window)SignInPage.Parent;
-                    window.Close();
-                    mainView.ShowDialog();
+                    if (SignInPage.tbEmail.Text == string.Empty || SignInPage.pbPassword.Password == string.Empty)  
+                        notifier.ShowInformation("Please fill in the information completely.");
+                    else if (!Regex.IsMatch(SignInPage.tbEmail.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
+                        notifier.ShowInformation("Please enter a valid email address.");
+                    else if (UserContext.Users.Any(u => u.Email == SignInPage.tbEmail.Text && u.Password == SignInPage.pbPassword.Password))
+                    {
+                        notifier.ShowSuccess("The entry was successful. We'll take you to the main page in a few seconds.");
+                        var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2.5) };
+                        timer.Start();
+                        timer.Tick += (sender, args) =>
+                        {
+                            timer.Stop();
+                            MainView mainView = new MainView();
+                            Window window = (Window)SignInPage.Parent;
+                            window.Close();
+                            mainView.ShowDialog();
+                        };
+                    }
+                    else if (UserContext.Users.Any(u => u.Email == SignInPage.tbEmail.Text && u.Password != SignInPage.pbPassword.Password))
+                        notifier.ShowWarning("That's not the right password. Please try again.");
+                    else
+                        notifier.ShowWarning("Couldn’t find a Taxi app account associated with this email. Please try again.");
                 },
                 pre => true);
+
+
         }
+
+        Notifier notifier = new Notifier(cfg =>
+        {
+            cfg.PositionProvider = new WindowPositionProvider(
+                parentWindow: Application.Current.MainWindow,
+                corner: Corner.TopRight,
+                offsetX: 415,
+                offsetY: 5);
+
+            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(2),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(2));
+
+            cfg.Dispatcher = Application.Current.Dispatcher;
+        });
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyname = null)

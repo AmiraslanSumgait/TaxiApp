@@ -1,4 +1,4 @@
-﻿<Window
+﻿<Window x:Class="TaxiApp.Views.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,15 +7,13 @@
         xmlns:cmd="http://www.galasoft.ch/mvvmlight"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:TaxiApp.Views" x:Class="TaxiApp.Views.MainView"
         mc:Ignorable="d"
         Title="MainView" 
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Height="630"
-        Width="1100" 
-        AllowsTransparency="True"
-        Background="{x:Null}">
+        Height="600"
+        Width="1000" 
+        AllowsTransparency="True">
 
     <!--Qalsin burda lazim olcag BY KENAN-->
     <!--<Window.Triggers>
@@ -32,103 +30,110 @@
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames
                 Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="CanvasMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="100"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="100"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"></EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
 
         <Storyboard x:Key="MenuClose">
             <DoubleAnimationUsingKeyFrames
                 Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="CanvasMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="100"></EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="buttonOpenMenu">
-            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"></BeginStoryboard>
         </EventTrigger>
 
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="buttonCloseMenu">
-            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"></BeginStoryboard>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard Duration="00:00:10" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1"/>
+                </Storyboard>
+            </BeginStoryboard>
         </EventTrigger>
     </Window.Triggers>
 
-    <materialDesign:Card UniformCornerRadius="10">
+    <materialDesign:Card>
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="16*"/>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="16*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Background="Black">
+            <Grid x:Name="gridHead" Grid.Row="0" Background="Black" >
 
                 <Button
                    Background="Transparent"                          
                    Height="25"
-                   Width="25"
-                   Margin="0,0,10,0"
-                   Padding="0,0,0,0"
+                   Width="45"
+                   Margin="0,0,0,0"
                    HorizontalAlignment="Right"
                    BorderThickness="0"
-                   x:Name="btn_close"
-                   Command="{Binding ExitAppCommand}"
                 >
                     <materialDesign:PackIcon
                                 
                       Kind="WindowClose"
                       Height="25"
-                      Width="25"
-                      
-                      
+                      Width="40"
+                      Margin="-19,-5,0,0"
                          
                       Foreground="White"
-                  />
+                  >
+
+                    </materialDesign:PackIcon>
 
                 </Button>
                 <Button
                    Background="Transparent"                          
                    Height="25"
-                   Width="25"
-                   Margin="0,0,41,0"
-                   Padding="0,0,0,0"
+                   Width="45"
+                   Margin="0,0,30,0"
                    HorizontalAlignment="Right"
                    x:Name="btn_max"
-                   BorderThickness="0"
-                   Command="{Binding MaximizeAppCommand}"
+                    BorderThickness="0"
                 >
                     <materialDesign:PackIcon
                                 
                      Kind="WindowMaximize"
                      Height="25"
-                     Width="25"
-                    
+                     Width="40"
+                     Margin="-19,-5,0,0"
                         
                      Foreground="White"
-                  />
+                  >
+
+                    </materialDesign:PackIcon>
 
                 </Button>
                 <Button
                    Background="Transparent"                          
                    Height="25"
-                   Width="25"
-                   Margin="0,0,72,0"
-                   Padding="0,0,0,0"
+                   Width="45"
+                   Margin="0,0,60,0"
                    HorizontalAlignment="Right"
-                   BorderThickness="0"
-                   x:Name="btn_min"
-                    Command="{Binding MinimizeAppCommand}"
+                     BorderThickness="0"
                 >
                     <materialDesign:PackIcon
                                 
                       Kind="WindowMinimize"
                       Height="25"
-                      Width="23"     
+                      Width="40"
+                      Margin="-19,-5,0,0"
+                         
                       Foreground="White"
-                  />
+                  >
+
+                    </materialDesign:PackIcon>
 
                 </Button>
 
@@ -170,7 +175,7 @@
                         Width="50"
                         Canvas.Right="10"
                         Canvas.Top="10"
-                        x:Name="buttonOpenMenu"
+                        Name="buttonOpenMenu"
                         Command="{Binding MenuOpenCommand}">
                                 <materialDesign:PackIcon
                                     Kind="Menu"
@@ -185,7 +190,7 @@
                             Height="40"
                             Width="50"
                             Canvas.Right="0"
-                            x:Name="buttonCloseMenu"
+                            Name="buttonCloseMenu"
                             BorderThickness="0"
                             Visibility="Collapsed"
                             Command="{Binding MenuCloseCommand}">
@@ -194,9 +199,18 @@
                                     Height="30"
                                     Width="40"
                                     Margin="-11,0,0,0"
-                                    Foreground="White"/>
+                                    Foreground="White">
+
+                                </materialDesign:PackIcon>
 
                             </Button>
+
+                            <TextBlock 
+                                FontSize="17" 
+                                Foreground="White"
+                                Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"
+                                Canvas.Top="15"
+                                Canvas.Left="10"/>
 
                             <Button
                             Background="Transparent"
@@ -213,7 +227,9 @@
                               Width="40"
                               Margin="-15,0,0,0"
                                  
-                              Foreground="White"/>
+                              Foreground="White">
+
+                                </materialDesign:PackIcon>
 
                             </Button>
 
@@ -226,7 +242,7 @@
                             Canvas.Top="140"
                             Canvas.Left="70"
                             x:Name="lbl_payment"
-                            Visibility="{Binding Visibility, ElementName=buttonCloseMenu}"/>
+                            Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"/>
 
                             <Button
                             Background="Transparent"
@@ -254,7 +270,7 @@
                             Canvas.Top="220"
                             Canvas.Left="70"
                             x:Name="lbl_rideHistory"
-                            Visibility="{Binding Visibility, ElementName=buttonCloseMenu}"/>
+                            Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"/>
 
                             <Button
                             Background="Transparent"
@@ -281,12 +297,12 @@
                             Canvas.Top="300"
                             Canvas.Left="70"
                             x:Name="lbl_support"
-                            Visibility="{Binding Visibility, ElementName=buttonCloseMenu}"/>
+                            Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"/>
 
                             <Button
                             Background="Transparent"
                             Height="40"
-                            BorderThickness="0"
+                        BorderThickness="0"
                             Width="50"
                             Canvas.Top="380"
                             Canvas.Left="20">
@@ -307,8 +323,8 @@
                             Width="120"
                             Canvas.Top="380"
                             Canvas.Left="70"
-                            x:Name="lbl_about"
-                            Visibility="{Binding Visibility, ElementName=buttonCloseMenu}"/>
+                            Name="lbl_about"
+                            Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"/>
 
                             <Button
                         x:Name="ExitAppButton"
@@ -336,83 +352,36 @@
                             Canvas.Top="460"
                             Canvas.Left="70"
                             x:Name="lbl_exit"
-                            Visibility="{Binding Visibility, ElementName=buttonCloseMenu}"/>
+                            Visibility="{Binding ElementName=buttonCloseMenu, Path=Visibility}"/>
 
                         </Canvas>
 
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="4*"/>
-                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="4*"></RowDefinition>
+                                <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0">
+                                <Button
+                              x:Name="StartNavigationButton"
+                              Height="30"
+                              Margin="300,400,0,0"
+                              Width="100"
+                              Command="{Binding StartNavigationCommand}"
+                              Content="Navigate route"
+                              IsEnabled="False"
+                              Background="Aqua"/>
 
                                 <Button
-                                   Background="Transparent"                          
-                                   Height="35"
-                                   Width="35"
-                                   Visibility="Visible"
-                                   Margin="0,100,15,0"
-                                   Padding="0,0,0,0"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Top"
-                                   BorderThickness="0"
-                                   x:Name="btn_info"
-                                   ToolTipService.ShowDuration="5000"
-                                   Command="{Binding InfoDestinationCommand}"
-                                 >
-                                    <materialDesign:PackIcon
-                                      x:Name="mater"
-                                     Kind="Information"
-                                     Height="35"
-                                     Width="35"
-                                     Foreground="black"
-                                     
-                                      
-                                     />
-
-                                    <Button.ToolTip >
-                                        <ToolTip  >
-                                            <StackPanel>
-                                                <TextBlock FontWeight="Bold">Info Destination</TextBlock>
-                                            </StackPanel>
-                                        </ToolTip>
-                                    </Button.ToolTip>
-
-                                </Button>
-
-                                
-
-                                <Button
-                                  x:Name="RecenterButton"
-                                  Height="35"
-                                  Width="35"
-                                  Margin="0,170,15,0"
-                                  Padding="0,0,0,0"
-                                  HorizontalAlignment="Right"
-                                  VerticalAlignment="Top"
-                                  BorderThickness="0"
-                                  Command="{Binding RecenterCommand}"
-                                  IsEnabled="False"
-                                  Background="Transparent"
-                                  ToolTipService.ShowDuration="5000">
-
-                                    <materialDesign:PackIcon 
-                                        Kind="CrosshairsGps"
-                                        Foreground="Black"
-                                        Height="35"
-                                        Width="35"/>
-
-                                    <Button.ToolTip >
-                                        <ToolTip  >
-                                            <StackPanel>
-                                                <TextBlock FontWeight="Bold">Recenter</TextBlock>
-                                            </StackPanel>
-                                        </ToolTip>
-                                    </Button.ToolTip>
-
-                                </Button>
+                              x:Name="RecenterButton"
+                              Height="30"
+                              Width="100"
+                              Margin="550,400,0,0"
+                              Command="{Binding RecenterCommand}"
+                              Content="Recenter"
+                              IsEnabled="False"
+                              Background="Aqua"/>
 
 
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -421,7 +390,7 @@
                                     </Border>
                                     <TextBox
                               x:Name="AddressTextBox"
-                            Margin="0,10,0,0"
+                            Margin="0,10,1,0"
                                 VerticalAlignment="Top"
                             Style="{StaticResource MaterialDesignTextBoxBase}"
                             VerticalContentAlignment="Center"
@@ -438,66 +407,31 @@
                                             </StackPanel>
                                         </materialDesign:HintAssist.Hint>
                                     </TextBox>
-                                    <Border>
+                                    <Border VerticalAlignment="Top">
                                         <Button
-                                    x:Name="SearchAddressButton"
-                                    Content="Search"
-                                    Height="40"
-                                    Background="#508CA4"
-                                    BorderThickness="0"
-                                    VerticalAlignment="Top"
-                                    materialDesign:ButtonAssist.CornerRadius="0 15 15 0"
-                                    Margin="0,10,35,0"
-                                    Command="{Binding SearchAdressCommand}" RenderTransformOrigin="0.114,4.067"/>
+                                            x:Name="SearchAddressButton"
+                                            Content="Search"
+                                            Height="38"
+                                            Background="#508CA4"
+                                            HorizontalAlignment="Center"
+                                            BorderThickness="0"
+                                            materialDesign:ButtonAssist.CornerRadius="0 15 15 0"
+                                            Margin="0,11,35,0"
+                                            Command="{Binding SearchAdressCommand}" RenderTransformOrigin="0.114,4.067"/>
                                     </Border>
                                 </StackPanel>
-
-                                <TextBlock
-                                  x:Name="MessagesTextBlock"
-                                  HorizontalAlignment="Stretch"
-                                  Height="50"
-                                  Width="200"
-                                  Margin="650,0,0,-300"
-                                  VerticalAlignment="Stretch"
-                                  TextWrapping="Wrap"
-                                  />
 
                             </Grid>
 
                             <Grid Grid.Row="1">
-
-                                <Grid Height="120" 
-                                      Margin="0,0,0,50">
-                                    <local:InfoUC 
-                                      HorizontalAlignment="Center"
-                                      Margin="40,0,0,0"
-                                      x:Name="InfoUcPanel"
-                                      
-                                    >
-                                    </local:InfoUC>
-                                </Grid>
-
-                                <Button
-                                  x:Name="StartNavigationButton"
-                                  Height="30"
-                                  Margin="0,120,0,0"
-                                  HorizontalAlignment="Center"
-                                  Width="250"
-                                  Command="{Binding StartNavigationCommand}"
-                                  Content="Navigate route"
-                                  IsEnabled="False"
-                                  >
-                                    <Button.Background>
-                                        <LinearGradientBrush  StartPoint="0,0" EndPoint="1,1">
-                                            <GradientStop Color="#1D976C" Offset="0"/>
-                                            <GradientStop Color="#93F9B9" Offset="0.445"/>
-                                            
-                                        </LinearGradientBrush>
-                                    </Button.Background>
-                                </Button>
-
-
-
+                                <TextBlock
+                               x:Name="MessagesTextBlock"
+                               HorizontalAlignment="Stretch"
+                               Height="50"
+                               Width="200"
+                               Margin="300,0,0,20"
+                               VerticalAlignment="Stretch"
+                               TextWrapping="Wrap"/>
                             </Grid>
                         </Grid>
                     </Grid>
