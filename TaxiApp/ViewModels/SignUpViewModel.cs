@@ -125,7 +125,7 @@ namespace TaxiApp.ViewModels
                       smtp.Credentials = new NetworkCredential("idayatov256@gmail.com", "kenan239932");
                       smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                       smtp.Send(message);
-                      notifier.ShowInformation("Emalinize gonderilen kodu \"register code\" bolmesine daxil edin.");
+                      notifier.ShowInformation("Enter the code sent to your email as \"register code\" ");
 
                       SignUpPage.btnCheckCode.Visibility = Visibility.Visible;
                       SignUpPage.tbregisterCode.IsEnabled = true;
