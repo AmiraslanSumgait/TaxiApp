@@ -4,28 +4,16 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
-C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Release\
-=======
-C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Release\
->>>>>>> master
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Release\
 TaxiApp
 none
 false
 TRACE
-<<<<<<< HEAD
-C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\App.xaml
+C:\Users\user\source\repos\TaxiApp\TaxiApp\App.xaml
 31849811818
-4691985600
-14-58717325
-132-883426161
-=======
-C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\App.xaml
-31849811818
-4-1736351359
-14-58717325
-132-970694
->>>>>>> master
+41523792581
+19-775478153
+1371197679797
 Views\MainView.xaml;Views\SignInPage.xaml;Views\SignUpPage.xaml;
 
 True

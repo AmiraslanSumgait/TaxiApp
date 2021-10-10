@@ -35,10 +35,11 @@ namespace TaxiApp.Views
         public MainView()
         {
             InitializeComponent();
-            MainViewModel = new MainViewModel(MyMapView,this);
+            MainViewModel = new MainViewModel(this);
 
         }
 
+        
 
     }
 }
