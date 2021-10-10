@@ -45,6 +45,7 @@ namespace TaxiApp.ViewModels
         public RelayCommandMain ExitAppCommand { get; set; }
         public RelayCommandMain MinimizeAppCommand { get; set; }
         public RelayCommandMain MaximizeAppCommand { get; set; }
+        public RelayCommandMain InfoDestinationCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -158,6 +159,11 @@ namespace TaxiApp.ViewModels
                 action => { MaximizeAppButton_Click(); },
                 pre => true
                 );
+            InfoDestinationCommand = new RelayCommandMain(
+               action => { MainView.InfoUcPanel.UserControl.Visibility = Visibility.Visible; 
+                           MainView.btn_info.Visibility = Visibility.Collapsed; },
+               pre => true
+               );
 
             MainView.DataContext = this;
             gvtapped = new RelayCommand<Esri.ArcGISRuntime.UI.Controls.GeoViewInputEventArgs>(Ongvtapped);
@@ -367,7 +373,8 @@ namespace TaxiApp.ViewModels
         }
         private void StartNavigation()
         {
-            
+            MainView.InfoUcPanel.UserControl.Visibility = Visibility.Collapsed;
+            MainView.btn_info.Visibility = Visibility.Visible;
             // Disable the start navigation button.
             MainView.StartNavigationButton.IsEnabled = false;
             // Get the directions for the route.

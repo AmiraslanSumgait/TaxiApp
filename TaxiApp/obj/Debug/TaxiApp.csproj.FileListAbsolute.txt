@@ -674,7 +674,6 @@ C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\zh-CN\Esri.ArcGISRuntime.r
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\zh-Hans\Esri.ArcGISRuntime.resources.dll
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\zh-HK\Esri.ArcGISRuntime.resources.dll
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\zh-TW\Esri.ArcGISRuntime.resources.dll
-C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.csproj.AssemblyReference.cache
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\MainView.baml
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\MainView.g.cs
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\SignInPage.g.cs
@@ -693,3 +692,7 @@ C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.csproj.CoreCompile
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.csproj.CopyComplete
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.exe
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.pdb
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.csproj.AssemblyReference.cache
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\InfoUC.g.cs
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\InfoUC.baml
