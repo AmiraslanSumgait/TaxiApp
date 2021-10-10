@@ -96,8 +96,8 @@ namespace TaxiApp.ViewModels
 
         // Graphics to show progress along the route.
         private Graphic _routeAheadGraphic;
-        private  static Uri _locationUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/361a937b56c542549083460f47a5caf3/data");
-        private  static Uri _currentLocationUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/22198fcdc2f5443b8303e97b0044aebe/data");
+        private static Uri _locationUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/361a937b56c542549083460f47a5caf3/data");
+        private static Uri _currentLocationUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/22198fcdc2f5443b8303e97b0044aebe/data");
         private static Uri _taxiUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/fabb958336e7475e844dda83b54dec47/data");
         private Uri _personUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/4bb29cac50bd46b3b8f63edb949a0db6/data");
 
@@ -124,7 +124,7 @@ namespace TaxiApp.ViewModels
             Width = 40
         };
         System.Drawing.Color routeColor = System.Drawing.Color.FromArgb(109, 219, 149);
-        public MainViewModel(MapView mapView,MainView mainView)
+        public MainViewModel(MapView mapView, MainView mainView)
         {
 
             MapView_temp = mapView;
@@ -132,7 +132,7 @@ namespace TaxiApp.ViewModels
             Initialize();
             StartNavigationCommand = new RelayCommandMain(
                 action => { StartNavigation(); },
-                pRE => true
+                pre => true
                );
             RecenterCommand = new RelayCommandMain(
                 action => { RecenterButton_Click(); },
@@ -171,7 +171,7 @@ namespace TaxiApp.ViewModels
             MainView.DataContext = this;
             gvtapped = new RelayCommand<Esri.ArcGISRuntime.UI.Controls.GeoViewInputEventArgs>(Ongvtapped);
             MyMap = new Map(BasemapStyle.ArcGISNavigation);
-           mapView.LocationDisplay.IsEnabled = true;
+            mapView.LocationDisplay.IsEnabled = true;
             mapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Recenter;
             mapView.LocationDisplay.CourseSymbol = new PictureMarkerSymbol(_taxiUri);
             //mapView.LocationDisplay.DefaultSymbol = new PictureMarkerSymbol(_personUri);
@@ -193,7 +193,7 @@ namespace TaxiApp.ViewModels
         }
         private async void Ongvtapped(GeoViewInputEventArgs e)
         {
-           
+
             ++count;
             try
             {
@@ -278,13 +278,10 @@ namespace TaxiApp.ViewModels
                 // Create a graphic to display the result address label.
                 TextSymbol textSymbol = new TextSymbol(geocodeResult.Label, System.Drawing.Color.Red, 18, Esri.ArcGISRuntime.Symbology.HorizontalAlignment.Center, Esri.ArcGISRuntime.Symbology.VerticalAlignment.Bottom);
                 Graphic textGraphic = new Graphic(geocodeResult.DisplayLocation, textSymbol);
-
                 // Add the location and label graphics to the graphics overlay.
                 //routeAndStopsOverlay.Graphics.Add(markerGraphic);
                 //routeAndStopsOverlay.Graphics.Add(textGraphic);
                 addressLocation = geocodeResult.DisplayLocation;
-
-
             }
             catch (Exception ex)
             {
@@ -324,7 +321,7 @@ namespace TaxiApp.ViewModels
         public async Task FindRoute()
         {
 
-            var stops = new[] { _graphicTaxi1,_startGraphic, _endGraphic }.Select(graphic => new Stop(graphic.Geometry as MapPoint));
+            var stops = new[] { _graphicTaxi1, _startGraphic, _endGraphic }.Select(graphic => new Stop(graphic.Geometry as MapPoint));
 
             var routeTask = await RouteTask.CreateAsync(_routingUri);
             RouteParameters parameters = await routeTask.CreateDefaultParametersAsync();
@@ -332,9 +329,9 @@ namespace TaxiApp.ViewModels
             parameters.ReturnRoutes = true;
             parameters.ReturnStops = true;
             parameters.OutputSpatialReference = SpatialReferences.Wgs84;
-           
+
             parameters.SetStops(stops);
-           
+
 
             var result = await routeTask.SolveRouteAsync(parameters);
             _routeResult = await routeTask.SolveRouteAsync(parameters);
@@ -348,7 +345,7 @@ namespace TaxiApp.ViewModels
                 ResetState();
                 throw new Exception("Route not found");
             }
-         
+
             _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, routeColor, 6) };
 
             // Create a graphic (solid) to represent the route that's been traveled (initially empty).
@@ -366,7 +363,7 @@ namespace TaxiApp.ViewModels
         }
         private void StartNavigation()
         {
-            
+
             // Disable the start navigation button.
             MainView.StartNavigationButton.IsEnabled = false;
             // Get the directions for the route.
@@ -374,7 +371,6 @@ namespace TaxiApp.ViewModels
 
             // Create a route tracker.
             _tracker = new RouteTracker(_routeResult, 0, true);
-           
             // Handle route tracking status changes.
             _tracker.TrackingStatusChanged += TrackingStatusUpdated;
             // Turn on navigation mode for the map view.
@@ -384,9 +380,11 @@ namespace TaxiApp.ViewModels
             // Add a data source for the location display.
             var simulationParameters = new SimulationParameters(DateTimeOffset.Now, 50.0);
             var simulatedDataSource = new SimulatedLocationDataSource();
+          
             simulatedDataSource.SetLocationsWithPolyline(_route.RouteGeometry, simulationParameters);
+            
             MapView_temp.LocationDisplay.DataSource = new RouteTrackerDisplayLocationService(simulatedDataSource, _tracker);
-         
+          
             // Use this instead if you want real location:
 
             // MapView_temp.LocationDisplay.DataSource = new RouteTrackerLocationDataSource(_tracker, new SystemLocationDataSource());
@@ -419,7 +417,7 @@ namespace TaxiApp.ViewModels
 
                 // Set geometries for progress and the remaining route.
                 _routeAheadGraphic.Geometry = status.RouteProgress.RemainingGeometry;
-                
+
 
             }
             else if (status.DestinationStatus == DestinationStatus.Reached)
@@ -487,16 +485,17 @@ namespace TaxiApp.ViewModels
         private void OpenMenuButton_Click()
         {
             MainView.buttonOpenMenu.Visibility = Visibility.Collapsed;
-            MainView.buttonCloseMenu.Visibility = Visibility.Visible;  
+            MainView.buttonCloseMenu.Visibility = Visibility.Visible;
         }
 
         private void ExitAppButton_Click() => MainView.Close();
-        private void MaximizeAppButton_Click() {
+        private void MaximizeAppButton_Click()
+        {
             ++countCliclMaximize;
             if (countCliclMaximize % 2 == 1) MainView.WindowState = WindowState.Maximized;
             else MainView.WindowState = WindowState.Normal;
         }
-        private void MinimizeAppButton_Click() => MainView.WindowState=WindowState.Minimized;
+        private void MinimizeAppButton_Click() => MainView.WindowState = WindowState.Minimized;
     }
 
     // This location data source uses an input data source and a route tracker.
