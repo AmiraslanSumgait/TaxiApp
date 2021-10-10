@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -59,7 +61,7 @@ namespace TaxiApp.ViewModels
 
             _randomCode = new Random();
             int correctCode = _randomCode.Next(10000, 99999);
-            
+
 
             SendCodeEmailCommand = new RelayCommandMain(
                 action =>
@@ -105,14 +107,35 @@ namespace TaxiApp.ViewModels
                   }
                   else
                   {
-
                       //Emaile kod geden hisse.
                       MessageBox.Show(correctCode.ToString());
+                      MailMessage message = new MailMessage();
+                      SmtpClient smtp = new SmtpClient();
+
+                      message.From = new MailAddress("idayatov256@gmail.com");
+
+                      message.To.Add(new MailAddress(SignUpPage.tbEmail.Text));
+                      message.Subject = "Təhlükəsizlik kodu";
+                      message.Body = "Write this given code on text box\n" + correctCode + "\nThank you!";
+
+                      smtp.Port = 587;
+                      smtp.Host = "smtp.gmail.com";
+                      smtp.EnableSsl = true;
+                      smtp.UseDefaultCredentials = false;
+                      smtp.Credentials = new NetworkCredential("idayatov256@gmail.com", "kenan239932");
+                      smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                      smtp.Send(message);
+                      notifier.ShowInformation("Emalinize gonderilen kodu \"register code\" bolmesine daxil edin.");
+
                       SignUpPage.btnCheckCode.Visibility = Visibility.Visible;
+                      SignUpPage.tbregisterCode.IsEnabled = true;
+
                       if (SignUpPage.tbregisterCode.Text != correctCode.ToString())
                       {
                           notifier.ShowError("Please write the code sent to the email correctly.");
                       }
+
+
 
                       UserContext = new UserContext();
 
@@ -120,7 +143,7 @@ namespace TaxiApp.ViewModels
                       {
                           Firstname = SignUpPage.tbFirstname.Text,
                           Lastname = SignUpPage.tbLastname.Text,
-                          Username=SignUpPage.tbUsername.Text,
+                          Username = SignUpPage.tbUsername.Text,
                           PhoneNumber = SignUpPage.tbPhoneNumber.Text,
                           Email = SignUpPage.tbEmail.Text,
                           Password = SignUpPage.pbPassword.Password
@@ -128,7 +151,7 @@ namespace TaxiApp.ViewModels
 
                       UserContext.Users.Add(newUser);
                       UserContext.SaveChanges();
-                      MessageBox.Show("Successfully register!");
+                      notifier.ShowSuccess("Successfully register.\nSign in sehfiesine qayidib girsi ede bilersiz :)");
                   }
               },
             pre => true);
