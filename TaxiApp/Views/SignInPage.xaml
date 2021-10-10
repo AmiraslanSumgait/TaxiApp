@@ -4,11 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TaxiApp.Views" 
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:TaxiApp.Models" xmlns:local2="clr-namespace:TaxiApp.Services"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" 
       Title="SignInPage" ShowsNavigationUI="False" Style="{StaticResource ResourceKey= SignInPage}">
 
+    <Page.Resources>
+        <local1:User x:Key="user"/>
+        <ControlTemplate x:Key="validationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="10" HorizontalAlignment="Right" Text="{Binding [0].ErrorContent}" DockPanel.Dock="Bottom"></TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+    </Page.Resources>
 
     <Grid>
         <Border CornerRadius="20">
@@ -101,6 +110,7 @@
 
                                     <TextBox x:Name="tbEmail"
                                         Margin="0 10 0 0"
+                                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Width="300"
                                         Height="50"
@@ -113,37 +123,65 @@
                                                 <TextBlock Text="Email" Padding="10 0 0 0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </materialDesign:HintAssist.Hint>
-                                        
-
+                                        <TextBox.Text>
+                                            <Binding Path="Email" Source="{StaticResource user}" UpdateSourceTrigger="PropertyChanged">
+                                                <Binding.ValidationRules>
+                                                    <local2:EmailValidationRuleService/>
+                                                </Binding.ValidationRules>
+                                            </Binding>
+                                        </TextBox.Text>
                                     </TextBox>
 
-                                    <PasswordBox x:Name="pbPassword"
+                                    <Grid>
+                                        <PasswordBox x:Name="pbPassword"
                                         Margin="0 10 0 0"
+                                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
                                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                         BorderBrush="#769DF7"
                                         MaxWidth="300"
                                         Height="50"
                                         materialDesign:TextFieldAssist.HasClearButton="True"
-                                        materialDesign:HintAssist.HelperText="At least 8 characters"
                                         FontSize="14">
-                                        <materialDesign:HintAssist.Hint>
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="LockOutline" VerticalAlignment="Center" Height="25" Width="20"/>
-                                                <TextBlock Text="Password" Padding="10 0 0 0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </materialDesign:HintAssist.Hint>
+                                            <materialDesign:HintAssist.Hint>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="LockOutline" VerticalAlignment="Center" Height="25" Width="20"/>
+                                                    <TextBlock Text="Password" Padding="10 0 0 0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </materialDesign:HintAssist.Hint>
+                                        </PasswordBox>
 
-                                    </PasswordBox>
+
+                                        <!--<TextBox x:Name="tbPassword"
+                                                 Visibility="Hidden"
+                                        Margin="0 10 0 0"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Width="300"
+                                        Height="50"
+                                        BorderBrush="#769DF7"
+                                        FontSize="14"
+                                                Text="{Binding ElementName=pbPassword, Path=Password}"
+                                        materialDesign:TextFieldAssist.HasClearButton="True">
+                                            <materialDesign:HintAssist.Hint>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="LockOutline" VerticalAlignment="Center" Height="25" Width="20"/>
+                                                    <TextBlock Text="Password" Padding="10 0 0 0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </materialDesign:HintAssist.Hint>
+                                        </TextBox>-->
+                                    </Grid>
+
+                                    <!--<CheckBox x:Name="cbPassword" Content="Show password" HorizontalAlignment="Right" Margin="0 3 210 0" Foreground="#363636" Checked="CheckBox_Checked"></CheckBox>-->
                                     <Button 
                                         Margin="0 20 0 0"
                                         FontSize="13"
                                         Foreground="#363636" 
-                                        Background="Transparent" 
+                                        Background="Transparent"
+                                        Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                         Content="Forgot your password?"
-                                        BorderThickness="0 0 0 0.9"
+                                        BorderThickness="0 0 0 1"
                                         BorderBrush="LightGray"
                                         Width="200"
-                                        Height="33" Cursor="UpArrow">
+                                        Height="33">
                                         <Button.Triggers>
                                             <EventTrigger RoutedEvent="MouseEnter">
                                                 <BeginStoryboard>
@@ -209,7 +247,9 @@
                         </Border.Background>
                     </Border>
                     <Canvas>
-                        <Button x:Name="btnPower" Padding="auto" Command="{Binding ExitCommand}" Background="Transparent" Canvas.Right="2" Canvas.Top="2" BorderThickness="0" Height="26" Width="30">
+                        <Button x:Name="btnPower" Padding="auto" Command="{Binding ExitCommand}" 
+                                Background="Transparent" ToolTip="Power" 
+                                Canvas.Right="2" Canvas.Top="2" BorderThickness="0" Height="26" Width="30">
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="MouseEnter">
                                     <BeginStoryboard>

@@ -929,3 +929,6 @@ C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.dll
 C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.xml
 C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\ToastNotifications.dll
+C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\ToastNotifications.Messages.dll
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\GeneratedInternalTypeHelper.g.cs

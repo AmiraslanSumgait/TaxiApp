@@ -13,7 +13,7 @@
         WindowStyle="None"
         Height="600"
         Width="1000" 
-        AllowsTransparency="True" >
+        AllowsTransparency="True">
 
     <!--Qalsin burda lazim olcag BY KENAN-->
     <!--<Window.Triggers>
@@ -51,6 +51,14 @@
 
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="buttonCloseMenu">
             <BeginStoryboard Storyboard="{StaticResource MenuClose}"></BeginStoryboard>
+        </EventTrigger>
+
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard Duration="00:00:10" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1"/>
+                </Storyboard>
+            </BeginStoryboard>
         </EventTrigger>
     </Window.Triggers>
 

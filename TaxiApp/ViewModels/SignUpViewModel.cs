@@ -10,6 +10,10 @@ using TaxiApp.Command;
 using TaxiApp.Data;
 using TaxiApp.Models;
 using TaxiApp.Views;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
 
 namespace TaxiApp.ViewModels
 {
@@ -55,14 +59,14 @@ namespace TaxiApp.ViewModels
 
             _randomCode = new Random();
             int correctCode = _randomCode.Next(10000, 99999);
-            MessageBox.Show(correctCode.ToString());
+            
 
             SendCodeEmailCommand = new RelayCommandMain(
                 action =>
                 {
                     if (SignUpPage.tbEmail.Text != string.Empty && SignUpPage.pbPassword.Password == SignUpPage.pbConfirmPassword.Password)
                     {
-                       
+
                     }
                     else if (SignUpPage.tbEmail.Text != string.Empty && SignUpPage.pbPassword.Password != SignUpPage.pbConfirmPassword.Password)
                     {
@@ -83,14 +87,40 @@ namespace TaxiApp.ViewModels
 
             SignUpCommand = new RelayCommandMain(action =>
               {
-                  if (SignUpPage.tbregisterCode.Text == correctCode.ToString())
+                  if (SignUpPage.tbFirstname.Text == ""
+                  || SignUpPage.tbLastname.Text == ""
+                  || SignUpPage.tbPhoneNumber.Text == ""
+                  || SignUpPage.tbEmail.Text == ""
+                  || SignUpPage.pbPassword.Password == ""
+                  || SignUpPage.pbConfirmPassword.Password == ""
+                  || SignUpPage.tbUsername.Text == "")
                   {
+                      notifier.ShowInformation("Please fill in the information completely.");
+                  }
+                  else if (SignUpPage.pbPassword.Password != SignUpPage.pbConfirmPassword.Password)
+                  {
+                      notifier.ShowWarning("Passwords are not the same.Try again.");
+                      signUpPage.pbPassword.Password = string.Empty;
+                      signUpPage.pbConfirmPassword.Password = string.Empty;
+                  }
+                  else
+                  {
+
+                      //Emaile kod geden hisse.
+                      MessageBox.Show(correctCode.ToString());
+                      SignUpPage.btnCheckCode.Visibility = Visibility.Visible;
+                      if (SignUpPage.tbregisterCode.Text != correctCode.ToString())
+                      {
+                          notifier.ShowError("Please write the code sent to the email correctly.");
+                      }
+
                       UserContext = new UserContext();
 
                       User newUser = new User
                       {
                           Firstname = SignUpPage.tbFirstname.Text,
                           Lastname = SignUpPage.tbLastname.Text,
+                          Username=SignUpPage.tbUsername.Text,
                           PhoneNumber = SignUpPage.tbPhoneNumber.Text,
                           Email = SignUpPage.tbEmail.Text,
                           Password = SignUpPage.pbPassword.Password
@@ -99,15 +129,25 @@ namespace TaxiApp.ViewModels
                       UserContext.Users.Add(newUser);
                       UserContext.SaveChanges();
                       MessageBox.Show("Successfully register!");
-
-                  }
-                  else
-                  {
-                      MessageBox.Show("Register code yanlisdir.Try again!");
                   }
               },
             pre => true);
         }
+
+        Notifier notifier = new Notifier(cfg =>
+        {
+            cfg.PositionProvider = new WindowPositionProvider(
+                parentWindow: Application.Current.MainWindow,
+                corner: Corner.TopRight,
+                offsetX: 5,
+                offsetY: 5);
+
+            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(2),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(2));
+
+            cfg.Dispatcher = Application.Current.Dispatcher;
+        });
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
