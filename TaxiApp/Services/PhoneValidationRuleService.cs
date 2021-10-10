@@ -21,16 +21,20 @@ namespace TaxiApp.Services
             string valueString = value as string;
             if (valueString == null)
             {
+                ErrorService.IsError = true;
                 valueString = "";
             }
             if (valueString.Length == 0)
             {
+                ErrorService.IsError = true;
                 return new ValidationResult(false, $"Cannot empty");
             }
             else if (!Regex.IsMatch(valueString, @"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}"))
             {
+                ErrorService.IsError = true;
                 return new ValidationResult(false, $"Invalid phone number format");
             }
+            ErrorService.IsError = false;
             return new ValidationResult(true, null);
         }
     }

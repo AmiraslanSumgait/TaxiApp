@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using TaxiApp.Command;
 using TaxiApp.Data;
 using TaxiApp.Models;
@@ -22,16 +23,6 @@ namespace TaxiApp.ViewModels
     public class SignUpViewModel
     {
 
-        //REGEX EXAMPLE
-        //private void textBox1_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, "[^0-9]"))
-        //    {
-        //        MessageBox.Show("Please enter only numbers.");
-        //        textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
-        //    }
-        //}
-
         public RelayCommandMain BackCommand { get; set; }
         public RelayCommandMain SignInPagePassCommand { get; set; }
         public RelayCommandMain SignUpCommand { get; set; }
@@ -39,7 +30,7 @@ namespace TaxiApp.ViewModels
 
         public SignUpPage SignUpPage { get; set; }
 
-        public UserContext UserContext { get; set; }
+        public UserContext UserContext { get; set; } = new UserContext();
 
         private Random _randomCode { get; set; }
 
@@ -53,7 +44,6 @@ namespace TaxiApp.ViewModels
                 {
                     SignInPage signInPage = new SignInPage();
                     SignUpPage.NavigationService.Navigate(signInPage);
-
                 },
                 pre => true);
 
@@ -66,24 +56,52 @@ namespace TaxiApp.ViewModels
             SendCodeEmailCommand = new RelayCommandMain(
                 action =>
                 {
-                    if (SignUpPage.tbEmail.Text != string.Empty && SignUpPage.pbPassword.Password == SignUpPage.pbConfirmPassword.Password)
+                    if (SignUpPage.tbFirstname.Text == ""
+                    || SignUpPage.tbLastname.Text == ""
+                    || SignUpPage.tbPhoneNumber.Text == ""
+                    || SignUpPage.tbEmail.Text == ""
+                    || SignUpPage.pbPassword.Password == ""
+                    || SignUpPage.pbConfirmPassword.Password == ""
+                    || SignUpPage.tbUsername.Text == "")
                     {
-
+                        notifier.ShowInformation("Please fill in the information completely.");
                     }
-                    else if (SignUpPage.tbEmail.Text != string.Empty && SignUpPage.pbPassword.Password != SignUpPage.pbConfirmPassword.Password)
+                    else if (SignUpPage.pbPassword.Password.Length < 8)
                     {
-                        MessageBox.Show("Parollar ust uste dusmur!");
+                        notifier.ShowWarning("Password must be at least 8 characters.");
+                    }
+                    else if (SignUpPage.pbPassword.Password != SignUpPage.pbConfirmPassword.Password)
+                    {
+                        notifier.ShowWarning("Passwords are not the same. Try again.");
                         signUpPage.pbPassword.Password = string.Empty;
                         signUpPage.pbConfirmPassword.Password = string.Empty;
                     }
-                    else if (SignUpPage.tbEmail.Text == string.Empty && SignUpPage.pbPassword.Password != SignUpPage.pbConfirmPassword.Password)
+                    else if (ErrorService.IsError == true)
                     {
-                        MessageBox.Show("Email empty ve parollar ust uste dusmur");
-                        signUpPage.pbPassword.Password = string.Empty;
-                        signUpPage.pbConfirmPassword.Password = string.Empty;
+                        notifier.ShowWarning("Please enter the information correctly.");
                     }
-                    else if (SignUpPage.tbEmail.Text == string.Empty)
-                        MessageBox.Show("Email empty!");
+                    else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
+                    {
+                        notifier.ShowWarning("There is already an account with this username. Please check another username.");
+                        SignUpPage.tbUsername.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show(correctCode.ToString());
+                        //Email hissesi
+                        try
+                        {
+                            SignUpPage.btnSendCode.Visibility = Visibility.Hidden;
+                            Network.Network.SendNotification(SignUpPage.tbEmail.Text, "Verification code", "Welcome!\nUse the verification code this to login: " + correctCode + "\nThank you.");
+                            SignUpPage.tbregisterCode.IsEnabled = true;
+                            SignUpPage.btnSignUp.IsEnabled = true;
+                            notifier.ShowInformation("Enter the code sent to your email as a registration code after sign up.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                    }
                 },
                 pre => true);
 
@@ -99,46 +117,31 @@ namespace TaxiApp.ViewModels
                   {
                       notifier.ShowInformation("Please fill in the information completely.");
                   }
+                  else if (SignUpPage.pbPassword.Password.Length < 8)
+                  {
+                      notifier.ShowWarning("Password must be at least 8 characters.");
+                  }
                   else if (SignUpPage.pbPassword.Password != SignUpPage.pbConfirmPassword.Password)
                   {
                       notifier.ShowWarning("Passwords are not the same.Try again.");
                       signUpPage.pbPassword.Password = string.Empty;
                       signUpPage.pbConfirmPassword.Password = string.Empty;
                   }
+                  else if (SignUpPage.tbregisterCode.Text != correctCode.ToString())
+                  {
+                      notifier.ShowError("Please write the code sent to the email correctly.");
+                  }
+                  else if (ErrorService.IsError == true)
+                  {
+                      notifier.ShowWarning("Please enter the information correctly.");
+                  }
+                  else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
+                  {
+                      notifier.ShowWarning("There is already an account with this username. Please check another username.");
+                      SignUpPage.tbUsername.Text = "";
+                  }
                   else
                   {
-                      //Emaile kod geden hisse.
-                      MessageBox.Show(correctCode.ToString());
-                      MailMessage message = new MailMessage();
-                      SmtpClient smtp = new SmtpClient();
-
-                      message.From = new MailAddress("idayatov256@gmail.com");
-
-                      message.To.Add(new MailAddress(SignUpPage.tbEmail.Text));
-                      message.Subject = "Təhlükəsizlik kodu";
-                      message.Body = "Write this given code on text box\n" + correctCode + "\nThank you!";
-
-                      smtp.Port = 587;
-                      smtp.Host = "smtp.gmail.com";
-                      smtp.EnableSsl = true;
-                      smtp.UseDefaultCredentials = false;
-                      smtp.Credentials = new NetworkCredential("idayatov256@gmail.com", "kenan239932");
-                      smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                      smtp.Send(message);
-                      notifier.ShowInformation("Enter the code sent to your email as \"register code\" ");
-
-                      SignUpPage.btnCheckCode.Visibility = Visibility.Visible;
-                      SignUpPage.tbregisterCode.IsEnabled = true;
-
-                      if (SignUpPage.tbregisterCode.Text != correctCode.ToString())
-                      {
-                          notifier.ShowError("Please write the code sent to the email correctly.");
-                      }
-
-
-
-                      UserContext = new UserContext();
-
                       User newUser = new User
                       {
                           Firstname = SignUpPage.tbFirstname.Text,
@@ -151,7 +154,15 @@ namespace TaxiApp.ViewModels
 
                       UserContext.Users.Add(newUser);
                       UserContext.SaveChanges();
-                      notifier.ShowSuccess("Successfully register.\nSign in sehfiesine qayidib girsi ede bilersiz :)");
+                      notifier.ShowSuccess("Successfully register.\nWe will direct you to the sign in page for a few seconds.");
+                      var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2.5) };
+                      timer.Start();
+                      timer.Tick += (sender, args) =>
+                      {
+                          timer.Stop();
+                          SignInPage signInPage = new SignInPage();
+                          SignUpPage.NavigationService.Navigate(signInPage);
+                      };
                   }
               },
             pre => true);

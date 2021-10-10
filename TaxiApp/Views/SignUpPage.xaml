@@ -344,7 +344,7 @@
                                     </TextBox>
                                 </StackPanel>
                                 <Grid>
-                                    <CheckBox
+                                    <!--<CheckBox
                                         Margin="130 10 0 0"
                                             x:Name="cbTerms">
                                         <StackPanel Orientation="Horizontal">
@@ -353,22 +353,21 @@
                                             <TextBlock Text=" and" FontSize="{Binding ElementName=tbMainTerms, Path=FontSize}"/>
                                             <TextBlock Text=" Privacy Policy." FontSize="{Binding ElementName=tbMainTerms, Path=FontSize}"/>
                                         </StackPanel>
-                                    </CheckBox>
-                                    <Button x:Name="btnCheckCode"
-                                        Visibility="Hidden"
+                                    </CheckBox>-->
+                                    <Button x:Name="btnSendCode"
                                         BorderThickness="1"
                                         Foreground="White"
-                                        Background="#4EAFB7"
+                                        Background="LightBlue"
                                         Height="30"
                                         Width="108"
                                         Margin="0 3 136 0"
                                         materialDesign:ButtonAssist.CornerRadius="0"
                                         HorizontalAlignment="Right"
-                                        Content="Check Code"
+                                        Content="Send Code"
                                         Command="{Binding SendCodeEmailCommand}"
                                         ToolTip="Email send code"/>
                                 </Grid>
-                                <Button
+                                <Button x:Name="btnSignUp"
                                         Margin="0 20 0 0"
                                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                         Width="200"
@@ -379,7 +378,7 @@
                                         Background="#4EAFB7"
                                         BorderThickness="0"
                                         Command="{Binding SignUpCommand}"
-                                        IsEnabled="{Binding ElementName=cbTerms, Path=IsChecked}"
+                                        IsEnabled="False"
                                         materialDesign:ButtonAssist.CornerRadius="25">
                                     <TextBlock Text="SIGN UP"/>
                                 </Button>

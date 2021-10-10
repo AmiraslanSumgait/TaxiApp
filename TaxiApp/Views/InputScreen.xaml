@@ -1,0 +1,49 @@
+﻿<Window x:Class="TaxiApp.Views.InputScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaxiApp.Views"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        mc:Ignorable="d"
+        Title="InputScreen" AllowsTransparency="True" Background="{x:Null}" WindowStyle="None" WindowStartupLocation="CenterScreen" Height="500" Width="850">
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FF4CBF9A"/>
+                <GradientStop Color="PaleGoldenrod" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Foreground="White" Text="T A X I   A P P" TextAlignment="Center" VerticalAlignment="Center" 
+                       FontSize="40" FontWeight="DemiBold" FontFamily="Trebuchet MS" />
+
+            <Grid Grid.Row="1">
+                <Image Source="taxiBooking.png" />
+            </Grid>
+
+            <Grid Grid.Row="2">
+
+                <ProgressBar x:Name="pbInput" Style="{x:Null}" Minimum="0" Maximum="100" VerticalAlignment="Bottom" Height="10" Background="White" Value="0" Foreground="#63B4D1"></ProgressBar>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

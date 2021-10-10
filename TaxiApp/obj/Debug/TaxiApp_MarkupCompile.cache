@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\user\source\repos\TaxiApp\TaxiApp\App.xaml
-31849811818
-150135641861
-19-775478153
+4-960777566
+41523792581
+23252723804
 1371197679797
-Views\MainView.xaml;Views\SignInPage.xaml;Views\SignUpPage.xaml;
+Views\InputScreen.xaml;Views\MainView.xaml;Views\SignInPage.xaml;Views\SignUpPage.xaml;
 
-False
+True
 

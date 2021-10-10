@@ -335,7 +335,6 @@ namespace TaxiApp.ViewModels
         }
         private void StartNavigation()
         {
-
             // Disable the start navigation button.
             MainView.StartNavigationButton.IsEnabled = false;
             // Get the directions for the route.

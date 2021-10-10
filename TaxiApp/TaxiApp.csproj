@@ -110,8 +110,10 @@
     </Compile>
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="Data\UserContext.cs" />
+    <Compile Include="Services\ErrorService.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Network\Network.cs" />
     <Compile Include="Services\EmailValidationRuleService.cs" />
     <Compile Include="Services\NameValidationRuleService.cs" />
     <Compile Include="Services\PhoneValidationRuleService.cs" />
@@ -120,6 +122,9 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
+    <Compile Include="Views\InputScreen.xaml.cs">
+      <DependentUpon>InputScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -158,6 +163,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\InputScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,7 +180,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Views\taxiBooking.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\taxiapp.png" />
     <Resource Include="Images\exit.png" />

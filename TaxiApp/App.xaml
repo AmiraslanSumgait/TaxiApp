@@ -6,7 +6,7 @@
              d1p1:Ignorable="d" 
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             StartupUri="Views/SignUpPage.xaml">
+             StartupUri="Views/InputScreen.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -73,16 +73,7 @@
                 </Style.Triggers>
             </Style>
 
-            <ControlTemplate x:Key="errorTemplate">
-                <Border BorderBrush="OrangeRed" BorderThickness="0">
-                    <Grid>
-                        <AdornedElementPlaceholder/>
-                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="OrangeRed"
-                               VerticalAlignment="Center" HorizontalAlignment="Right"
-                               Margin="0,0,4,0"/>
-                    </Grid>
-                </Border>
-            </ControlTemplate>
+           
         </ResourceDictionary>
     </Application.Resources>
 </Application>
