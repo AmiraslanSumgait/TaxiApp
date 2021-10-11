@@ -38,8 +38,5 @@ namespace TaxiApp.Views
             MainViewModel = new MainViewModel(this);
 
         }
-
-        
-
     }
 }
