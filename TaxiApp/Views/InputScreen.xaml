@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaxiApp.Views"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Title="InputScreen" AllowsTransparency="True" Background="{x:Null}" WindowStyle="None" WindowStartupLocation="CenterScreen" Height="500" Width="850">
+        Title="InputScreen" AllowsTransparency="True" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterScreen" Height="500" Width="850">
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
@@ -34,7 +34,16 @@
             </Grid.RowDefinitions>
 
             <TextBlock Foreground="White" Text="T A X I   A P P" TextAlignment="Center" VerticalAlignment="Center" 
-                       FontSize="40" FontWeight="DemiBold" FontFamily="Trebuchet MS" />
+                       FontSize="40" FontWeight="DemiBold" FontFamily="Trebuchet MS" >
+                <TextBlock.Effect>
+
+                    <DropShadowEffect BlurRadius="30"
+                                      ShadowDepth="2"
+                                      Direction="-90"
+                                      Color="#FEF200" />
+
+                </TextBlock.Effect>
+            </TextBlock>
 
             <Grid Grid.Row="1">
                 <Image Source="taxiBooking.png" />
@@ -42,7 +51,24 @@
 
             <Grid Grid.Row="2">
 
-                <ProgressBar x:Name="pbInput" Style="{x:Null}" Minimum="0" Maximum="100" VerticalAlignment="Bottom" Height="10" Background="White" Value="0" Foreground="#63B4D1"></ProgressBar>
+                <ProgressBar 
+                        x:Name="pbInput" 
+                        Style="{x:Null}" 
+                        Minimum="0" 
+                        Maximum="100" 
+                        VerticalAlignment="Bottom" 
+                        Height="10" 
+                        Background="White" 
+                        Value="0" 
+                        Foreground="#63B4D1"
+                        >
+                    <ProgressBar.Effect>
+                        <DropShadowEffect BlurRadius="20"
+                                      ShadowDepth="2"
+                                      Direction="-40"
+                                      Color="#FEF200" />
+                    </ProgressBar.Effect>
+                </ProgressBar>
             </Grid>
         </Grid>
     </Grid>

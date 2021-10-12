@@ -27,7 +27,7 @@ namespace TaxiApp.Views
         {
             InitializeComponent();
 
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(0.5) };
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(188) };
             timer.Start();
             timer.Tick += (sender, args) =>
             {
@@ -41,36 +41,12 @@ namespace TaxiApp.Views
                     window.ShowDialog();
                 }
                 else if (pbInput.Value < 30)
-                    pbInput.Value += 8;
-                else if (pbInput.Value < 60)
-                    pbInput.Value += 14;
+                    pbInput.Value += 1;
                 else
-                    pbInput.Value += 18;
+                    pbInput.Value += 10;
             };
         }
 
 
-    }
-
-    public class WindowClosingBehavior : Behavior<Window>
-    {
-        protected override void OnAttached()
-        {
-            AssociatedObject.Closing += AssociatedObject_Closing;
-        }
-
-        private void AssociatedObject_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Window window = sender as Window;
-            window.Closing -= AssociatedObject_Closing;
-            e.Cancel = true;
-            var anim = new DoubleAnimation(0, (Duration)TimeSpan.FromSeconds(0.5));
-            anim.Completed += (s, _) => window.Close();
-            window.BeginAnimation(UIElement.OpacityProperty, anim);
-        }
-        protected override void OnDetaching()
-        {
-            AssociatedObject.Closing -= AssociatedObject_Closing;
-        }
     }
 }

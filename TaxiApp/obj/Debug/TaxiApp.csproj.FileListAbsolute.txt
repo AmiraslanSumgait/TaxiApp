@@ -909,15 +909,11 @@ C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\zh-TW\Esri.ArcGISRuntime.re
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.csproj.AssemblyReference.cache
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\MainView.baml
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\MainView.g.cs
-C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\SignInPage.g.cs
-C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\SignUpPage.g.cs
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\App.g.cs
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp_Content.g.cs
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp_MarkupCompile.cache
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp_MarkupCompile.lref
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\App.baml
-C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\SignInPage.baml
-C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\SignUpPage.baml
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.g.resources
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.Properties.Resources.resources
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.csproj.GenerateResource.cache
@@ -932,5 +928,11 @@ C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.SqlServer.x
 C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\ToastNotifications.dll
 C:\Users\user\source\repos\TaxiApp\TaxiApp\bin\Debug\ToastNotifications.Messages.dll
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\ForgotPasswordPage.g.cs
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\InputScreen.g.cs
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\SignInPage.g.cs
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\SignUpPage.g.cs
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\ForgotPasswordPage.baml
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\InputScreen.baml
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\SignInPage.baml
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\SignUpPage.baml

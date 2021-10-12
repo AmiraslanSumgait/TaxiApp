@@ -25,6 +25,7 @@ namespace TaxiApp.ViewModels
         public RelayCommandMain ExitCommand { get; set; }
         public RelayCommandMain SignUpPagePassCommand { get; set; }
         public RelayCommandMain SignInCommand { get; set; }
+        public RelayCommandMain ForgotPasswordCommand { get; set; }
 
         public SignInPage SignInPage { get; set; }
 
@@ -54,7 +55,7 @@ namespace TaxiApp.ViewModels
             SignInCommand = new RelayCommandMain(
                 action =>
                 {
-                    if (SignInPage.tbEmail.Text == string.Empty || SignInPage.pbPassword.Password == string.Empty)  
+                    if (SignInPage.tbEmail.Text == string.Empty || SignInPage.pbPassword.Password == string.Empty)
                         notifier.ShowInformation("Please fill in the information completely.");
                     else if (!Regex.IsMatch(SignInPage.tbEmail.Text, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
                         notifier.ShowInformation("Please enter a valid email address.");
@@ -79,7 +80,13 @@ namespace TaxiApp.ViewModels
                 },
                 pre => true);
 
-
+            ForgotPasswordCommand = new RelayCommandMain(
+                action =>
+                {
+                    ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage();
+                    SignInPage.frameForgotPassword.Navigate(forgotPasswordPage);
+                },
+                pre => true);
         }
 
         Notifier notifier = new Notifier(cfg =>

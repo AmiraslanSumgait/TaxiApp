@@ -85,6 +85,11 @@ namespace TaxiApp.ViewModels
                         notifier.ShowWarning("There is already an account with this username. Please check another username.");
                         SignUpPage.tbUsername.Text = "";
                     }
+                    else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
+                    {
+                        notifier.ShowWarning("There is already an account with this email. Please check another email.");
+                        SignUpPage.tbEmail.Text = "";
+                    }
                     else
                     {
                         MessageBox.Show(correctCode.ToString());
@@ -139,6 +144,11 @@ namespace TaxiApp.ViewModels
                   {
                       notifier.ShowWarning("There is already an account with this username. Please check another username.");
                       SignUpPage.tbUsername.Text = "";
+                  }
+                  else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
+                  {
+                      notifier.ShowWarning("There is already an account with this email. Please check another email.");
+                      SignUpPage.tbEmail.Text = "";
                   }
                   else
                   {

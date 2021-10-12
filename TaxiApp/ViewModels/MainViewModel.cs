@@ -19,6 +19,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaxiApp.Command;
+using TaxiApp.Data;
 using TaxiApp.Services;
 using TaxiApp.Views;
 namespace TaxiApp.ViewModels

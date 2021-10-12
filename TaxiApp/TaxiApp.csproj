@@ -119,9 +119,13 @@
     <Compile Include="Services\PhoneValidationRuleService.cs" />
     <Compile Include="Services\RouteTrackerDisplayLocationService.cs" />
     <Compile Include="Services\UsernameValidationRuleService.cs" />
+    <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
+    <Compile Include="Views\ForgotPasswordPage.xaml.cs">
+      <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InputScreen.xaml.cs">
       <DependentUpon>InputScreen.xaml</DependentUpon>
     </Compile>
@@ -163,6 +167,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\ForgotPasswordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\InputScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
