@@ -188,8 +188,8 @@ namespace TaxiApp.ViewModels
             _startGraphic = new Graphic(null, currentLocationSymbol);
             _endGraphic = new Graphic(null, locationSymbol);
             _graphicTaxi1 = new Graphic(_taxi1, taxiSymbol);
-            _graphicTaxi2 = new Graphic(_taxi1, taxiSymbol);
-            routeAndStopsOverlay.Graphics.AddRange(new[] {_graphicTaxi1, _startGraphic, _endGraphic });
+            _graphicTaxi2 = new Graphic(_taxi2, taxiSymbol);
+            routeAndStopsOverlay.Graphics.AddRange(new[] {_graphicTaxi1, _graphicTaxi2, _startGraphic, _endGraphic });
         }
         private async void Ongvtapped(GeoViewInputEventArgs e)
         {
@@ -226,10 +226,7 @@ namespace TaxiApp.ViewModels
         {
             if (MainView.AddressTextBox.Text != string.Empty)
             {
-
                 // Get the MapViewModel from the page (defined as a static resource).
-
-
                 // Call SearchAddress on the view model, pass the address text and the map view's spatial reference.
                 try
                 {
@@ -245,12 +242,9 @@ namespace TaxiApp.ViewModels
                     {
                         await MainView.MyMapView.SetViewpointCenterAsync(addressPoint);
                     }
-
-
                 }
                 catch (Exception)
                 {
-
                 }
             }
             else
@@ -262,7 +256,6 @@ namespace TaxiApp.ViewModels
         public async Task<MapPoint> SearchAddress(string address, SpatialReference spatialReference)
         {
             MapPoint addressLocation = null;
-
             try
             {
                 //GraphicsOverlay graphicsOverlay = this.GraphicsOverlays.FirstOrDefault();
@@ -284,7 +277,7 @@ namespace TaxiApp.ViewModels
                 Graphic textGraphic = new Graphic(geocodeResult.DisplayLocation, textSymbol);
 
                 // Add the location and label graphics to the graphics overlay.
-                //routeAndStopsOverlay.Graphics.Add(markerGraphic);
+                routeAndStopsOverlay.Graphics.Add(markerGraphic);
                 routeAndStopsOverlay.Graphics.Add(textGraphic);
                 addressLocation = geocodeResult.DisplayLocation;
             }
@@ -367,7 +360,6 @@ namespace TaxiApp.ViewModels
         private void StartNavigation()
         {
             routeAndStopsOverlay.Graphics.Remove(_graphicTaxi2);
-           
             MainView.InfoUcPanel.UserControl.Visibility = Visibility.Collapsed;
             MainView.btn_info.IsEnabled = true;
             // Disable the start navigation button.
@@ -417,7 +409,7 @@ namespace TaxiApp.ViewModels
                                                 status.RouteProgress.RemainingTime.ToString(@"hh\:mm\:ss"));
 
                 if (status.CurrentManeuverIndex + 1 < _directionsList.Count)
-                {
+                { 
                     statusMessageBuilder.AppendLine("Next direction: " + _directionsList[status.CurrentManeuverIndex + 1].DirectionText);
                 }
 
