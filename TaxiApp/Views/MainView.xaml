@@ -32,7 +32,7 @@
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames
                 Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="CanvasMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="90"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
@@ -41,7 +41,7 @@
             <DoubleAnimationUsingKeyFrames
                 Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="CanvasMenu">
                 <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="90"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
@@ -161,7 +161,7 @@
                         <!--Background="#383D3B"-->
                         <!--Background="#415D43"-->
                         <Canvas
-                    Grid.Column="0"
+                    Grid.Column="0" Width="79"
                     Background="#2eb875"
                     x:Name="CanvasMenu">
                             <Button

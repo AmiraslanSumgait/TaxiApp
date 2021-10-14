@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="Data\UserContext.cs" />
+    <Compile Include="Models\Driver.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\EmailValidationRuleService.cs" />
@@ -179,7 +180,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\taxiapp.png" />
     <Resource Include="Images\exit.png" />
