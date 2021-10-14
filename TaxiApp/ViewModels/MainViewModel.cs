@@ -19,6 +19,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaxiApp.Command;
+using TaxiApp.Data;
 using TaxiApp.Services;
 using TaxiApp.Views;
 namespace TaxiApp.ViewModels
@@ -109,6 +110,7 @@ namespace TaxiApp.ViewModels
         };
         public MainViewModel(MainView mainView)
         {
+            
             MainView = mainView;
             Initialize();
 
@@ -176,6 +178,7 @@ namespace TaxiApp.ViewModels
             {
                routeAndStopsOverlay
             };
+           
             _startGraphic = new Graphic(null, currentLocationSymbol);
             _endGraphic = new Graphic(null, locationSymbol);
             routeAndStopsOverlay.Graphics.AddRange(new[] { _startGraphic, _endGraphic });
@@ -494,3 +497,4 @@ namespace TaxiApp.ViewModels
 
     }
 }
+

@@ -941,3 +941,5 @@ C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\ToastNotifications.Message
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.xml
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\InfoDestinationUC.baml
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\RateDriverView.g.cs
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\RateDriverView.baml
