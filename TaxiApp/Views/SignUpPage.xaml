@@ -36,7 +36,7 @@
                         </Border.Background>
                     </Border>
                     <Canvas>
-                        <Button x:Name="btnBack" Command="{Binding BackCommand}" Background="Transparent" Padding="auto" Canvas.Left="2" Canvas.Top="2" BorderThickness="0" Height="26" Width="30">
+                        <Button x:Name="btnBack" ToolTip="Back" Command="{Binding BackCommand}" Background="Transparent" Padding="auto" Canvas.Left="2" Canvas.Top="2" BorderThickness="0" Height="26" Width="30">
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="MouseEnter">
                                     <BeginStoryboard>

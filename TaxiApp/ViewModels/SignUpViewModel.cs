@@ -111,70 +111,70 @@ namespace TaxiApp.ViewModels
                 pre => true);
 
             SignUpCommand = new RelayCommandMain(action =>
-              {
-                  if (SignUpPage.tbFirstname.Text == ""
-                  || SignUpPage.tbLastname.Text == ""
-                  || SignUpPage.tbPhoneNumber.Text == ""
-                  || SignUpPage.tbEmail.Text == ""
-                  || SignUpPage.pbPassword.Password == ""
-                  || SignUpPage.pbConfirmPassword.Password == ""
-                  || SignUpPage.tbUsername.Text == "")
-                  {
-                      notifier.ShowInformation("Please fill in the information completely.");
-                  }
-                  else if (SignUpPage.pbPassword.Password.Length < 8)
-                  {
-                      notifier.ShowWarning("Password must be at least 8 characters.");
-                  }
-                  else if (SignUpPage.pbPassword.Password != SignUpPage.pbConfirmPassword.Password)
-                  {
-                      notifier.ShowWarning("Passwords are not the same.Try again.");
-                      signUpPage.pbPassword.Password = string.Empty;
-                      signUpPage.pbConfirmPassword.Password = string.Empty;
-                  }
-                  else if (SignUpPage.tbregisterCode.Text != correctCode.ToString())
-                  {
-                      notifier.ShowError("Please write the code sent to the email correctly.");
-                  }
-                  else if (ErrorService.IsError == true)
-                  {
-                      notifier.ShowWarning("Please enter the information correctly.");
-                  }
-                  else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
-                  {
-                      notifier.ShowWarning("There is already an account with this username. Please check another username.");
-                      SignUpPage.tbUsername.Text = "";
-                  }
-                  else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
-                  {
-                      notifier.ShowWarning("There is already an account with this email. Please check another email.");
-                      SignUpPage.tbEmail.Text = "";
-                  }
-                  else
-                  {
-                      User newUser = new User
-                      {
-                          Firstname = SignUpPage.tbFirstname.Text,
-                          Lastname = SignUpPage.tbLastname.Text,
-                          Username = SignUpPage.tbUsername.Text,
-                          PhoneNumber = SignUpPage.tbPhoneNumber.Text,
-                          Email = SignUpPage.tbEmail.Text,
-                          Password = SignUpPage.pbPassword.Password
-                      };
+            {
+                if (SignUpPage.tbFirstname.Text == ""
+                || SignUpPage.tbLastname.Text == ""
+                || SignUpPage.tbPhoneNumber.Text == ""
+                || SignUpPage.tbEmail.Text == ""
+                || SignUpPage.pbPassword.Password == ""
+                || SignUpPage.pbConfirmPassword.Password == ""
+                || SignUpPage.tbUsername.Text == "")
+                {
+                    notifier.ShowInformation("Please fill in the information completely.");
+                }
+                else if (SignUpPage.pbPassword.Password.Length < 8)
+                {
+                    notifier.ShowWarning("Password must be at least 8 characters.");
+                }
+                else if (SignUpPage.pbPassword.Password != SignUpPage.pbConfirmPassword.Password)
+                {
+                    notifier.ShowWarning("Passwords are not the same.Try again.");
+                    signUpPage.pbPassword.Password = string.Empty;
+                    signUpPage.pbConfirmPassword.Password = string.Empty;
+                }
+                else if (SignUpPage.tbregisterCode.Text != correctCode.ToString())
+                {
+                    notifier.ShowError("Please write the code sent to the email correctly.");
+                }
+                else if (ErrorService.IsError == true)
+                {
+                    notifier.ShowWarning("Please enter the information correctly.");
+                }
+                else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
+                {
+                    notifier.ShowWarning("There is already an account with this username. Please check another username.");
+                    SignUpPage.tbUsername.Text = "";
+                }
+                else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
+                {
+                    notifier.ShowWarning("There is already an account with this email. Please check another email.");
+                    SignUpPage.tbEmail.Text = "";
+                }
+                else
+                {
+                    User newUser = new User
+                    {
+                        Firstname = SignUpPage.tbFirstname.Text,
+                        Lastname = SignUpPage.tbLastname.Text,
+                        Username = SignUpPage.tbUsername.Text,
+                        PhoneNumber = SignUpPage.tbPhoneNumber.Text,
+                        Email = SignUpPage.tbEmail.Text,
+                        Password = SignUpPage.pbPassword.Password
+                    };
 
-                      UserContext.Users.Add(newUser);
-                      UserContext.SaveChanges();
-                      notifier.ShowSuccess("Successfully register.\nWe will direct you to the sign in page for a few seconds.");
-                      var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2.5) };
-                      timer.Start();
-                      timer.Tick += (sender, args) =>
-                      {
-                          timer.Stop();
-                          SignInPage signInPage = new SignInPage();
-                          SignUpPage.NavigationService.Navigate(signInPage);
-                      };
-                  }
-              },
+                    UserContext.Users.Add(newUser);
+                    UserContext.SaveChanges();
+                    notifier.ShowSuccess("Successfully register.\nWe will direct you to the sign in page for a few seconds.");
+                    var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2.5) };
+                    timer.Start();
+                    timer.Tick += (sender, args) =>
+                    {
+                        timer.Stop();
+                        SignInPage signInPage = new SignInPage();
+                        SignUpPage.NavigationService.Navigate(signInPage);
+                    };
+                }
+            },
             pre => true);
         }
 

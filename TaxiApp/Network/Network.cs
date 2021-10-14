@@ -11,7 +11,7 @@ namespace TaxiApp.Network
 {
     static class Network
     {
-        public static void SendNotification(string receiveMail,string messageSubject,string messageBody)
+        public static void SendNotification(string receiveMail, string messageSubject, string messageBody)
         {
             MailMessage message = new MailMessage();
             SmtpClient smtp = new SmtpClient();
