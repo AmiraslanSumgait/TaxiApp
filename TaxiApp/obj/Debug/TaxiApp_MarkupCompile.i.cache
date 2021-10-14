@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\App.xaml
-4-673093740
+6-1524828611
 150368873991
-23-1061645166
+281446206227
 1371392502372
-Views\InfoDestinationUC.xaml;Views\MainView.xaml;Views\SignInPage.xaml;Views\SignUpPage.xaml;
+Views\ForgotPasswordPage.xaml;Views\InfoDestinationUC.xaml;Views\InputScreen.xaml;Views\MainView.xaml;Views\SignInPage.xaml;Views\SignUpPage.xaml;
 
-True
+False
 
