@@ -950,3 +950,9 @@ C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.SqlSer
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\InfoDestinationUC.g.cs
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\InfoDestinationUC.baml
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\ForgotPasswordPage.g.cs
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\InfoDestinationUC.g.cs
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\InputScreen.g.cs
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\ForgotPasswordPage.baml
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\InfoDestinationUC.baml
+C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\InputScreen.baml

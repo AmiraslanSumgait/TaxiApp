@@ -54,6 +54,14 @@
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="buttonCloseMenu">
             <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
         </EventTrigger>
+
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard Duration="00:00:10" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
     </Window.Triggers>
 
     <materialDesign:Card UniformCornerRadius="10">

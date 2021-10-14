@@ -156,7 +156,7 @@
 
                     <Label
                         FontSize="8"
-                        Content="Car Model"
+                        Content="Car Info"
                         Margin="320,32,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"

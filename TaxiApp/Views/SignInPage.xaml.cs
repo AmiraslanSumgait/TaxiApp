@@ -25,7 +25,6 @@ namespace TaxiApp.Views
     /// </summary>
     public partial class SignInPage : Page
     {
-        //public MainView MainView { get; set; } = new MainView();
         public SignInViewModel SignInViewModel { get; set; }
 
         public SignInPage()
@@ -33,31 +32,8 @@ namespace TaxiApp.Views
             InitializeComponent();
             SignInViewModel = new SignInViewModel(this);
             DataContext = SignInViewModel;
-            //SignInViewModel.MainView = MainView;
-            //SignInViewModel.MainViewModel = MainView.MainViewModel;
-            //SignInViewModel.SignInPage = this;
 
         }
 
-       
-
-
-
-
-        //private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    if (cbPassword.IsChecked == true)
-        //    {
-        //        tbPassword.Visibility = Visibility.Visible;
-        //        pbPassword.Visibility = Visibility.Hidden;
-
-
-        //    }
-        //    else
-        //    {
-        //        tbPassword.Visibility = Visibility.Hidden;
-        //        pbPassword.Visibility = Visibility.Visible;
-        //    }
-        //}
     }
 }
