@@ -941,3 +941,12 @@ C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\ToastNotifications.Message
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.xml
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\InfoDestinationUC.baml
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.dll
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\ToastNotifications.dll
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\ToastNotifications.Messages.dll
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.xml
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\InfoDestinationUC.g.cs
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\InfoDestinationUC.baml
