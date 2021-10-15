@@ -13,6 +13,7 @@ namespace TaxiApp.ViewModels
     {
         public InfoDestinationUC InfoUC { get; set; }
         public RelayCommandMain ExitCommand { get; set; }
+       
         public InfoDestinationViewModel(InfoDestinationUC infoUC)
         {
             InfoUC = infoUC;
@@ -24,7 +25,7 @@ namespace TaxiApp.ViewModels
         public void ExitButtonClick()
         {
             InfoUC.UserControl.Visibility = Visibility.Collapsed;
-            ((MainView)Application.Current.MainWindow).btn_info.IsEnabled = true;
+            InfoUC.UserControl.IsEnabled = true;
         }
     }
 }

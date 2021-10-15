@@ -19,6 +19,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaxiApp.Command;
+using TaxiApp.Data;
 using TaxiApp.Services;
 using TaxiApp.Views;
 namespace TaxiApp.ViewModels
@@ -118,9 +119,10 @@ namespace TaxiApp.ViewModels
         };
         public MainViewModel(MainView mainView)
         {
+            
             MainView = mainView;
             Initialize();
-
+           
             mainView.gridHead.MouseLeftButtonDown += Grid_MouseLeftButtonDown;
             StartNavigationCommand = new RelayCommandMain(
                 action => { StartNavigation(); },
@@ -162,7 +164,7 @@ namespace TaxiApp.ViewModels
             InfoDestinationCommand = new RelayCommandMain(
                action => {
                    MainView.InfoUcPanel.UserControl.Visibility = Visibility.Visible;
-                   MainView.btn_info.IsEnabled =false;
+                   MainView.InfoUcPanel.UserControl.IsEnabled = true;  
                },
                pre => true
                );
@@ -185,6 +187,7 @@ namespace TaxiApp.ViewModels
             {
                routeAndStopsOverlay
             };
+           
             _startGraphic = new Graphic(null, currentLocationSymbol);
             _endGraphic = new Graphic(null, locationSymbol);
             _graphicTaxi1 = new Graphic(_taxi1, taxiSymbol);
@@ -498,3 +501,4 @@ namespace TaxiApp.ViewModels
 
     }
 }
+

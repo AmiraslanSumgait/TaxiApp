@@ -8,7 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" 
              d:DesignWidth="2800"
-             Name="UserControl">
+             Name="UserControl"
+             >
 
     <materialDesign:Card UniformCornerRadius="10">
         <Grid Background="White" >

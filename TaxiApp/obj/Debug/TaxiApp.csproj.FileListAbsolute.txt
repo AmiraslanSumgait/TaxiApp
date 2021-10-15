@@ -956,3 +956,9 @@ C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\InputScreen.g.cs
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\ForgotPasswordPage.baml
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\InfoDestinationUC.baml
 C:\Users\user\source\repos\TaxiApp\TaxiApp\obj\Debug\Views\InputScreen.baml
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\ForgotPasswordPage.g.cs
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\InputScreen.g.cs
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\RateDriverView.g.cs
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\ForgotPasswordPage.baml
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\InputScreen.baml
+C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\RateDriverView.baml
