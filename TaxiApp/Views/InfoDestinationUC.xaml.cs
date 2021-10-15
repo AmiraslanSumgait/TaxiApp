@@ -28,5 +28,10 @@ namespace TaxiApp.Views
             infoDestinationViewModel = new InfoDestinationViewModel(this);
             DataContext = infoDestinationViewModel;
         }
+
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
     }
 }

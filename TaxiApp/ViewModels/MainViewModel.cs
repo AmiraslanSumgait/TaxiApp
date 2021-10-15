@@ -122,7 +122,7 @@ namespace TaxiApp.ViewModels
             
             MainView = mainView;
             Initialize();
-
+           
             mainView.gridHead.MouseLeftButtonDown += Grid_MouseLeftButtonDown;
             StartNavigationCommand = new RelayCommandMain(
                 action => { StartNavigation(); },
@@ -164,7 +164,7 @@ namespace TaxiApp.ViewModels
             InfoDestinationCommand = new RelayCommandMain(
                action => {
                    MainView.InfoUcPanel.UserControl.Visibility = Visibility.Visible;
-                   MainView.btn_info.IsEnabled =false;
+                   MainView.InfoUcPanel.UserControl.IsEnabled = true;  
                },
                pre => true
                );

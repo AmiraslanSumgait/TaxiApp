@@ -365,7 +365,6 @@
                                    Background="Transparent"                          
                                    Height="35"
                                    Width="35"
-                                   IsEnabled="False"
                                    Margin="0,100,15,0"
                                    Padding="0,0,0,0"
                                    HorizontalAlignment="Right"
@@ -374,13 +373,14 @@
                                    x:Name="btn_info"
                                    ToolTipService.ShowDuration="5000"
                                    Command="{Binding InfoDestinationCommand}"
+                                   IsEnabled="{Binding IsEnabled, ElementName=InfoUcPanel}"
                                  >
                                     <materialDesign:PackIcon
                                       x:Name="mater"
-                                     Kind="Information"
-                                     Height="35"
-                                     Width="35"
-                                     Foreground="black"
+                                      Kind="Information"
+                                      Height="35"
+                                      Width="35"
+                                      Foreground="black"
                                      
                                       
                                      />
