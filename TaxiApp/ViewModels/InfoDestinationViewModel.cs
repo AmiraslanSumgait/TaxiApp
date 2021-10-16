@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TaxiApp.Command;
+using TaxiApp.Models;
 using TaxiApp.Views;
 
 namespace TaxiApp.ViewModels
@@ -14,8 +15,6 @@ namespace TaxiApp.ViewModels
         public InfoDestinationUC InfoUC { get; set; }
         public RelayCommandMain ExitCommand { get; set; }
 
-        
-       
         public InfoDestinationViewModel(InfoDestinationUC infoUC)
         {
             InfoUC = infoUC;
@@ -23,8 +22,12 @@ namespace TaxiApp.ViewModels
                action => { ExitButtonClick(); },
                pRE => true
               );
+           
         }
-        
+        public static void adss()
+        {
+
+        }
         public void ExitButtonClick()
         {
             InfoUC.UserControl.Visibility = Visibility.Collapsed;
