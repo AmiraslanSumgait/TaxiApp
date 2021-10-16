@@ -29,9 +29,6 @@ namespace TaxiApp.Views
             DataContext = infoDestinationViewModel;
         }
 
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
+        
     }
 }

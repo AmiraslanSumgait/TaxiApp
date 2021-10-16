@@ -37,7 +37,7 @@ namespace TaxiApp.Views
         {
             InitializeComponent();
             MainViewModel = new MainViewModel(this);
-            
+            DataContext = MainViewModel;
         }
     }
 }
