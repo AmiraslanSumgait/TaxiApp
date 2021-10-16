@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -30,7 +31,7 @@ namespace TaxiApp.ViewModels
 
         public SignUpPage SignUpPage { get; set; }
 
-        public UserContext UserContext { get; set; } = new UserContext();
+        public UserContext UserContext { get; set; }
 
         private Random _randomCode { get; set; }
 
@@ -80,18 +81,19 @@ namespace TaxiApp.ViewModels
                     {
                         notifier.ShowWarning("Please enter the information correctly.");
                     }
-                    else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
-                    {
-                        notifier.ShowWarning("There is already an account with this username. Please check another username.");
-                        SignUpPage.tbUsername.Text = "";
-                    }
-                    else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
-                    {
-                        notifier.ShowWarning("There is already an account with this email. Please check another email.");
-                        SignUpPage.tbEmail.Text = "";
-                    }
+                    //else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
+                    //{
+                    //    notifier.ShowWarning("There is already an account with this username. Please check another username.");
+                    //    SignUpPage.tbUsername.Text = "";
+                    //}
+                    //else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
+                    //{
+                    //    notifier.ShowWarning("There is already an account with this email. Please check another email.");
+                    //    SignUpPage.tbEmail.Text = "";
+                    //}
                     else
                     {
+                        UserContext = new UserContext();
                         MessageBox.Show(correctCode.ToString());
                         //Email hissesi
                         try
@@ -140,16 +142,16 @@ namespace TaxiApp.ViewModels
                 {
                     notifier.ShowWarning("Please enter the information correctly.");
                 }
-                else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
-                {
-                    notifier.ShowWarning("There is already an account with this username. Please check another username.");
-                    SignUpPage.tbUsername.Text = "";
-                }
-                else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
-                {
-                    notifier.ShowWarning("There is already an account with this email. Please check another email.");
-                    SignUpPage.tbEmail.Text = "";
-                }
+                //else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
+                //{
+                //    notifier.ShowWarning("There is already an account with this username. Please check another username.");
+                //    SignUpPage.tbUsername.Text = "";
+                //}
+                //else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
+                //{
+                //    notifier.ShowWarning("There is already an account with this email. Please check another email.");
+                //    SignUpPage.tbEmail.Text = "";
+                //}
                 else
                 {
                     User newUser = new User
@@ -161,7 +163,8 @@ namespace TaxiApp.ViewModels
                         Email = SignUpPage.tbEmail.Text,
                         Password = SignUpPage.pbPassword.Password
                     };
-
+                    newUser.Firstname = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(newUser.Firstname.ToLower());
+                    newUser.Lastname = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(newUser.Firstname.ToLower());
                     UserContext.Users.Add(newUser);
                     UserContext.SaveChanges();
                     notifier.ShowSuccess("Successfully register.\nWe will direct you to the sign in page for a few seconds.");
@@ -178,6 +181,7 @@ namespace TaxiApp.ViewModels
             pre => true);
         }
 
+        #region Create notifier
         Notifier notifier = new Notifier(cfg =>
         {
             cfg.PositionProvider = new WindowPositionProvider(
@@ -192,6 +196,7 @@ namespace TaxiApp.ViewModels
 
             cfg.Dispatcher = Application.Current.Dispatcher;
         });
+        #endregion
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {

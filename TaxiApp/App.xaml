@@ -73,16 +73,34 @@
                 </Style.Triggers>
             </Style>
 
-            <ControlTemplate x:Key="errorTemplate">
-                <Border BorderBrush="OrangeRed" BorderThickness="0">
-                    <Grid>
-                        <AdornedElementPlaceholder/>
-                        <TextBlock Text="{Binding [0].ErrorContent}" Foreground="OrangeRed"
-                               VerticalAlignment="Center" HorizontalAlignment="Right"
-                               Margin="0,0,4,0"/>
-                    </Grid>
-                </Border>
-            </ControlTemplate>
+            <Style x:Key="ForgotPassPage">
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetProperty="Margin" SpeedRatio="1.5">
+                                <ThicknessAnimation>
+                                    <ThicknessAnimation.From>
+                                        <Thickness 
+                                        Left="0"
+                                        Top="0"
+                                        Right="0"
+                                        Bottom="550"/>
+                                    </ThicknessAnimation.From>
+                                    <ThicknessAnimation.To>
+                                        <Thickness 
+                                        Left="0"
+                                        Top="0"
+                                        Right="0"
+                                        Bottom="0"/>
+                                    </ThicknessAnimation.To>
+                                </ThicknessAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

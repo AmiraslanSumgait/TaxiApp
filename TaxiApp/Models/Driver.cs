@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TaxiApp.Models
 {
-    public class Driver
+    public class Driver : Entity
     {
         public string Name { get; set; }
         public string Surname { get; set; }

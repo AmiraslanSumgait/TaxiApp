@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:TaxiApp.Views" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:TaxiApp.Models" xmlns:local2="clr-namespace:TaxiApp.Services"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" 
+      d:DesignHeight="450" d:DesignWidth="800"
       Title="SignInPage" ShowsNavigationUI="False" Style="{StaticResource ResourceKey= SignInPage}">
 
     <Page.Resources>
@@ -20,58 +20,57 @@
     </Page.Resources>
 
     <Grid>
-        <Border CornerRadius="20">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.8*"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.8*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0">
-                    <Border CornerRadius="10 0 0 10" Background="Snow">
-                        <Grid>
+            <Grid Grid.Column="0">
+                <Border CornerRadius="10 0 0 10" Background="Snow">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.7*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="0.7*"/>
+                                <RowDefinition Height="0.4*"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.4*"/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-
-                                <Grid Grid.Row="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="12*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0">
-                                        <Canvas>
-                                            <Image HorizontalAlignment="Center" Canvas.Top="2" Canvas.Left="4" VerticalAlignment="Center" Width="27" Height="28" Source="taxiapp.png"/>
-                                        </Canvas>
-                                    </Grid>
-                                    <Grid Grid.Column="1">
-                                        <TextBlock 
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="12*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Canvas>
+                                        <Image HorizontalAlignment="Center" Canvas.Top="2" Canvas.Left="4" VerticalAlignment="Center" Width="27" Height="28" Source="pack://application:,,,/TaxiApp;component/Images/taxiapp.png"/>
+                                    </Canvas>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <TextBlock 
                                     Text="Taxi App" 
                                     Padding="0 5 0 0" 
                                     FontSize="17" 
                                     FontWeight="Bold"
                                     FontFamily="Leelawadee UI">
-                                            <TextBlock.Foreground>
-                                                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                                    <GradientStop Color="#FF4CBF9A"/>
-                                                    <GradientStop Color="PaleGoldenrod" Offset="1"/>
-                                                </LinearGradientBrush>
-                                            </TextBlock.Foreground>
-                                        </TextBlock>
-                                    </Grid>
+                                        <TextBlock.Foreground>
+                                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                                <GradientStop Color="#FF4CBF9A"/>
+                                                <GradientStop Color="PaleGoldenrod" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
                                 </Grid>
+                            </Grid>
 
 
-                                <Grid Grid.Row="1">
-                                    <StackPanel>
-                                        <TextBlock 
+                            <Grid Grid.Row="1">
+                                <StackPanel>
+                                    <TextBlock 
                                             Margin="0 15 0 0"
                                                 Text="Sign in to Taxi App"
                                                 FontSize="32"
@@ -80,35 +79,29 @@
                                                 Foreground="#4CBF9A"
                                                 VerticalAlignment="Top"
                                                 HorizontalAlignment="Center"/>
-                                        <StackPanel Margin="0 10 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <materialDesign:PackIcon Kind="Facebook" Foreground="#1771E6" 
+                                    <StackPanel Margin="0 10 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Facebook" Foreground="#1771E6" 
                                                                          Height="35" Width="35" ></materialDesign:PackIcon>
-                                            <materialDesign:PackIcon Kind="GooglePlus" Foreground="#D04338" Margin="15 0 0 0"
+                                        <materialDesign:PackIcon Kind="GooglePlus" Foreground="#D04338" Margin="15 0 0 0"
                                                                          Height="35" Width="35" ></materialDesign:PackIcon>
-                                            <materialDesign:PackIcon Kind="Twitter" Foreground="#8EBEE3" Margin="15 0 0 0"
+                                        <materialDesign:PackIcon Kind="Twitter" Foreground="#8EBEE3" Margin="15 0 0 0"
                                                                          Height="35" Width="35" ></materialDesign:PackIcon>
-                                        </StackPanel>
-                                        <TextBlock 
+                                    </StackPanel>
+                                    <TextBlock 
                                             Margin="0 10 0 0"
                                                 Text="or use your email account:"
                                                 FontSize="13"
                                                 FontFamily="Leelawadee UI"
                                                 Foreground="DarkGray"
                                             HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Grid>
+                                </StackPanel>
                             </Grid>
+                        </Grid>
 
-                            <Grid Grid.Row="1">
-                                <StackPanel>
-                                    <!--<hc:TextBox Margin="0 10" hc:InfoElement.Placeholder="Email" Background="#F4F8F7" Height="45" Width="300"
-                                                hc:IconElement.Geometry="">
-                                       
-                                    </hc:TextBox>
-                                    <hc:PasswordBox hc:InfoElement.Placeholder="Password" hc:ShowEyeButton="True" Background="#F4F8F7" Height="45" Width="300"
-                                                    />-->
+                        <Grid Grid.Row="1">
+                            <StackPanel>
 
-                                    <TextBox x:Name="tbEmail"
+                                <TextBox x:Name="tbEmail"
                                         Margin="0 10 0 0"
                                         Validation.ErrorTemplate="{StaticResource validationTemplate}"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -117,23 +110,23 @@
                                         BorderBrush="#769DF7"
                                         FontSize="14"
                                         materialDesign:TextFieldAssist.HasClearButton="True">
-                                        <materialDesign:HintAssist.Hint>
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="EmailOutline" VerticalAlignment="Center" Height="25" Width="20"/>
-                                                <TextBlock Text="Email" Padding="10 0 0 0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </materialDesign:HintAssist.Hint>
-                                        <TextBox.Text>
-                                            <Binding Path="Email" Source="{StaticResource user}" UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <local2:EmailValidationRuleService/>
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox.Text>
-                                    </TextBox>
+                                    <materialDesign:HintAssist.Hint>
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="EmailOutline" VerticalAlignment="Center" Height="25" Width="20"/>
+                                            <TextBlock Text="Email" Padding="10 0 0 0" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </materialDesign:HintAssist.Hint>
+                                    <TextBox.Text>
+                                        <Binding Path="Email" Source="{StaticResource user}" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local2:EmailValidationRuleService/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
 
-                                    <Grid>
-                                        <PasswordBox x:Name="pbPassword"
+                                <Grid>
+                                    <PasswordBox x:Name="pbPassword"
                                         Margin="0 10 0 0"
                                         Validation.ErrorTemplate="{StaticResource validationTemplate}"
                                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
@@ -142,36 +135,16 @@
                                         Height="50"
                                         materialDesign:TextFieldAssist.HasClearButton="True"
                                         FontSize="14">
-                                            <materialDesign:HintAssist.Hint>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <materialDesign:PackIcon Kind="LockOutline" VerticalAlignment="Center" Height="25" Width="20"/>
-                                                    <TextBlock Text="Password" Padding="10 0 0 0" VerticalAlignment="Center"/>
-                                                </StackPanel>
-                                            </materialDesign:HintAssist.Hint>
-                                        </PasswordBox>
+                                        <materialDesign:HintAssist.Hint>
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="LockOutline" VerticalAlignment="Center" Height="25" Width="20"/>
+                                                <TextBlock Text="Password" Padding="10 0 0 0" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </materialDesign:HintAssist.Hint>
+                                    </PasswordBox>
+                                </Grid>
 
-
-                                        <!--<TextBox x:Name="tbPassword"
-                                                 Visibility="Hidden"
-                                        Margin="0 10 0 0"
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        Width="300"
-                                        Height="50"
-                                        BorderBrush="#769DF7"
-                                        FontSize="14"
-                                                Text="{Binding ElementName=pbPassword, Path=Password}"
-                                        materialDesign:TextFieldAssist.HasClearButton="True">
-                                            <materialDesign:HintAssist.Hint>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <materialDesign:PackIcon Kind="LockOutline" VerticalAlignment="Center" Height="25" Width="20"/>
-                                                    <TextBlock Text="Password" Padding="10 0 0 0" VerticalAlignment="Center"/>
-                                                </StackPanel>
-                                            </materialDesign:HintAssist.Hint>
-                                        </TextBox>-->
-                                    </Grid>
-
-                                    <!--<CheckBox x:Name="cbPassword" Content="Show password" HorizontalAlignment="Right" Margin="0 3 210 0" Foreground="#363636" Checked="CheckBox_Checked"></CheckBox>-->
-                                    <Button 
+                                <Button 
                                         Margin="0 20 0 0"
                                         FontSize="13"
                                         Command="{Binding ForgotPasswordCommand}"
@@ -183,41 +156,41 @@
                                         BorderBrush="LightGray"
                                         Width="200"
                                         Height="33">
-                                        <Button.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation
+                                    <Button.Triggers>
+                                        <EventTrigger RoutedEvent="MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation
                                                             Storyboard.TargetProperty="FontSize"
                                                             Duration="0:0:0.3"
                                                             To="14"/>
-                                                        <DoubleAnimation
+                                                    <DoubleAnimation
                                                             Storyboard.TargetProperty="Height"
                                                             Duration="0:0:0.3"
                                                             To="36"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
 
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation
+                                        <EventTrigger RoutedEvent="MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation
                                                             Storyboard.TargetProperty="FontSize"
                                                             Duration="0:0:0.3"
                                                             To="13"/>
-                                                        <DoubleAnimation
+                                                    <DoubleAnimation
                                                             Storyboard.TargetProperty="Height"
                                                             Duration="0:0:0.3"
                                                             To="33"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </Button.Triggers>
-                                    </Button>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </Button.Triggers>
+                                </Button>
 
-                                    <Grid Margin="0 20 0 0">
-                                        <Button
+                                <Grid Margin="0 20 0 0">
+                                    <Button
                                             Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                             Width="200"
                                             Height="50"
@@ -228,77 +201,77 @@
                                             BorderThickness="0"
                                             materialDesign:ButtonAssist.CornerRadius="25"
                                             Command="{Binding SignInCommand}">
-                                            <TextBlock Text="SIGN IN"/>
-                                        </Button>
-                                    </Grid>
-                                </StackPanel>
-                            </Grid>
-
+                                        <TextBlock Text="SIGN IN"/>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
                         </Grid>
-                    </Border>
-                    <Frame x:Name="frameForgotPassword"/>
-                </Grid>
 
-                <Grid Grid.Column="1">
-                    <Border CornerRadius="0 10 10 0">
-                        <Border.Background>
-                            <LinearGradientBrush>
-                                <GradientStop Color="#4EAFB7" Offset="0.4"/>
-                                <GradientStop Color="PaleGoldenrod" Offset="1.2"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                    </Border>
-                    <Canvas>
-                        <Button x:Name="btnPower" Padding="auto" Command="{Binding ExitCommand}" 
+                    </Grid>
+                </Border>
+                <Frame x:Name="frameForgotPassword" NavigationUIVisibility="Hidden"/>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Border CornerRadius="0 10 10 0">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#4EAFB7" Offset="0.4"/>
+                            <GradientStop Color="PaleGoldenrod" Offset="1.2"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Canvas>
+                    <Button x:Name="btnPower" Padding="auto" Command="{Binding ExitCommand}" 
                                 Background="Transparent" ToolTip="Power" 
                                 Canvas.Right="2" Canvas.Top="2" BorderThickness="0" Height="26" Width="30">
-                            <Button.Triggers>
-                                <EventTrigger RoutedEvent="MouseEnter">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
                                 Storyboard.TargetProperty="Width"
                                 To="35"
                                 Duration="0:0:0.3"/>
-                                            <DoubleAnimation
+                                        <DoubleAnimation
                                 Storyboard.TargetProperty="Height"
                                 To="31"
                                 Duration="0:0:0.3"/>
-                                            <ColorAnimation
+                                        <ColorAnimation
                                                 Storyboard.TargetName="icnPower"
                                     Storyboard.TargetProperty="(materialDesign:PackIcon.Foreground).(SolidColorBrush.Color)" 
                                     To="Red" 
                                     Duration="0:0:0.5"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
 
-                                <EventTrigger RoutedEvent="MouseLeave">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation 
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
                                 Storyboard.TargetProperty="Width"
                                 To="30"
                                  Duration="0:0:0.5"/>
-                                            <DoubleAnimation 
+                                        <DoubleAnimation 
                                 Storyboard.TargetProperty="Height"
                                 To="26"
                                  Duration="0:0:0.5"/>
-                                            <ColorAnimation
+                                        <ColorAnimation
                                                 Storyboard.TargetName="icnPower"
                                     Storyboard.TargetProperty="(materialDesign:PackIcon.Foreground).(SolidColorBrush.Color)" 
                                     To="#363636" 
                                     Duration="0:0:0.5"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Button.Triggers>
-                            <materialDesign:PackIcon Name="icnPower" BorderThickness="0" Kind="Power" Foreground="#363636" Height="auto" Width="auto"/>
-                        </Button>
-                    </Canvas>
-                    <StackPanel HorizontalAlignment="Center">
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                        <materialDesign:PackIcon Name="icnPower" BorderThickness="0" Kind="Power" Foreground="#363636" Height="auto" Width="auto"/>
+                    </Button>
+                </Canvas>
+                <StackPanel HorizontalAlignment="Center">
 
-                        <TextBlock 
+                    <TextBlock 
                         Text="Welcome Taxi App!"
                         Foreground="Snow"
                         FontSize="26"
@@ -306,7 +279,7 @@
                         FontWeight="Bold"
                         HorizontalAlignment="Center"
                         Margin="0 150 0 0"/>
-                        <TextBlock 
+                    <TextBlock 
                         Text="Enter your personal details, register and start your journey with us"
                         TextWrapping="Wrap"
                         TextAlignment="Center"
@@ -316,7 +289,7 @@
                             FontWeight="Light"
                         FontFamily="Leelawadee UI"
                         HorizontalAlignment="Center"/>
-                        <Button
+                    <Button
                             Style="{StaticResource MaterialDesignRaisedDarkButton}"
                             Margin="0 30 0 0"
                             Width="200"
@@ -329,36 +302,34 @@
                             BorderThickness="2"
                             materialDesign:ButtonAssist.CornerRadius="25"
                             Command="{Binding SignUpPagePassCommand}">
-                            <TextBlock Text="SIGN UP"/>
-                            <Button.Triggers>
-                                <EventTrigger RoutedEvent="MouseEnter">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation 
+                        <TextBlock Text="SIGN UP"/>
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
                                 Storyboard.TargetProperty="Width"
                                 To="190"
                                 Duration="0:0:0.3"
                                                  AutoReverse="True"/>
 
-                                            <DoubleAnimation 
+                                        <DoubleAnimation 
                                 Storyboard.TargetProperty="Height"
                                 To="45"
                                 Duration="0:0:0.3"
                                                  AutoReverse="True"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
 
 
-                            </Button.Triggers>
-                        </Button>
-                    </StackPanel>
-                </Grid>
-
+                        </Button.Triggers>
+                    </Button>
+                </StackPanel>
             </Grid>
-        </Border>
-        <!--<Frame x:Name="frameSignInUp" BorderThickness="0" NavigationUIVisibility="Hidden"></Frame>-->
 
+        </Grid>
+        <Frame x:Name="signUpFrame" NavigationUIVisibility="Hidden"></Frame>
 
     </Grid>
 </Page>
