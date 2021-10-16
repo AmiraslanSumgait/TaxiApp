@@ -40,20 +40,20 @@
                     Height="15" 
                     Width="15" 
                     Padding="0,0,0,0"
-                    Margin="10,35,0,0"
+                    Margin="10,5,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
                         <materialDesign:PackIcon
                         Height="15"
                         Width="15"
-                        Kind="Home" Margin="-5,-30,0,0" 
+                        Kind="Home"
                     />
                     </Border>
 
                     <Label
                         FontSize="8"
                         Content="Your Location"
-                        Margin="31,0,0,0"
+                        Margin="30,0,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
@@ -65,8 +65,8 @@
                         x:Name="txtB_YourLocation"
                         FontSize="8"
                         Text=""
-                        Width="105"
-                        Margin="31,15,0,0"
+                        Width="140"
+                        Margin="31,18,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -79,18 +79,19 @@
                       Height="15" 
                       Width="15" 
                       Padding="0,0,0,0"
-                      Margin="150,15,0,17"
-                      HorizontalAlignment="Left">
+                      Margin="10,45,0,0"
+                      HorizontalAlignment="Left"
+                       VerticalAlignment="Top">
                         <materialDesign:PackIcon 
                         Kind="MapMarker"
                         Height="15" 
-                        Width="15" Margin="-143,7,0,-7" />
+                        Width="15" />
                     </Border>
 
                     <Label
                         FontSize="8"
                         Content="Destination"
-                        Margin="25,35,0,0"
+                        Margin="30,42,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
@@ -100,8 +101,8 @@
                         x:Name="txtB_Destination"
                         FontSize="8"
                         Text=""
-                        Width="105"
-                        Margin="31,54,0,0"
+                        Width="140"
+                        Margin="31,61,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -116,19 +117,20 @@
                       Height="15" 
                       Width="15" 
                       Padding="0,0,0,0"
-                      Margin="300,34,0,36"
-                      HorizontalAlignment="Left">
+                      Margin="180,5,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top">
                         <materialDesign:PackIcon 
                             Kind="Car"
                             Height="15" 
-                            Width="15" Margin="-118,-26,0,0" />
+                            Width="15"  />
                     </Border>
 
 
                     <Label
                         FontSize="8"
                         Content="Car Info"
-                        Margin="205,2,0,0"
+                        Margin="200,0,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
@@ -139,7 +141,7 @@
                         FontSize="8"
                         Text="Opel Astra 99-XX-999"
                         Width="105"
-                        Margin="210,18,0,0"
+                        Margin="205,18,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -152,18 +154,19 @@
                       Height="15" 
                       Width="15" 
                       Padding="0,0,0,0"
-                      Margin="435,15,0,17"
-                      HorizontalAlignment="Left">
+                      Margin="180,45,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top">
                         <materialDesign:PackIcon 
                             Kind="CurrencyUsd"
                             Height="15" 
-                      Width="15" Margin="-256,13,0,-13" />
+                            Width="15"  />
                     </Border>
 
                     <Label
                         FontSize="8"
                         Content="Payment"
-                        Margin="203,42,0,0"
+                        Margin="200,42,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
@@ -176,7 +179,7 @@
                         FontSize="8"
                         Text="1.50"
                         Width="50"
-                        Margin="210,61,0,0"
+                        Margin="205,61,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -188,17 +191,18 @@
                       Height="15" 
                       Width="15" 
                       Padding="0,0,0,0"
-                      Margin="300,34,0,36"
-                      HorizontalAlignment="Left">
+                      Margin="340,5,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top">
                         <materialDesign:PackIcon 
                             Kind="AccountCircle"
                             Height="15" 
-                            Width="15" Margin="40,-25,-40,0" />
+                            Width="15"  />
                     </Border>
                     <Label
                         FontSize="8"
                         Content="Driver Name"
-                        Margin="359,2,0,0"
+                        Margin="360,0,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
@@ -220,17 +224,18 @@
                       Height="15" 
                       Width="15" 
                       Padding="0,0,0,0"
-                      Margin="300,70,0,0"
-                      HorizontalAlignment="Left">
+                      Margin="340,45,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top">
                         <materialDesign:PackIcon 
                             Kind="AccountCircle"
                             Height="15" 
-                            Width="15" Margin="39,-21,-39,0" />
+                            Width="15" />
                     </Border>
                     <Label
                         FontSize="8"
                         Content="Driver Surname"
-                        Margin="359,42,0,0"
+                        Margin="360,42,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
@@ -251,8 +256,8 @@
                     <TextBlock                        
                         FontSize="11"
                         Text="Route Distance "
-                        Width="110"
-                        Margin="435,6,-15,0"
+                        Width="80"
+                        Margin="435,5,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -262,13 +267,14 @@
                     <TextBlock   
                         FontSize="15"
                         Text="🡳 "
-                        Width="110"
+                        Width="20"
                         Margin="462,21,-35,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Top" Height="24">
+                        VerticalAlignment="Top" 
+                        Height="24">
                     </TextBlock>
                     <TextBlock
                         

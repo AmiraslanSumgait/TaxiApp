@@ -12,9 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,6 +45,7 @@ namespace TaxiApp.ViewModels
         public RelayCommandMain MinimizeAppCommand { get; set; }
         public RelayCommandMain MaximizeAppCommand { get; set; }
         public RelayCommandMain InfoDestinationCommand { get; set; }
+        public RelayCommandMain RideHistoryCommand { get; set; }
         public ObservableCollection<Driver> Drivers { get; set; } = new ObservableCollection<Driver>();
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -103,6 +106,12 @@ namespace TaxiApp.ViewModels
         private Graphic _graphicTaxi1 = new Graphic();
         private Graphic _graphicTaxi2 = new Graphic();
         private Graphic _graphicTaxi3 = new Graphic();
+
+        private LocatorTask _geocoder;
+        private readonly Uri _serviceUri = new Uri("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+        IReadOnlyList<GeocodeResult> resultAdresses;
+        public Ridehistory RideHistory { get; set; }
+        public List<Ridehistory> RideHistories { get; set; } = new List<Ridehistory>();
         //-----------------------------------------------------------------
         //----------------------------------------------------------------------
 
@@ -126,6 +135,9 @@ namespace TaxiApp.ViewModels
         {
             MainView = mainView;
             Initialize();
+            var text = File.ReadAllText("RideHistory.json");
+            RideHistories = JsonSerializer.Deserialize<List<Ridehistory>>(text);
+
             _graphicTaxi1.Geometry = _taxi1;
             _graphicTaxi1.Symbol = taxiSymbol;
             _graphicTaxi2.Geometry = _taxi2;
@@ -208,6 +220,15 @@ namespace TaxiApp.ViewModels
                action => {
                    MainView.InfoUcPanel.UserControl.Visibility = Visibility.Visible;
                    MainView.InfoUcPanel.UserControl.IsEnabled = true;
+               },
+               pre => true
+               );
+            RideHistoryCommand = new RelayCommandMain(
+               action =>
+               {
+                   RideHistory ridehistory = new RideHistory();
+                   ridehistory.RideHistories = RideHistories;
+                   ridehistory.Show();
                },
                pre => true
                );
@@ -304,7 +325,11 @@ namespace TaxiApp.ViewModels
                     ResetState();
                     _routeAheadGraphic.Geometry = null;
                 }
-
+                _geocoder = await LocatorTask.CreateAsync(_serviceUri);
+                resultAdresses = await _geocoder.ReverseGeocodeAsync(e.Location);
+                MainView.InfoUcPanel.txtB_Destination.Text = resultAdresses.First().Label;
+                resultAdresses = await _geocoder.ReverseGeocodeAsync(MainView.MyMapView.LocationDisplay.Location.Position);
+                MainView.InfoUcPanel.txtB_YourLocation.Text = resultAdresses.First().Label;
                 await HandleTap(e.Location);
             }
             catch (Exception ex)
@@ -312,8 +337,11 @@ namespace TaxiApp.ViewModels
                 MessageBox.Show("Error", ex.Message);
             }
         }
-        private void Initialize()
+        private async void Initialize()
         {
+            _geocoder = await LocatorTask.CreateAsync(_serviceUri);
+            resultAdresses = await _geocoder.ReverseGeocodeAsync(MainView.MyMapView.LocationDisplay.Location.Position);
+            MainView.InfoUcPanel.txtB_YourLocation.Text = resultAdresses.First().Label;
             try
             {
                 // Add event handler for when this sample is unloaded.
@@ -362,26 +390,32 @@ namespace TaxiApp.ViewModels
             {
                 //GraphicsOverlay graphicsOverlay = this.GraphicsOverlays.FirstOrDefault();
                 //graphicsOverlay.Graphics.Clear();
-                LocatorTask locatorTask = new LocatorTask(new Uri("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"));
+                _geocoder = new LocatorTask(_serviceUri);
                 // Define geocode parameters: limit the results to one and get all attributes.
                 GeocodeParameters geocodeParameters = new GeocodeParameters();
                 geocodeParameters.ResultAttributeNames.Add("*");
                 geocodeParameters.MaxResults = 1;
                 geocodeParameters.OutputSpatialReference = spatialReference;
-                IReadOnlyList<GeocodeResult> results = await locatorTask.GeocodeAsync(address, geocodeParameters);
-                GeocodeResult geocodeResult = results.FirstOrDefault();
+                resultAdresses = await _geocoder.GeocodeAsync(address, geocodeParameters);
+                GeocodeResult geocodeResult = resultAdresses.FirstOrDefault();
                 if (geocodeResult == null) { throw new Exception("No matches found."); }
-                SimpleMarkerSymbol markerSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Circle, System.Drawing.Color.Green, 15);
-                Graphic markerGraphic = new Graphic(geocodeResult.DisplayLocation, geocodeResult.Attributes, markerSymbol);
+
+                Graphic markerGraphic = new Graphic(geocodeResult.DisplayLocation, geocodeResult.Attributes);
                 Marker = markerGraphic;
                 // Create a graphic to display the result address label.
                 TextSymbol textSymbol = new TextSymbol(geocodeResult.Label, System.Drawing.Color.Red, 18, Esri.ArcGISRuntime.Symbology.HorizontalAlignment.Center, Esri.ArcGISRuntime.Symbology.VerticalAlignment.Bottom);
                 Graphic textGraphic = new Graphic(geocodeResult.DisplayLocation, textSymbol);
 
+                // InfoUC Destionation added text
+                MainView.InfoUcPanel.txtB_Destination.Text = geocodeResult.Label;
+                resultAdresses = await _geocoder.ReverseGeocodeAsync(MainView.MyMapView.LocationDisplay.Location.Position);
+                MainView.InfoUcPanel.txtB_YourLocation.Text = resultAdresses.First().Label;
+
                 // Add the location and label graphics to the graphics overlay.
-                // routeAndStopsOverlay.Graphics.Add(markerGraphic);
+                routeAndStopsOverlay.Graphics.Add(markerGraphic);
                 routeAndStopsOverlay.Graphics.Add(textGraphic);
                 addressLocation = geocodeResult.DisplayLocation;
+
             }
             catch (Exception ex)
             {
@@ -473,7 +507,16 @@ namespace TaxiApp.ViewModels
 
         private void StartNavigation()
         {
+            RideHistory = new Ridehistory
+            {
+                Destination = MainView.InfoUcPanel.txtB_Destination.Text,
+                YourLocation = MainView.InfoUcPanel.txtB_YourLocation.Text,
+                Payment = Convert.ToDouble(MainView.InfoUcPanel.txtB_Payment.Text),
+                Date = DateTime.Now
+            };
 
+            RideHistories.Add(RideHistory);
+            JsonService.WriteToJsonFile(RideHistories, "RideHistory.json");
             // MessageBox.Show(.ToString());
             foreach (var driver in Drivers)
             {
@@ -564,6 +607,9 @@ namespace TaxiApp.ViewModels
                     {
                         // Stop the simulated location data source.
                         MainView.MyMapView.LocationDisplay.DataSource.StopAsync();
+                        MainView.MyMapView.LocationDisplay.DataSource.StopAsync();
+                        MainView.InfoUcPanel.txtB_YourLocation.Text = MainView.InfoUcPanel.txtB_Destination.Text;
+                        MainView.InfoUcPanel.txtB_Destination.Text = null;
                     });
                 }
             }

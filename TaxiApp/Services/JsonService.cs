@@ -14,6 +14,7 @@ namespace TaxiApp.Services
         {
             var options = new JsonSerializerOptions(); 
             options.WriteIndented = true;
+            options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
             var textJson = JsonSerializer.Serialize(obj, options);
             File.WriteAllText(path, textJson);
         }
