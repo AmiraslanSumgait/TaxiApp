@@ -34,12 +34,8 @@ namespace TaxiApp.Views
                 if (pbInput.Value >= 100)
                 {
                     timer.Stop();
-                    NavigationWindow window = new NavigationWindow();
                     SignInPage signInPage = new SignInPage();
-                    //window.NavigationService.Navigate(signInPage);
                     this.Content = signInPage;
-                    //this.Close();
-                    //window.ShowDialog();
                 }
                 else if (pbInput.Value < 30)
                     pbInput.Value += 1;
