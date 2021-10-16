@@ -24,7 +24,7 @@ namespace TaxiApp.ViewModels
         public void ExitButtonClick()
         {
             InfoUC.UserControl.Visibility = Visibility.Collapsed;
-            ((MainView)Application.Current.MainWindow).btn_info.IsEnabled = true;
+            InfoUC.UserControl.IsEnabled = true;
         }
     }
 }

@@ -162,7 +162,7 @@ namespace TaxiApp.ViewModels
             InfoDestinationCommand = new RelayCommandMain(
                action => {
                    MainView.InfoUcPanel.UserControl.Visibility = Visibility.Visible;
-                   MainView.btn_info.IsEnabled =false;
+                   MainView.InfoUcPanel.UserControl.IsEnabled = true;
                },
                pre => true
                );
@@ -485,7 +485,7 @@ namespace TaxiApp.ViewModels
             MainView.buttonCloseMenu.Visibility = Visibility.Visible;
         }
 
-        private void ExitAppButton_Click() => MainView.Close();
+        private void ExitAppButton_Click() => Application.Current.Shutdown();
         private void MaximizeAppButton_Click()
         {
             Canvas.SetLeft(MainView.buttonOpenMenu, 13);

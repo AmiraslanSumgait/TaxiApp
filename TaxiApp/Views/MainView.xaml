@@ -17,17 +17,6 @@
         AllowsTransparency="True"
         Background="{x:Null}">
 
-    <!--Qalsin burda lazim olcag BY KENAN-->
-    <!--<Window.Triggers>
-        <EventTrigger RoutedEvent="Loaded">
-            <BeginStoryboard>
-                <Storyboard Duration="00:00:5" Storyboard.TargetProperty="Opacity">
-                    <DoubleAnimation From="0" To="1"/>
-                </Storyboard>
-            </BeginStoryboard>
-        </EventTrigger>
-    </Window.Triggers>-->
-
     <Window.Resources>
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames
@@ -245,7 +234,6 @@
                             Canvas.Top="220"
                             Canvas.Left="20">
                                 <materialDesign:PackIcon
-                                
                               Kind="History"
                               Height="30"
                               Width="40"
@@ -361,7 +349,7 @@
                                    Background="Transparent"                          
                                    Height="35"
                                    Width="35"
-                                   IsEnabled="False"
+                                   IsEnabled="{Binding IsEnabled, ElementName=InfoUcPanel}"
                                    Margin="0,100,15,0"
                                    Padding="0,0,0,0"
                                    HorizontalAlignment="Right"
@@ -369,8 +357,7 @@
                                    BorderThickness="0"
                                    x:Name="btn_info"
                                    ToolTipService.ShowDuration="5000"
-                                   Command="{Binding InfoDestinationCommand}"
-                                 >
+                                   Command="{Binding InfoDestinationCommand}">
                                     <materialDesign:PackIcon
                                       x:Name="mater"
                                      Kind="Information"
@@ -476,12 +463,10 @@
 
                                 <Grid Height="120" 
                                       Margin="0,0,0,50">
-                                    <local:InfoDestinationUC 
+                                    <local:InfoDestinationUC
                                       HorizontalAlignment="Center"
                                       Margin="40,0,0,0"
-                                      x:Name="InfoUcPanel"
-                                      
-                                    >
+                                      x:Name="InfoUcPanel">
                                     </local:InfoDestinationUC>
                                 </Grid>
 
@@ -510,6 +495,7 @@
                         </Grid>
                     </Grid>
                 </Border>
+                <Frame x:Name="frame"/>
             </Grid>
         </Grid>
     </materialDesign:Card>

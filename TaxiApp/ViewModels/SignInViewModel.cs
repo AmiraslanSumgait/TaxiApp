@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Navigation;
 using System.Windows.Threading;
 using TaxiApp.Command;
 using TaxiApp.Data;
@@ -38,8 +39,7 @@ namespace TaxiApp.ViewModels
             ExitCommand = new RelayCommandMain(
                action =>
                {
-                   Window window = (Window)SignInPage.Parent;
-                   window.Close();
+                   Application.Current.Shutdown();
                },
                pre => true
                );
@@ -48,7 +48,7 @@ namespace TaxiApp.ViewModels
                 action =>
                 {
                     SignUpPage signUpPage = new SignUpPage();
-                    SignInPage.NavigationService.Navigate(signUpPage);
+                    SignInPage.signUpFrame.Navigate(signUpPage);
                 },
                 pre => true);
 
@@ -67,8 +67,8 @@ namespace TaxiApp.ViewModels
                         timer.Tick += (sender, args) =>
                         {
                             timer.Stop();
+                            var window = Application.Current.MainWindow as InputScreen;
                             MainView mainView = new MainView();
-                            Window window = (Window)SignInPage.Parent;
                             window.Close();
                             mainView.ShowDialog();
                         };
@@ -89,12 +89,13 @@ namespace TaxiApp.ViewModels
                 pre => true);
         }
 
+        #region Create notifier
         Notifier notifier = new Notifier(cfg =>
         {
             cfg.PositionProvider = new WindowPositionProvider(
                 parentWindow: Application.Current.MainWindow,
                 corner: Corner.TopRight,
-                offsetX: 415,
+                offsetX: 310,
                 offsetY: 5);
 
             cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
@@ -103,6 +104,7 @@ namespace TaxiApp.ViewModels
 
             cfg.Dispatcher = Application.Current.Dispatcher;
         });
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] string propertyname = null)

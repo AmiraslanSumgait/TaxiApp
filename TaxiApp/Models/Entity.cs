@@ -8,6 +8,6 @@ namespace TaxiApp.Models
 {
     public class Entity
     {
-        public int Id { get; set; }
+        public Guid Guid { get; set; } = Guid.NewGuid();
     }
 }

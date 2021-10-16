@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\user\source\repos\TaxiApp\AdminPanel\App.xaml
-4-636202840
+4-954367169
 
-8507230237
-122-974886962
-Views\DriversListPage.xaml;Views\DriverUserControl.xaml;Views\MainView.xaml;Views\RoutePrice.xaml;
+15-1260756720
+1251911929663
+Views\AddDriverView.xaml;Views\DriversListPage.xaml;Views\MainView.xaml;Views\RoutePrice.xaml;
 
 False
 

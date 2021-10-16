@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaxiApp.Models
 {
-    public class Driver
+    public class Driver : Entity
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -14,5 +14,6 @@ namespace TaxiApp.Models
         public string CarNumber { get; set; }
         public int Rating { get; set; }
         public double Balance { get; set; }
+        
     }
 }

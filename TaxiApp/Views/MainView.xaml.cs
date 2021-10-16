@@ -38,5 +38,11 @@ namespace TaxiApp.Views
             MainViewModel = new MainViewModel(this);
 
         }
+
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage();
+        //    frame.Navigate(forgotPasswordPage);
+        //}
     }
 }

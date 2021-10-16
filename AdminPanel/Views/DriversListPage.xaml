@@ -3,23 +3,37 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:hc="https://handyorg.github.io/handycontrol"
       xmlns:local="clr-namespace:AdminPanel.Views"
       mc:Ignorable="d"
-      Title="DriversListPage" Height="530" Width="654"  >
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DriversListPage">
+
     <Page.Resources>
         <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
                         <Border Name="_Border"
-                                Padding="2"
-                                SnapsToDevicePixels="true">
+                                Padding="5"
+                                Margin="3"
+                                SnapsToDevicePixels="true"
+                                CornerRadius="5">
                             <ContentPresenter />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="true">
-                                <Setter TargetName="_Border" Property="Background" Value="#303036"/>
-                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter TargetName="_Border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="#3AAED8" Offset="0"></GradientStop>
+                                            <GradientStop Color="#BBDEF0" Offset="1"></GradientStop>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Foreground" Value="Snow"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -27,85 +41,132 @@
             </Setter>
         </Style>
     </Page.Resources>
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="0.5*"></RowDefinition>
             <RowDefinition Height="5*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="2">
-                <!--<TextBox BorderBrush="Black" BorderThickness="2" Margin="0,26,0,9"/>-->
-            </Grid>
-        </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.5*"></ColumnDefinition>
-                <ColumnDefinition Width="2.5*"></ColumnDefinition>
-                <ColumnDefinition Width="3.5*"></ColumnDefinition>
-                <ColumnDefinition Width="3.5*"></ColumnDefinition>
-                <ColumnDefinition Width="2.5*"></ColumnDefinition>
-                <ColumnDefinition Width="2.5*"></ColumnDefinition>
-                <ColumnDefinition Width="2.5*"></ColumnDefinition>
-                <ColumnDefinition Width="2.5*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid>
-                <TextBlock Text="Name" FontSize="15" FontWeight="Bold"></TextBlock>
+            <Grid Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox 
+                        x:Name="txbSearch"
+                        HorizontalAlignment="Left"
+                        Margin="15,10,0,0"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource MaterialDesignTextBoxBase}"
+                        VerticalContentAlignment="Center"
+                        Width="200"
+                        Height="40"
+                        BorderBrush="#769DF7"
+                        Background="White"
+                        FontSize="14"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        materialDesign:TextFieldAssist.UnderlineCornerRadius="15">
+                        <materialDesign:HintAssist.Hint>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Search driver" Padding="5 0 0 0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </materialDesign:HintAssist.Hint>
+                    </TextBox>
+
+                </StackPanel>
             </Grid>
             <Grid Grid.Column="1">
-                <TextBlock Text="Surname" FontSize="15" FontWeight="Bold"></TextBlock>
+                <materialDesign:Badged
+                    Badge="{materialDesign:PackIcon Kind=AccountMultiplePlusOutline}"
+                    BadgeColorZoneMode="PrimaryLight" 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    BadgeBackground="LightGreen"
+                    Margin="0 0 15 0">
+                    <Button
+                        BorderBrush="Transparent"
+                        Background="LightBlue"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Content="ADD DRIVER"
+                        Command="{Binding AddDriverCommand}"
+                        Style="{StaticResource MaterialDesignRaisedSecondaryLightButton}"/>
+                </materialDesign:Badged>
             </Grid>
-            <Grid Grid.Column="2">
-                <TextBlock Text="Car Number" FontSize="16" FontWeight="Bold"></TextBlock>
-            </Grid>
-            <Grid Grid.Column="3">
-                <TextBlock Text="Car Model" FontSize="16" FontWeight="Bold"></TextBlock>
-             
-            </Grid>
-            <Grid Grid.Column="4">
-                <TextBlock Text="Balance" FontSize="15" FontWeight="Bold"></TextBlock>
-            </Grid>
-            <Grid Grid.Column="5">
-                <TextBlock Text="Rating" FontSize="15" FontWeight="Bold"></TextBlock>
-            </Grid>
-            <Grid Grid.Column="6">
-                <TextBlock Text="Status" FontSize="15" FontWeight="Bold"></TextBlock>
-            </Grid>
-            <Grid Grid.Column="7">
-                <TextBlock Text="Action" FontSize="15" FontWeight="Bold"></TextBlock>
-            </Grid>
+
         </Grid>
-        <ListBox Grid.Row="2" ItemsSource="{Binding Drivers}" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"  >
-            <!--<ListBox.Style>
-                <Style>
-                    <Style.Triggers>
-                        <EventTrigger RoutedEvent="Selector.SelectionChanged">
-                            <BeginStoryboard>
-                                <Storyboard >
-                                    <DoubleAnimation From="0" To="1" Duration="0:0:2" Storyboard.TargetProperty="Opacity" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ListBox.Style>-->
+        <Grid Grid.Row="1" Margin="7 0 7 0">
             
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel></StackPanel>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <local:DriverUserControl >
-                    </local:DriverUserControl>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            <ScrollViewer>
+                <ListBox Name="lbDrivers"
+                         ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                         ItemsSource="{Binding Drivers}" 
+                         ItemContainerStyle="{StaticResource _ListBoxItemStyle}">
+                    <ListBox.Template>
+                        <ControlTemplate>
+                            <DockPanel>
+                                <Grid Height="30" DockPanel.Dock="Top" Background="#6C756B">
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Padding="5 0 0 0">NAME</TextBlock>
+                                    <TextBlock Grid.Column="1">SURNAME</TextBlock>
+                                    <TextBlock Grid.Column="2">CAR NUMBER</TextBlock>
+                                    <TextBlock Grid.Column="3">CAR MODEL</TextBlock>
+                                    <TextBlock Grid.Column="4">BALANCE</TextBlock>
+                                    <TextBlock Grid.Column="5">RATING</TextBlock>
+                                    <TextBlock Grid.Column="6">STATUS</TextBlock>
+                                    <TextBlock Grid.Column="7" HorizontalAlignment="Center" Margin="0 0 5 0">ACTION</TextBlock>
+                                </Grid>
+                                <ItemsPresenter></ItemsPresenter>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </ListBox.Template>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontSize="13" Text="{Binding Name}" Grid.Column="0"></TextBlock>
+                                <TextBlock FontSize="13" Padding="5 0 0 0" Text="{Binding Surname}" Grid.Column="1"></TextBlock>
+                                <TextBlock FontSize="13"  Padding="5 0 0 0" Text="{Binding CarNumber}" Grid.Column="2"></TextBlock>
+                                <TextBlock FontSize="13"  Padding="5 0 0 0" Text="{Binding CarModel}" Grid.Column="3"></TextBlock>
+                                <TextBlock FontSize="13"  Padding="15 0 0 0" Text="{Binding Balance}" Grid.Column="4"></TextBlock>
+                                <TextBlock FontSize="13"  Padding="20 0 0 0" Text="{Binding Rating}" Grid.Column="5"></TextBlock>
+                                <materialDesign:PackIcon Kind="CheckDecagram" Foreground="Green" Margin="17 0 0 0" Grid.Column="6"/>
+                                <Button x:Name="btnRemove" Tag="{Binding Guid}" Background="Transparent" BorderThickness="1" BorderBrush="LightCoral" 
+                                        Command="{Binding DataContext.RemoveDriverCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" Grid.Column="7">
+                                    <materialDesign:PackIcon Kind="AccountOffOutline" Foreground="Red" />
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page>

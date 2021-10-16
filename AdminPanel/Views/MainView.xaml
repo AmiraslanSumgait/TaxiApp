@@ -4,45 +4,76 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdminPanel.Views"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Title="MainView" Height="600" Width="900" MouseLeftButtonDown="Window_MouseLeftButtonDown"   >
+        Title="MainView" Height="600" Width="1100" MinHeight="600" MinWidth="1000">
     <Window.Resources>
-     
-        <!--<Style x:Key="myLBStyle" TargetType="{x:Type ListBoxItem}">
-            <Style.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
-                             Color="Transparent"/>
-            </Style.Resources>
-        </Style>-->
+        <Style x:Key="menuItemIcons" TargetType="materialDesign:PackIcon">
+            <Setter Property="Foreground" Value="#929496"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="menuItemText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#c4c1b6"/>
+            <Setter Property="Height" Value="31"/>
+            <Setter Property="FontFamily" Value="Cambria"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="menuItemStackpanel" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Height" Value="51"/>
+            <Setter Property="Width" Value="244"/>
+        </Style>
+        <Style TargetType="Window">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding gridLeftMenu}">
+
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard Duration="00:00:10" Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation From="0" To="1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+    
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"></ColumnDefinition>
-            <ColumnDefinition Width="8*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="8.8*"></RowDefinition>
+            <RowDefinition/>
+            <RowDefinition Height="8.8*"/>
         </Grid.RowDefinitions>
 
-        <Frame Grid.Column="1" Grid.Row="1" x:Name="Frame" NavigationUIVisibility="Hidden">
-        </Frame>
-        <Grid  Background="#373e43">
+        <Frame Grid.Column="1" Grid.Row="1" x:Name="Frame" NavigationUIVisibility="Hidden"/>
+
+        <Grid Background="#373e43">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="8*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+
             <Grid>
-                <Image HorizontalAlignment="Center" Canvas.Top="2" Canvas.Left="4" VerticalAlignment="Center" Source="pack://application:,,,/AdminPanel;component/Images/taxiapp.png"/>
+                <Image HorizontalAlignment="Center" Width="40" Height="auto" Canvas.Top="2" Canvas.Left="4" VerticalAlignment="Center" Source="pack://application:,,,/AdminPanel;component/Images/taxiapp.png"/>
             </Grid>
             <Grid Grid.Column="1" >
                 <TextBlock 
-                                    Text="Taxi App" 
-                                    Padding="0 5 0 0" 
-                                    FontSize="34" 
-                                    FontWeight="Bold"
-                                    FontFamily="Leelawadee UI">
+                    Text="Taxi App" 
+                    Padding="0 5 0 0" 
+                    FontSize="28" 
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    FontFamily="Leelawadee UI">
                     <TextBlock.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1"  StartPoint="0.5,0">
                             <GradientStop Color="#FF4CBF9A"/>
@@ -52,75 +83,117 @@
                 </TextBlock>
             </Grid>
         </Grid>
-        <Grid Grid.Column="1" Background="#373e43" >
+
+        <Grid Grid.Column="1" Background="#373e43">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="9.5*"></ColumnDefinition>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1">
-                <StackPanel Orientation="Horizontal">
+            <Grid Grid.Column="1" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 20 0">
                     <materialDesign:PackIcon Kind="Account" Foreground="#c4c1b6" Height="50" Width="60"/>
                     <TextBlock Padding="0,15" FontSize="20" Text="Admin" Foreground="#c4c1b6" FontFamily="Segoe UI Black"/>
-
                 </StackPanel>
 
             </Grid>
         </Grid>
+
         <Grid Grid.Row="1" Background="#373e43">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="5*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <StackPanel HorizontalAlignment="Left">
-                <materialDesign:PackIcon Foreground="#929496"  Kind="ViewDashboard"  Height="31" Width="50"  />
-                <materialDesign:PackIcon Kind="AccountBox" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="Car" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="Account" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="CircleEditOutline" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="CarEstate" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="Cash" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="FileDocumentEdit" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="Star" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="MapMarker" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="MapMarkerRadius" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="FileMultiple" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="Barcode" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="BellRing" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="Cog" Height="31" Width="50" Foreground="#929496" />
-                <materialDesign:PackIcon Kind="ExitToApp" Height="31" Width="50" Foreground="#929496" />
-            </StackPanel>
-            <ListBox Grid.Column="1" Background="#373e43" BorderThickness="0"  >
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True" >
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="Foreground" Value="Red" />
-                            </Trigger>
-                        </Style.Triggers>
-                        <Style.Resources>
-                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                        </Style.Resources>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBoxItem  Height="31" Content="Dashboard" Foreground="#c4c1b6" FontSize="20" FontFamily="Cambria" ></ListBoxItem>
-                <ListBoxItem x:Name="Drivers" FontFamily="Cambria" Height="31" Content="Drivers" MouseDoubleClick="Drivers_MouseDoubleClick"    Foreground="#c4c1b6" FontSize="20" ></ListBoxItem>
-                <ListBoxItem x:Name="Rides" FontFamily="Cambria" Height="31" Content="Rides"   Foreground="#c4c1b6" FontSize="20" MouseDoubleClick="Rides_MouseDoubleClick"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31" Content="Riders"     Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31" Content="Manual Ride Booking" Foreground="#c4c1b6" FontSize="18"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31" Content="Vehicle Type" Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31" Content="Earning Reports" Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31" Content="Manage Documents" Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31" Content="Rating and Reviews" Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31"  Content="Drivers Location" Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31"  Content="Track Users" Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31"  Content="Statement" Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31"  Content="Promo Code" Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31"  Content="Push Notification" Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31"  Content="App Settings" Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-                <ListBoxItem FontFamily="Cambria" Height="31"  Content="Exit App" Foreground="#c4c1b6" FontSize="20"></ListBoxItem>
-            </ListBox>
+            <Grid Margin="0 7 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <ListBoxItem BorderThickness="0" VerticalContentAlignment= "Center">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ViewDashboard" Style="{StaticResource menuItemIcons}"/>
+                            <TextBlock Text="Dashboard" Style="{StaticResource menuItemText}"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center" MouseDoubleClick="Drivers_MouseDoubleClick">
+                        <StackPanel Style="{StaticResource menuItemStackpanel}">
+                            <materialDesign:PackIcon Kind="AccountBox" Style="{StaticResource menuItemIcons}"/>
+                            <TextBlock Text="Drivers" Style="{StaticResource menuItemText}"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center" MouseDoubleClick="Rides_MouseDoubleClick">
+                        <StackPanel Style="{StaticResource menuItemStackpanel}">
+                            <materialDesign:PackIcon Kind="Car" Style="{StaticResource menuItemIcons}"/>
+                            <TextBlock Text="Rides" Style="{StaticResource menuItemText}"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center">
+                        <StackPanel Style="{StaticResource menuItemStackpanel}">
+                            <materialDesign:PackIcon Kind="Account" Style="{StaticResource menuItemIcons}"/>
+                            <TextBlock Text="Riders" Style="{StaticResource menuItemText}"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center">
+                        <StackPanel Style="{StaticResource menuItemStackpanel}">
+                            <materialDesign:PackIcon Kind="CarEstate" Style="{StaticResource menuItemIcons}"/>
+                            <TextBlock Text="Vehicle Type" Style="{StaticResource menuItemText}"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </Grid>
+                <Grid Grid.Row="5">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center">
+                        <StackPanel Style="{StaticResource menuItemStackpanel}">
+                            <materialDesign:PackIcon Kind="Star" Style="{StaticResource menuItemIcons}"/>
+                            <TextBlock Text="Rating and Reviews" Style="{StaticResource menuItemText}"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </Grid>
+                <Grid Grid.Row="6">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center">
+                        <StackPanel Style="{StaticResource menuItemStackpanel}">
+                            <materialDesign:PackIcon Kind="MapMarkerRadius" Style="{StaticResource menuItemIcons}"/>
+                            <TextBlock Text="Track Users" Style="{StaticResource menuItemText}"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </Grid>
+                <Grid Grid.Row="7">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center">
+                        <StackPanel Style="{StaticResource menuItemStackpanel}">
+                            <materialDesign:PackIcon Kind="BellRing" Style="{StaticResource menuItemIcons}"/>
+                            <TextBlock Text="Push Notification" Style="{StaticResource menuItemText}"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </Grid>
+                <Grid Grid.Row="8">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center">
+                        <StackPanel Style="{StaticResource menuItemStackpanel}">
+                            <materialDesign:PackIcon Kind="Cog" Style="{StaticResource menuItemIcons}"/>
+                            <TextBlock Text="App Settings" Style="{StaticResource menuItemText}"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </Grid>
+                <Grid Grid.Row="9">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center">
+                        <StackPanel Style="{StaticResource menuItemStackpanel}">
+                            <materialDesign:PackIcon Kind="ExitToApp" Style="{StaticResource menuItemIcons}"/>
+                            <TextBlock Text="Exit App" Style="{StaticResource menuItemText}"/>
+                        </StackPanel>
+                    </ListBoxItem>
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaxiApp.Views"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Title="InputScreen" AllowsTransparency="True" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterScreen" Height="500" Width="850">
+        Title="InputScreen" AllowsTransparency="True" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterScreen" Height="550" Width="850">
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
@@ -46,7 +46,7 @@
             </TextBlock>
 
             <Grid Grid.Row="1">
-                <Image Source="taxiBooking.png" />
+                <Image Source="pack://application:,,,/TaxiApp;component/Images/taxiBooking.png" />
             </Grid>
 
             <Grid Grid.Row="2">
