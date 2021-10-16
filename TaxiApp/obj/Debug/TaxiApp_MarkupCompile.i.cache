@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\obj\Debug\
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\
 TaxiApp
 none
 false
 DEBUG;TRACE
-C:\Users\Admin\Source\Repos\TaxiApp\TaxiApp\App.xaml
+C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\App.xaml
 7535428459
-150-801978591
+150368873991
 30-1580282446
-137-1539042579
+1371392502372
 Views\ForgotPasswordPage.xaml;Views\InfoDestinationUC.xaml;Views\InputScreen.xaml;Views\MainView.xaml;Views\RateDriverView.xaml;Views\SignInPage.xaml;Views\SignUpPage.xaml;
 
 True

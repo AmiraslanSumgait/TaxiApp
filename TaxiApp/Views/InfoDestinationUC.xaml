@@ -17,35 +17,6 @@
 
                 <Grid Width="530" Height="85">
 
-                    <TextBlock
-                        
-                        FontSize="12"
-                        Text="Route Kilometres ➔"
-                        Width="110"
-                        Margin="12,8,0,0"
-                        TextWrapping="Wrap"
-                        Foreground="Black"
-                        FontWeight="DemiBold"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-
-                    </TextBlock>
-
-                    <TextBlock
-                        
-                        x:Name="txB_km"
-                        FontSize="12"
-                        Text="2.5"
-                        Width="40"
-                        Margin="125,8,0,0"
-                        TextWrapping="Wrap"
-                        Foreground="Black"
-                        FontWeight="DemiBold"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-
-                    </TextBlock>
-
                     <Button 
                       x:Name="btn_exit"
                       Height="15" 
@@ -75,14 +46,14 @@
                         <materialDesign:PackIcon
                         Height="15"
                         Width="15"
-                        Kind="Home" 
+                        Kind="Home" Margin="-5,-30,0,0" 
                     />
                     </Border>
 
                     <Label
                         FontSize="8"
                         Content="Your Location"
-                        Margin="27,32,0,0"
+                        Margin="31,0,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
@@ -95,7 +66,7 @@
                         FontSize="8"
                         Text="Sumqayit 18 mikrorayon"
                         Width="105"
-                        Margin="31,50,0,0"
+                        Margin="31,15,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -113,26 +84,24 @@
                         <materialDesign:PackIcon 
                         Kind="MapMarker"
                         Height="15" 
-                        Width="15" />
+                        Width="15" Margin="-143,7,0,-7" />
                     </Border>
 
                     <Label
                         FontSize="8"
                         Content="Destination"
-                        Margin="170,32,0,0"
+                        Margin="25,35,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-
                     </Label>
-
                     <TextBlock
                         x:Name="txtB_Destination"
                         FontSize="8"
                         Text="Sumqayit Elmar Market"
                         Width="105"
-                        Margin="173,50,0,0"
+                        Margin="31,54,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -147,31 +116,30 @@
                       Height="15" 
                       Width="15" 
                       Padding="0,0,0,0"
-                      Margin="300,15,0,17"
+                      Margin="300,34,0,36"
                       HorizontalAlignment="Left">
                         <materialDesign:PackIcon 
                             Kind="Car"
                             Height="15" 
-                            Width="15" />
+                            Width="15" Margin="-118,-26,0,0" />
                     </Border>
+
 
                     <Label
                         FontSize="8"
                         Content="Car Info"
-                        Margin="320,32,0,0"
+                        Margin="205,2,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-
                     </Label>
-
                     <TextBlock
                         x:Name="txtB_Carmodel"
                         FontSize="8"
                         Text="Opel Astra 99-XX-999"
                         Width="105"
-                        Margin="323,50,0,0"
+                        Margin="210,18,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -189,13 +157,13 @@
                         <materialDesign:PackIcon 
                             Kind="CurrencyUsd"
                             Height="15" 
-                      Width="15" />
+                      Width="15" Margin="-256,13,0,-13" />
                     </Border>
 
                     <Label
                         FontSize="8"
                         Content="Payment"
-                        Margin="450,32,0,0"
+                        Margin="203,42,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
@@ -208,7 +176,7 @@
                         FontSize="8"
                         Text="1.50"
                         Width="50"
-                        Margin="453,50,0,0"
+                        Margin="210,61,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -216,13 +184,109 @@
                         VerticalAlignment="Top">
 
                     </TextBlock>
+                    <Border 
+                      Height="15" 
+                      Width="15" 
+                      Padding="0,0,0,0"
+                      Margin="300,34,0,36"
+                      HorizontalAlignment="Left">
+                        <materialDesign:PackIcon 
+                            Kind="AccountCircle"
+                            Height="15" 
+                            Width="15" Margin="40,-25,-40,0" />
+                    </Border>
+                    <Label
+                        FontSize="8"
+                        Content="Driver Name"
+                        Margin="359,2,0,0"
+                        Foreground="Gray"
+                        FontWeight="UltraLight"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    </Label>
+                    <TextBlock
+                        x:Name="txtB_Name"
+                        FontSize="8"
+                        Text="Nabi"
+                        Width="50"
+                        Margin="365,20,0,0"
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontWeight="DemiBold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    </TextBlock>
+                    <Border 
+                      Height="15" 
+                      Width="15" 
+                      Padding="0,0,0,0"
+                      Margin="300,70,0,0"
+                      HorizontalAlignment="Left">
+                        <materialDesign:PackIcon 
+                            Kind="AccountCircle"
+                            Height="15" 
+                            Width="15" Margin="39,-21,-39,0" />
+                    </Border>
+                    <Label
+                        FontSize="8"
+                        Content="Driver Surname"
+                        Margin="359,42,0,0"
+                        Foreground="Gray"
+                        FontWeight="UltraLight"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    </Label>
+                    <TextBlock
+                        x:Name="txtB_Surname"
+                        FontSize="8"
+                        Text="Nabili"
+                        Width="50"
+                        Margin="365,61,0,0"
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontWeight="DemiBold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    </TextBlock>
+                    <TextBlock                        
+                        FontSize="11"
+                        Text="Route Distance "
+                        Width="110"
+                        Margin="435,6,-15,0"
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontWeight="DemiBold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    </TextBlock>
+                    <TextBlock   
+                        FontSize="15"
+                        Text="🡳 "
+                        Width="110"
+                        Margin="462,21,-35,0"
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontWeight="DemiBold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" Height="24">
+                    </TextBlock>
+                    <TextBlock
+                        
+                        x:Name="txB_km"
+                        FontSize="11"
+                        Text=""
+                        Width="85"
+                        Margin="445,49,0,0"
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontWeight="DemiBold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" Height="34">
 
+                    </TextBlock>
                 </Grid>
 
             </Viewbox>
         </Grid>
     </materialDesign:Card>
-
-
-
-    </UserControl>
+</UserControl>

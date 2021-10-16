@@ -28,7 +28,7 @@
             </Label>
 
             <TextBlock
-                Text="Emiraslan Aliyev"
+                Text="Amiraslan Aliyev"
                 Width="150"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
