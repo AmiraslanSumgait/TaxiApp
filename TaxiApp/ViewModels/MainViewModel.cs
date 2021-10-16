@@ -11,15 +11,18 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaxiApp.Command;
 using TaxiApp.Data;
+using TaxiApp.Models;
 using TaxiApp.Services;
 using TaxiApp.Views;
 namespace TaxiApp.ViewModels
@@ -42,6 +45,7 @@ namespace TaxiApp.ViewModels
         public RelayCommandMain MinimizeAppCommand { get; set; }
         public RelayCommandMain MaximizeAppCommand { get; set; }
         public RelayCommandMain InfoDestinationCommand { get; set; }
+        public RelayCommandMain RideHistoryCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -95,13 +99,23 @@ namespace TaxiApp.ViewModels
         private Uri _personUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/4bb29cac50bd46b3b8f63edb949a0db6/data");
 
         private readonly Uri _routingUri = new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
-        private readonly MapPoint _taxi1 = new MapPoint( 49.846275, 40.414404, SpatialReferences.Wgs84);
+        private readonly MapPoint _taxi1 = new MapPoint(49.71113, 40.5541, SpatialReferences.Wgs84);
         private readonly MapPoint _taxi2 = new MapPoint(49.726979, 40.478204,   SpatialReferences.Wgs84);
         //------------------------------------------------------------------
         private readonly MapPoint _conventionCenter = new MapPoint(49.651630, 40.609029, SpatialReferences.Wgs84);
         //----------------------------------------------------------------------
+
+        //////////////////////////////////////////////////////////////////////////////////////
+        private LocatorTask _geocoder;
+        private readonly Uri _serviceUri = new Uri("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+        Graphic nearestTaxi = new Graphic();
+        IReadOnlyList<GeocodeResult> resultAdresses;
+        public Ridehistory RideHistory { get; set; }
+        public List<Ridehistory> RideHistories { get; set; } = new List<Ridehistory>();
         
-        public MainView MainView { get; set; }
+        /////////////////////////////////////////////////////////////////////////////////////
+
+        public MainView MainView { get; set; } 
         PictureMarkerSymbol locationSymbol = new PictureMarkerSymbol(_locationUri)
         {
             Height = 27,
@@ -122,7 +136,9 @@ namespace TaxiApp.ViewModels
             
             MainView = mainView;
             Initialize();
-           
+            var text = File.ReadAllText("RideHistory.json");
+            RideHistories = JsonSerializer.Deserialize<List<Ridehistory>>(text);
+            
             mainView.gridHead.MouseLeftButtonDown += Grid_MouseLeftButtonDown;
             StartNavigationCommand = new RelayCommandMain(
                 action => { StartNavigation(); },
@@ -136,7 +152,7 @@ namespace TaxiApp.ViewModels
                 action => { SearchAddressButton_Click(); },
                 pre => true
             );
-
+            
             MenuOpenCommand = new RelayCommandMain(
                 action => { OpenMenuButton_Click(); },
                 pre => true
@@ -168,6 +184,15 @@ namespace TaxiApp.ViewModels
                },
                pre => true
                );
+            RideHistoryCommand = new RelayCommandMain(
+                action => 
+                {
+                    RideHistory ridehistory = new RideHistory();
+                    ridehistory.RideHistories = RideHistories;
+                    ridehistory.Show();
+                },
+                pre => true
+                );
 
             MainView.DataContext = this;
             gvtapped = new RelayCommand<Esri.ArcGISRuntime.UI.Controls.GeoViewInputEventArgs>(Ongvtapped);
@@ -176,13 +201,14 @@ namespace TaxiApp.ViewModels
             MainView.MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Recenter;
             MainView.MyMapView.LocationDisplay.CourseSymbol = new PictureMarkerSymbol(_taxiUri);
             MainView.MyMapView.LocationDisplay.DefaultSymbol = new PictureMarkerSymbol(_personUri);
+            
             SetupMap();
         }
         
         GraphicsOverlay routeAndStopsOverlay = new GraphicsOverlay();
         public void SetupMap()
         {
-
+            
             this.GraphicsOverlays = new GraphicsOverlayCollection
             {
                routeAndStopsOverlay
@@ -199,11 +225,17 @@ namespace TaxiApp.ViewModels
             ++count;
             try
             {
+                
                 if (count != 1)
                 {
                     ResetState();
                     _routeAheadGraphic.Geometry = null;
                 }
+                _geocoder = await LocatorTask.CreateAsync(_serviceUri);
+                resultAdresses = await _geocoder.ReverseGeocodeAsync(e.Location);
+                MainView.InfoUcPanel.txtB_Destination.Text = resultAdresses.First().Label;
+                resultAdresses = await _geocoder.ReverseGeocodeAsync(MainView.MyMapView.LocationDisplay.Location.Position);
+                MainView.InfoUcPanel.txtB_YourLocation.Text = resultAdresses.First().Label;
 
                 await HandleTap(e.Location);
             }
@@ -211,20 +243,27 @@ namespace TaxiApp.ViewModels
             {
                 MessageBox.Show("Error", ex.Message);
             }
+            
         }
-        private void Initialize()
+        
+        private async void Initialize()
         {
+
+            _geocoder = await LocatorTask.CreateAsync(_serviceUri);
+            resultAdresses = await _geocoder.ReverseGeocodeAsync(MainView.MyMapView.LocationDisplay.Location.Position);
+            MainView.InfoUcPanel.txtB_YourLocation.Text = resultAdresses.First().Label;
             try
             {
                 // Add event handler for when this sample is unloaded.
                 MainView.Unloaded += SampleUnloaded;
-
+               
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error");
             }
         }
+
         private async void SearchAddressButton_Click()
         {
             if (MainView.AddressTextBox.Text != string.Empty)
@@ -240,6 +279,7 @@ namespace TaxiApp.ViewModels
                     _endGraphic.Geometry = Marker.Geometry;
                     _startGraphic.Geometry = MainView.MyMapView.LocationDisplay.Location.Position;
                     await FindRoute();
+                    
                     // If a result was found, center the display on it.
                     if (addressPoint != null)
                     {
@@ -254,6 +294,7 @@ namespace TaxiApp.ViewModels
             {
                 MessageBox.Show("Please enter your address destination.");
             }
+            
         }
         public Graphic Marker { get; set; }
         public async Task<MapPoint> SearchAddress(string address, SpatialReference spatialReference)
@@ -263,21 +304,26 @@ namespace TaxiApp.ViewModels
             {
                 //GraphicsOverlay graphicsOverlay = this.GraphicsOverlays.FirstOrDefault();
                 //graphicsOverlay.Graphics.Clear();
-                LocatorTask locatorTask = new LocatorTask(new Uri("https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"));
+                _geocoder= new LocatorTask(_serviceUri);
                 // Define geocode parameters: limit the results to one and get all attributes.
                 GeocodeParameters geocodeParameters = new GeocodeParameters();
                 geocodeParameters.ResultAttributeNames.Add("*");
                 geocodeParameters.MaxResults = 1;
                 geocodeParameters.OutputSpatialReference = spatialReference;
-                IReadOnlyList<GeocodeResult> results = await locatorTask.GeocodeAsync(address, geocodeParameters);
-                GeocodeResult geocodeResult = results.FirstOrDefault();
+                resultAdresses = await _geocoder.GeocodeAsync(address, geocodeParameters);
+                GeocodeResult geocodeResult = resultAdresses.FirstOrDefault();
                 if (geocodeResult == null) { throw new Exception("No matches found."); }
-                SimpleMarkerSymbol markerSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbolStyle.Circle, System.Drawing.Color.Green, 15);
-                Graphic markerGraphic = new Graphic(geocodeResult.DisplayLocation, geocodeResult.Attributes, markerSymbol);
+               
+                Graphic markerGraphic = new Graphic(geocodeResult.DisplayLocation, geocodeResult.Attributes);
                 Marker = markerGraphic;
                 // Create a graphic to display the result address label.
                 TextSymbol textSymbol = new TextSymbol(geocodeResult.Label, System.Drawing.Color.Red, 18, Esri.ArcGISRuntime.Symbology.HorizontalAlignment.Center, Esri.ArcGISRuntime.Symbology.VerticalAlignment.Bottom);
                 Graphic textGraphic = new Graphic(geocodeResult.DisplayLocation, textSymbol);
+
+                // InfoUC Destionation added text
+                MainView.InfoUcPanel.txtB_Destination.Text = geocodeResult.Label;
+                resultAdresses = await _geocoder.ReverseGeocodeAsync(MainView.MyMapView.LocationDisplay.Location.Position);
+                MainView.InfoUcPanel.txtB_YourLocation.Text = resultAdresses.First().Label;
 
                 // Add the location and label graphics to the graphics overlay.
                 routeAndStopsOverlay.Graphics.Add(markerGraphic);
@@ -322,7 +368,21 @@ namespace TaxiApp.ViewModels
         public async Task FindRoute()
         {
 
-            var stops = new[] { _graphicTaxi2,_startGraphic, _endGraphic }.Select(graphic => new Stop(graphic.Geometry as MapPoint));
+            var myCurrenLocation = MainView.MyMapView.LocationDisplay.Location.Position as MapPoint;
+            double distance = 0;
+            double distanceTemp = 100;
+            foreach (var graphic in routeAndStopsOverlay.Graphics)
+            {
+                var graphicCordinate = graphic.Geometry as MapPoint;
+                if (graphic == _startGraphic) break;
+                distance = Math.Abs(Math.Pow((myCurrenLocation.X - graphicCordinate.X), 2) + Math.Pow((myCurrenLocation.Y - graphicCordinate.Y), 2));
+                if (distanceTemp > distance)
+                {
+                    distanceTemp = distance;
+                    nearestTaxi = graphic;
+                }
+            }
+            IEnumerable<Stop> stops = new[] { nearestTaxi, _startGraphic, _endGraphic, }.Select(graphic => new Stop(graphic.Geometry as MapPoint));
 
             var routeTask = await RouteTask.CreateAsync(_routingUri);
             RouteParameters parameters = await routeTask.CreateDefaultParametersAsync();
@@ -362,7 +422,19 @@ namespace TaxiApp.ViewModels
         }
         private void StartNavigation()
         {
-            routeAndStopsOverlay.Graphics.Remove(_graphicTaxi2);
+            
+            RideHistory = new Ridehistory
+            {
+                Destination = MainView.InfoUcPanel.txtB_Destination.Text,
+                YourLocation = MainView.InfoUcPanel.txtB_YourLocation.Text,
+                Payment = Convert.ToDouble(MainView.InfoUcPanel.txtB_Payment.Text),
+                Date = DateTime.Now
+            };
+
+            RideHistories.Add(RideHistory);
+            JsonService.WriteToJsonFile(RideHistories, "RideHistory.json");
+
+            routeAndStopsOverlay.Graphics.Remove(nearestTaxi);
             MainView.InfoUcPanel.UserControl.Visibility = Visibility.Collapsed;
             MainView.btn_info.IsEnabled = true;
             // Disable the start navigation button.
@@ -374,7 +446,8 @@ namespace TaxiApp.ViewModels
             _tracker = new RouteTracker(_routeResult, 0, true);
 
             // Handle route tracking status changes.
-            _tracker.TrackingStatusChanged += TrackingStatusUpdated;
+            _tracker.TrackingStatusChanged += TrackingStatusUpdated; 
+           
             // Turn on navigation mode for the map view.
             MainView.MyMapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
             MainView.MyMapView.LocationDisplay.AutoPanModeChanged += AutoPanModeChanged;
@@ -391,7 +464,7 @@ namespace TaxiApp.ViewModels
 
             // Enable the location display (this wil start the location data source).
             MainView.MyMapView.LocationDisplay.IsEnabled = true;
-           
+            
         }
 
         private void TrackingStatusUpdated(object sender, RouteTrackerTrackingStatusChangedEventArgs e)
@@ -422,12 +495,13 @@ namespace TaxiApp.ViewModels
             }
             else if (status.DestinationStatus == DestinationStatus.Reached)
             {
+               
                 statusMessageBuilder.AppendLine("Destination reached.");
-
+                
                 // Set the route geometries to reflect the completed route.
                 _routeAheadGraphic.Geometry = null;
-
-
+               
+                
                 // Navigate to the next stop (if there are stops remaining).
                 if (status.RemainingDestinationCount > 1)
                 {
@@ -439,14 +513,19 @@ namespace TaxiApp.ViewModels
                     {
                         // Stop the simulated location data source.
                         MainView.MyMapView.LocationDisplay.DataSource.StopAsync();
+                        MainView.InfoUcPanel.txtB_YourLocation.Text = MainView.InfoUcPanel.txtB_Destination.Text;
+                        MainView.InfoUcPanel.txtB_Destination.Text = null;
                     });
                 }
+                
             }
             MainView.Dispatcher.BeginInvoke((Action)delegate ()
             {
                 // Show the status information in the UI.
-                MainView.MessagesTextBlock.Text = statusMessageBuilder.ToString();
+                 MainView.MessagesTextBlock.Text = statusMessageBuilder.ToString();
+
             });
+           
         }
         
         private void AutoPanModeChanged(object sender, LocationDisplayAutoPanMode e)
@@ -467,11 +546,13 @@ namespace TaxiApp.ViewModels
             if (_tracker != null)
             {
                 _tracker.TrackingStatusChanged -= TrackingStatusUpdated;
+
                 //_tracker.NewVoiceGuidance -= SpeakDirection;
                 _tracker = null;
             }
             // Stop the location data source.
             MainView.MyMapView.LocationDisplay?.DataSource?.StopAsync();
+            
         }
         private void CloseMenuButton_Click()
         {

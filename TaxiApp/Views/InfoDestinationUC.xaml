@@ -93,7 +93,7 @@
                     <TextBlock
                         x:Name="txtB_YourLocation"
                         FontSize="8"
-                        Text="Sumqayit 18 mikrorayon"
+                        Text=""
                         Width="105"
                         Margin="31,50,0,0"
                         TextWrapping="Wrap"
@@ -130,7 +130,7 @@
                     <TextBlock
                         x:Name="txtB_Destination"
                         FontSize="8"
-                        Text="Sumqayit Elmar Market"
+                        Text=""
                         Width="105"
                         Margin="173,50,0,0"
                         TextWrapping="Wrap"

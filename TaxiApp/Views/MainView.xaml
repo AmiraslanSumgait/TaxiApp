@@ -241,12 +241,13 @@
                             Visibility="{Binding Visibility, ElementName=buttonCloseMenu}"/>
 
                             <Button
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Height="40"
-                            Width="50"
-                            Canvas.Top="220"
-                            Canvas.Left="20">
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Height="40"
+                                Width="50"
+                                Canvas.Top="220"
+                                Canvas.Left="20"
+                                Command="{Binding RideHistoryCommand}">
                                 <materialDesign:PackIcon
                                 
                               Kind="History"
@@ -349,16 +350,27 @@
                             Canvas.Left="70"
                             x:Name="lbl_exit"
                             Visibility="{Binding Visibility, ElementName=buttonCloseMenu}"/>
-
+                            
                         </Canvas>
 
                         <Grid Grid.Column="1" Grid.ColumnSpan="2">
-                            <Grid.RowDefinitions>
+                                <Grid.RowDefinitions>
                                 <RowDefinition Height="4*"/>
                                 <RowDefinition Height="2*"/>
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0">
+
+                                <!--<Label
+                                    x:Name="label"
+                                    Height="100"
+                                    Width="300"
+                                    FontSize="12"
+                                    Background="AliceBlue"
+                                    Foreground="Black"
+                                    >
+                                    
+                                </Label>-->
 
                                 <Button
                                    
