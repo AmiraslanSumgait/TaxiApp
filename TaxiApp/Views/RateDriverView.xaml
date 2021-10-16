@@ -1,0 +1,76 @@
+﻿<Window x:Class="TaxiApp.Views.RateDriverView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaxiApp.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="RateDriverView" 
+        Height="230" 
+        Width="200"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="{x:Null}">
+
+    <materialDesign:Card UniformCornerRadius="5">
+
+        <Grid x:Name="gridHead">
+            <Label
+                Content="Rate Rider"
+                FontSize="17"
+                FontWeight="Heavy"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="0,0,0,200">
+                
+            </Label>
+
+            <TextBlock
+                Text="Amiraslan Aliyev"
+                Width="150"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="30,0,0,100"
+                FontSize="17"
+                FontWeight="DemiBold"
+                TextWrapping="Wrap"
+                >
+
+            </TextBlock>
+
+            
+            <materialDesign:RatingBar
+              x:Name="RatingBar" 
+              ValueChanged="RatingBar_ValueChanged"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+                Foreground="Green"
+              Margin="0,30,0,0"
+              />
+
+            <Grid
+                >
+                <Button
+                  Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                  Width="150"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Margin="0,150,0,0"
+                  BorderThickness="0"
+                  Background="#2eb875"
+                    Command="{Binding CloseCommand}"
+                  materialDesign:ButtonAssist.CornerRadius="20"
+                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                    <TextBlock
+                      Text="Rate" />
+                </Button>
+            </Grid>
+
+        </Grid>
+
+    </materialDesign:Card>
+   
+    
+</Window>

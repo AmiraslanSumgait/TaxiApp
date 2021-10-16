@@ -8,42 +8,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" 
              d:DesignWidth="2800"
-             Name="UserControl">
+             Name="UserControl"
+             >
 
     <materialDesign:Card UniformCornerRadius="10">
         <Grid Background="White" >
             <Viewbox Stretch="Uniform" >
 
                 <Grid Width="530" Height="85">
-
-                    <TextBlock
-                        
-                        FontSize="12"
-                        Text="Route Kilometres ➔"
-                        Width="110"
-                        Margin="12,8,0,0"
-                        TextWrapping="Wrap"
-                        Foreground="Black"
-                        FontWeight="DemiBold"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-
-                    </TextBlock>
-
-                    <TextBlock
-                        
-                        x:Name="txB_km"
-                        FontSize="12"
-                        Text="2.5"
-                        Width="40"
-                        Margin="125,8,0,0"
-                        TextWrapping="Wrap"
-                        Foreground="Black"
-                        FontWeight="DemiBold"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-
-                    </TextBlock>
 
                     <Button 
                       x:Name="btn_exit"
@@ -68,20 +40,20 @@
                     Height="15" 
                     Width="15" 
                     Padding="0,0,0,0"
-                    Margin="10,35,0,0"
+                    Margin="10,5,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top">
                         <materialDesign:PackIcon
                         Height="15"
                         Width="15"
-                        Kind="Home" 
+                        Kind="Home"
                     />
                     </Border>
 
                     <Label
                         FontSize="8"
                         Content="Your Location"
-                        Margin="27,32,0,0"
+                        Margin="30,0,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
@@ -92,9 +64,9 @@
                     <TextBlock
                         x:Name="txtB_YourLocation"
                         FontSize="8"
-                        Text="Sumqayit 18 mikrorayon"
-                        Width="105"
-                        Margin="31,50,0,0"
+                        Text=""
+                        Width="140"
+                        Margin="31,18,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -107,8 +79,9 @@
                       Height="15" 
                       Width="15" 
                       Padding="0,0,0,0"
-                      Margin="150,15,0,17"
-                      HorizontalAlignment="Left">
+                      Margin="10,45,0,0"
+                      HorizontalAlignment="Left"
+                       VerticalAlignment="Top">
                         <materialDesign:PackIcon 
                         Kind="MapMarker"
                         Height="15" 
@@ -118,20 +91,18 @@
                     <Label
                         FontSize="8"
                         Content="Destination"
-                        Margin="170,32,0,0"
+                        Margin="30,42,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-
                     </Label>
-
                     <TextBlock
                         x:Name="txtB_Destination"
                         FontSize="8"
-                        Text="Sumqayit Elmar Market"
-                        Width="105"
-                        Margin="173,50,0,0"
+                        Text=""
+                        Width="140"
+                        Margin="31,61,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -146,31 +117,31 @@
                       Height="15" 
                       Width="15" 
                       Padding="0,0,0,0"
-                      Margin="300,15,0,17"
-                      HorizontalAlignment="Left">
+                      Margin="180,5,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top">
                         <materialDesign:PackIcon 
                             Kind="Car"
                             Height="15" 
-                            Width="15" />
+                            Width="15"  />
                     </Border>
+
 
                     <Label
                         FontSize="8"
                         Content="Car Info"
-                        Margin="320,32,0,0"
+                        Margin="200,0,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-
                     </Label>
-
                     <TextBlock
                         x:Name="txtB_Carmodel"
                         FontSize="8"
                         Text="Opel Astra 99-XX-999"
                         Width="105"
-                        Margin="323,50,0,0"
+                        Margin="205,18,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -183,18 +154,19 @@
                       Height="15" 
                       Width="15" 
                       Padding="0,0,0,0"
-                      Margin="435,15,0,17"
-                      HorizontalAlignment="Left">
+                      Margin="180,45,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top">
                         <materialDesign:PackIcon 
                             Kind="CurrencyUsd"
                             Height="15" 
-                      Width="15" />
+                            Width="15"  />
                     </Border>
 
                     <Label
                         FontSize="8"
                         Content="Payment"
-                        Margin="450,32,0,0"
+                        Margin="200,42,0,0"
                         Foreground="Gray"
                         FontWeight="UltraLight"
                         HorizontalAlignment="Left"
@@ -207,7 +179,7 @@
                         FontSize="8"
                         Text="1.50"
                         Width="50"
-                        Margin="453,50,0,0"
+                        Margin="205,61,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
@@ -215,13 +187,112 @@
                         VerticalAlignment="Top">
 
                     </TextBlock>
+                    <Border 
+                      Height="15" 
+                      Width="15" 
+                      Padding="0,0,0,0"
+                      Margin="340,5,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top">
+                        <materialDesign:PackIcon 
+                            Kind="AccountCircle"
+                            Height="15" 
+                            Width="15"  />
+                    </Border>
+                    <Label
+                        FontSize="8"
+                        Content="Driver Name"
+                        Margin="360,0,0,0"
+                        Foreground="Gray"
+                        FontWeight="UltraLight"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    </Label>
+                    <TextBlock
+                        x:Name="txtB_Name"
+                        FontSize="8"
+                        Text="Nabi"
+                        Width="50"
+                        Margin="365,20,0,0"
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontWeight="DemiBold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    </TextBlock>
+                    <Border 
+                      Height="15" 
+                      Width="15" 
+                      Padding="0,0,0,0"
+                      Margin="340,45,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top">
+                        <materialDesign:PackIcon 
+                            Kind="AccountCircle"
+                            Height="15" 
+                            Width="15" />
+                    </Border>
+                    <Label
+                        FontSize="8"
+                        Content="Driver Surname"
+                        Margin="360,42,0,0"
+                        Foreground="Gray"
+                        FontWeight="UltraLight"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    </Label>
+                    <TextBlock
+                        x:Name="txtB_Surname"
+                        FontSize="8"
+                        Text="Nabili"
+                        Width="50"
+                        Margin="365,61,0,0"
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontWeight="DemiBold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    </TextBlock>
+                    <TextBlock                        
+                        FontSize="11"
+                        Text="Route Distance "
+                        Width="80"
+                        Margin="435,5,0,0"
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontWeight="DemiBold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    </TextBlock>
+                    <TextBlock   
+                        FontSize="15"
+                        Text="🡳 "
+                        Width="20"
+                        Margin="462,21,-35,0"
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontWeight="DemiBold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" 
+                        Height="24">
+                    </TextBlock>
+                    <TextBlock
+                        
+                        x:Name="txB_km"
+                        FontSize="11"
+                        Text=""
+                        Width="85"
+                        Margin="445,49,0,0"
+                        TextWrapping="Wrap"
+                        Foreground="Black"
+                        FontWeight="DemiBold"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top" Height="34">
 
+                    </TextBlock>
                 </Grid>
 
             </Viewbox>
         </Grid>
     </materialDesign:Card>
-
-
-
-    </UserControl>
+</UserControl>

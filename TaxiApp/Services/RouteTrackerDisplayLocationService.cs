@@ -39,6 +39,7 @@ namespace TaxiApp.Services
 
             // Update the location output when the tracker location updates.
             _routeTracker.TrackingStatusChanged += TrackingStatusChanged;
+
         }
 
         private void InputLocationChanged(object sender, Location e)

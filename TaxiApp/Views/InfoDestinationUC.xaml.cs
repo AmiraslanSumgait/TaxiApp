@@ -28,5 +28,7 @@ namespace TaxiApp.Views
             infoDestinationViewModel = new InfoDestinationViewModel(this);
             DataContext = infoDestinationViewModel;
         }
+
+        
     }
 }

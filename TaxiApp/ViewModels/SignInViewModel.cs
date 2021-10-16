@@ -27,12 +27,9 @@ namespace TaxiApp.ViewModels
         public RelayCommandMain SignUpPagePassCommand { get; set; }
         public RelayCommandMain SignInCommand { get; set; }
         public RelayCommandMain ForgotPasswordCommand { get; set; }
-
         public SignInPage SignInPage { get; set; }
-
         public UserContext UserContext { get; set; } = new UserContext();
         public User CurrentUser { get; set; }
-
         public SignInViewModel(SignInPage signInPage)
         {
             SignInPage = signInPage;
