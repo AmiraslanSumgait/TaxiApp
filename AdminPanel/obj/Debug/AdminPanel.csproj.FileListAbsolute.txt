@@ -460,17 +460,6 @@ C:\Users\user\source\repos\TaxiApp\AdminPanel\obj\Debug\AdminPanel.csproj.CopyCo
 C:\Users\user\source\repos\TaxiApp\AdminPanel\obj\Debug\AdminPanel.exe
 C:\Users\user\source\repos\TaxiApp\AdminPanel\obj\Debug\AdminPanel.pdb
 C:\Users\user\source\repos\TaxiApp\AdminPanel\obj\Debug\App.baml
-C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\HandyControl.dll
-C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\HandyControl.xml
-C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\ca-ES\HandyControl.resources.dll
-C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\en\HandyControl.resources.dll
-C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\fa\HandyControl.resources.dll
-C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\fr\HandyControl.resources.dll
-C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\ko-KR\HandyControl.resources.dll
-C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\pl\HandyControl.resources.dll
-C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\pt-BR\HandyControl.resources.dll
-C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\ru\HandyControl.resources.dll
-C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\tr\HandyControl.resources.dll
 C:\Users\user\source\repos\TaxiApp\AdminPanel\obj\Debug\Views\AddDriverView.g.cs
 C:\Users\user\source\repos\TaxiApp\AdminPanel\obj\Debug\Views\AddDriverView.baml
 C:\Users\user\source\repos\TaxiApp\AdminPanel\obj\Debug\GeneratedInternalTypeHelper.g.cs
