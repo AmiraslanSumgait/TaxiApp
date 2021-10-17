@@ -10,7 +10,7 @@ using TaxiApp;
 
 namespace AdminPanel
 {
-    class OnlyNumberAndLetterValidationRuleService:ValidationRule //@"^[a-zA-Z0-9\_]+$"
+    class OnlyNumberAndLetterValidationRuleService:ValidationRule 
     {
         public OnlyNumberAndLetterValidationRuleService()
         {
@@ -30,7 +30,7 @@ namespace AdminPanel
                 ErrorService.IsError = true;
                 return new ValidationResult(false, $"Cannot empty");
             }
-            else if (!Regex.IsMatch(valueString, @"^[a-zA-Z0-9]+$"))
+            else if (!Regex.IsMatch(valueString, @"^[A-Za-z0-9 ]*$"))
             {
                 ErrorService.IsError = true;
                 return new ValidationResult(false, $"Invalid format");

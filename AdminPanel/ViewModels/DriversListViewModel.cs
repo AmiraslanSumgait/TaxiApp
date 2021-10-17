@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using TaxiApp.Command;
 using TaxiApp.Models;
+using TaxiApp.Services;
 
 namespace AdminPanel.ViewModels
 {
@@ -104,42 +105,15 @@ namespace AdminPanel.ViewModels
                 }
 
             };
+
             TempDrivers = Drivers;
 
         }
 
         private void RemoveButton_Click()
         {
-            ListBoxItem myListBoxItem = (ListBoxItem)(DriversListPage.lbDrivers.ItemContainerGenerator.ContainerFromItem(DriversListPage.lbDrivers.Items.CurrentItem));
-            ContentPresenter myContentPresenter = FindVisualChild<ContentPresenter>(myListBoxItem);
-            DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
-            Button btnRemove = (Button)myDataTemplate.FindName("btnRemove", myContentPresenter);
-            if (btnRemove != null)
-            {
-                var removeDriverId = btnRemove.Tag;
-                var removeDrive = Drivers.FirstOrDefault(d => d.Guid == (Guid)removeDriverId);
-                Drivers.Remove(removeDrive);
-
-            }
-        }
-
-        private ChildItem FindVisualChild<ChildItem>(DependencyObject obj) where ChildItem : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
-                if (child != null && child is ChildItem)
-                {
-                    return (ChildItem)child;
-                }
-                else
-                {
-                    ChildItem childOfChild = FindVisualChild<ChildItem>(child);
-                    if (childOfChild != null)
-                        return childOfChild;
-                }
-            }
-            return null;
+            var removeDriver = DriversListPage.lbDrivers.SelectedItem as Driver;
+            Drivers.Remove(removeDriver);
         }
 
         private void SearchTextBox_Changed(object sender, TextChangedEventArgs e)
