@@ -28,6 +28,7 @@
             </Label>
 
             <TextBlock
+                Name="tb_Name"
                 Text="Amiraslan Aliyev"
                 Width="150"
                 HorizontalAlignment="Center"
