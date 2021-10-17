@@ -21,7 +21,7 @@ namespace TaxiApp.ViewModels
             
             RateDriverView = rateDriverView;
             CloseCommand = new RelayCommandMain(
-                action => { rateDriverView.Close();},
+                action => {rateDriverView.Hide();},
                 pre => true
              );
             rateDriverView.gridHead.MouseLeftButtonDown += Grid_MouseLeftButtonDown;
