@@ -143,6 +143,8 @@
     <Compile Include="Models\RideHistory.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Network\Network.cs" />
+    <Compile Include="Repository\DriversRepository.cs" />
+    <Compile Include="Repository\RideHistoriesRepository.cs" />
     <Compile Include="Services\EmailValidationRuleService.cs" />
     <Compile Include="Services\ErrorService.cs" />
     <Compile Include="Services\JsonService.cs" />
@@ -204,6 +206,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Drivers.json" />
+    <None Include="Resources\RideHistory.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -242,9 +246,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\taxiapp.png" />
   </ItemGroup>

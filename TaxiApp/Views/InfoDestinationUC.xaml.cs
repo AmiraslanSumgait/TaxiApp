@@ -24,9 +24,16 @@ namespace TaxiApp.Views
         public InfoDestinationViewModel infoDestinationViewModel { get; set; }
         public InfoDestinationUC()
         {
-            InitializeComponent();
-            infoDestinationViewModel = new InfoDestinationViewModel(this);
-            DataContext = infoDestinationViewModel;
+            try
+            {
+                InitializeComponent();
+                infoDestinationViewModel = new InfoDestinationViewModel(this);
+                DataContext = infoDestinationViewModel;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         

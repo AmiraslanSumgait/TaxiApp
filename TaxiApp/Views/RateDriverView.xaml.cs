@@ -23,10 +23,16 @@ namespace TaxiApp.Views
         public RateDriverViewModel RateDriverViewModel { get; set; }
         public RateDriverView()
         {
-            InitializeComponent();
-            RateDriverViewModel = new RateDriverViewModel(this);
-            DataContext = RateDriverViewModel;
-            
+            try
+            {
+                InitializeComponent();
+                RateDriverViewModel = new RateDriverViewModel(this);
+                DataContext = RateDriverViewModel;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void RatingBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<int> e)

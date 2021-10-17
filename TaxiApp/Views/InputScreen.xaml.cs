@@ -25,25 +25,32 @@ namespace TaxiApp.Views
     {
         public InputScreen()
         {
-            InitializeComponent();
-
-            var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(188) };
-            timer.Start();
-            timer.Tick += (sender, args) =>
+            try
             {
-                if (pbInput.Value >= 100)
+                InitializeComponent();
+
+                var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(188) };
+                timer.Start();
+                timer.Tick += (sender, args) =>
                 {
-                    timer.Stop();
-                    SignInPage signInPage = new SignInPage();
-                    this.Content = signInPage;
-                }
-                else if (pbInput.Value < 30)
-                    pbInput.Value += 1;
-                else
-                    pbInput.Value += 10;
-            };
+                    if (pbInput.Value >= 100)
+                    {
+                        timer.Stop();
+                        SignInPage signInPage = new SignInPage();
+                        this.Content = signInPage;
+                    }
+                    else if (pbInput.Value < 30)
+                        pbInput.Value += 100;
+                    else
+                        pbInput.Value += 10;
+                };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
     }
 }

@@ -24,8 +24,15 @@ namespace TaxiApp.Views
         public List<Ridehistory> RideHistories { get; set; } = new List<Ridehistory>();
         public RideHistory()
         {
-            InitializeComponent();
-            DataContext = this;
+            try
+            {
+                InitializeComponent();
+                DataContext = this;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

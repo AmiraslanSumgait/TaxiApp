@@ -31,7 +31,7 @@ namespace TaxiApp.ViewModels
 
         public SignUpPage SignUpPage { get; set; }
 
-        public UserContext UserContext { get; set; }
+        public UserContext UserContext { get; set; } = new UserContext();
 
         private Random _randomCode { get; set; }
 
@@ -81,21 +81,20 @@ namespace TaxiApp.ViewModels
                     {
                         notifier.ShowWarning("Please enter the information correctly.");
                     }
-                    //else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
-                    //{
-                    //    notifier.ShowWarning("There is already an account with this username. Please check another username.");
-                    //    SignUpPage.tbUsername.Text = "";
-                    //}
-                    //else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
-                    //{
-                    //    notifier.ShowWarning("There is already an account with this email. Please check another email.");
-                    //    SignUpPage.tbEmail.Text = "";
-                    //}
+                    else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
+                    {
+                        notifier.ShowWarning("There is already an account with this username. Please check another username.");
+                        SignUpPage.tbUsername.Text = "";
+                    }
+                    else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
+                    {
+                        notifier.ShowWarning("There is already an account with this email. Please check another email.");
+                        SignUpPage.tbEmail.Text = "";
+                    }
                     else
                     {
                         UserContext = new UserContext();
-                        MessageBox.Show(correctCode.ToString());
-                        //Email hissesi
+                        //Email side
                         try
                         {
                             SignUpPage.btnSendCode.Visibility = Visibility.Hidden;
@@ -106,7 +105,7 @@ namespace TaxiApp.ViewModels
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            notifier.ShowError(ex.Message);
                         }
                     }
                 },
@@ -136,22 +135,22 @@ namespace TaxiApp.ViewModels
                 }
                 else if (SignUpPage.tbregisterCode.Text != correctCode.ToString())
                 {
-                    notifier.ShowError("Please write the code sent to the email correctly.");
+                    notifier.ShowWarning("Please write the code sent to the email correctly.");
                 }
                 else if (ErrorService.IsError == true)
                 {
                     notifier.ShowWarning("Please enter the information correctly.");
                 }
-                //else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
-                //{
-                //    notifier.ShowWarning("There is already an account with this username. Please check another username.");
-                //    SignUpPage.tbUsername.Text = "";
-                //}
-                //else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
-                //{
-                //    notifier.ShowWarning("There is already an account with this email. Please check another email.");
-                //    SignUpPage.tbEmail.Text = "";
-                //}
+                else if (UserContext.Users.Any(u => u.Username == SignUpPage.tbUsername.Text))
+                {
+                    notifier.ShowWarning("There is already an account with this username. Please check another username.");
+                    SignUpPage.tbUsername.Text = "";
+                }
+                else if (UserContext.Users.Any(u => u.Email == SignUpPage.tbEmail.Text))
+                {
+                    notifier.ShowWarning("There is already an account with this email. Please check another email.");
+                    SignUpPage.tbEmail.Text = "";
+                }
                 else
                 {
                     User newUser = new User

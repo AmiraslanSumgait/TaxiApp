@@ -39,31 +39,33 @@ namespace TaxiApp.ViewModels
                 {
                     if (ForgotPasswordPage.btnSendCode.Content.ToString() == "Send Code")
                     {
-                        if (ForgotPasswordPage.tbEmail.Text == "")
+                        if (ForgotPasswordPage.tbEmail.Text == string.Empty)
                             notifier.ShowInformation("Please fill in the blank.");
                         else if (ErrorService.IsError == true)
                             notifier.ShowInformation("Please enter a valid email address.");
                         else if (!UserContext.Users.Any(u => u.Email == ForgotPasswordPage.tbEmail.Text))
-                            notifier.ShowWarning("This is not registered with gmail.");
+                            notifier.ShowWarning("This is not registered with gmail!");
                         else
                         {
-                            //MessageBox.Show(correctCode.ToString());
+                            forgotPasswordPage.btnSendCode.IsEnabled = false;
                             Network.Network.SendNotification(ForgotPasswordPage.tbEmail.Text, "Verification code", "Welcome!\nUse the verification code this to login: " + correctCode + "\nThank you.");
+                            forgotPasswordPage.tbEmail.IsEnabled = false;
+                            forgotPasswordPage.btnSendCode.IsEnabled = true;
                             ForgotPasswordPage.btnSendCode.Content = "Check Code";
-                            ForgotPasswordPage.tbVertfCode.IsEnabled = true; ;
+                            ForgotPasswordPage.tbVertfCode.IsEnabled = true; 
                         }
                     }
                     else
                     {
                         if (ForgotPasswordPage.tbVertfCode.Text == "")
-                            notifier.ShowInformation("Please fill in the blank.");
+                            notifier.ShowInformation("Please enter the verification code.");
                         else if (ForgotPasswordPage.tbVertfCode.Text != correctCode.ToString())
                             notifier.ShowWarning("Please write the code sent to the email correctly.");
                         else
                         {
                             notifier.ShowSuccess("The verification code is correct. You can now enter a new password.");
-                            forgotPasswordPage.tbEmail.IsReadOnly = true;
-                            forgotPasswordPage.tbVertfCode.IsReadOnly = true;
+                            forgotPasswordPage.tbEmail.IsEnabled = false;
+                            forgotPasswordPage.tbVertfCode.IsEnabled = false;
                             forgotPasswordPage.pbPassword.IsEnabled = true;
                             forgotPasswordPage.pbConfirmPass.IsEnabled = true;
                             forgotPasswordPage.btnUpdatePass.IsEnabled = true;
@@ -119,12 +121,12 @@ namespace TaxiApp.ViewModels
             cfg.PositionProvider = new WindowPositionProvider(
                 parentWindow: Application.Current.MainWindow,
                 corner: Corner.TopRight,
-                offsetX: 415,
+                offsetX: 310,
                 offsetY: 5);
 
             cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
                 notificationLifetime: TimeSpan.FromSeconds(2),
-                maximumNotificationCount: MaximumNotificationCount.FromCount(2));
+                maximumNotificationCount: MaximumNotificationCount.FromCount(1));
 
             cfg.Dispatcher = Application.Current.Dispatcher;
         });

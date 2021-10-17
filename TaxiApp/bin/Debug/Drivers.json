@@ -1,0 +1,110 @@
+[
+  {
+    "Name": "Nebi",
+    "Surname": "Nebili",
+    "CarModel": "Bmw X5",
+    "CarNumber": "35-NN-270",
+    "Rating": 4.75,
+    "Balance": 30,
+    "CarGraphic": "MapPoint[X=49.82193, Y=40.40526, Wkid=4326]",
+    "RouteCount": 4,
+    "RatingAll": 19,
+    "Guid": "bdefb45c-af99-4944-8a48-5c834d67ca8f"
+  },
+  {
+    "Name": "Kenan",
+    "Surname": "Idayatov",
+    "CarModel": "Bmw M5",
+    "CarNumber": "99-KK-444",
+    "Rating": 4.75,
+    "Balance": 120,
+    "CarGraphic": "MapPoint[X=49.726979, Y=40.478204, Wkid=4326]",
+    "RouteCount": 4,
+    "RatingAll": 19,
+    "Guid": "23efe044-7fab-494f-b1f1-996a683c5ce5"
+  },
+  {
+    "Name": "Hörmət",
+    "Surname": "Həmidov",
+    "CarModel": "Hyundai I30",
+    "CarNumber": "99-EC-255",
+    "Rating": 4,
+    "Balance": 223,
+    "CarGraphic": "MapPoint[X=49.71113, Y=40.5541, Wkid=4326]",
+    "RouteCount": 6,
+    "RatingAll": 24,
+    "Guid": "28f2270d-3c98-4c62-b3aa-d1083fb34b4e"
+  },
+  {
+    "Name": "Fərid",
+    "Surname": "Abizadə",
+    "CarModel": "Nissa Juke",
+    "CarNumber": "99-AC-190",
+    "Rating": 3.7999999999999998,
+    "Balance": 110,
+    "CarGraphic": "MapPoint[X=49.7418, Y=40.4569, Wkid=4326]",
+    "RouteCount": 5,
+    "RatingAll": 19,
+    "Guid": "9a0839f4-fc47-47a6-99f2-d7df09eb4283"
+  },
+  {
+    "Name": "Raul",
+    "Surname": "Qasimov",
+    "CarModel": "Opel Zafira",
+    "CarNumber": "20-KE-222",
+    "Rating": 4.2000000000000002,
+    "Balance": 40,
+    "CarGraphic": "MapPoint[X=49.7556, Y=40.4442, Wkid=4326]",
+    "RouteCount": 5,
+    "RatingAll": 21,
+    "Guid": "4739afeb-64f6-48ac-948f-7e13992ac84b"
+  },
+  {
+    "Name": "Ramin",
+    "Surname": "Abdullayev",
+    "CarModel": "Vaz 2107",
+    "CarNumber": "50-YP-755",
+    "Rating": 4.7000000000000002,
+    "Balance": 402,
+    "CarGraphic": "MapPoint[X=49.7729, Y=40.4415, Wkid=4326]",
+    "RouteCount": 10,
+    "RatingAll": 47,
+    "Guid": "c7fb04b9-2827-4137-8858-f4bb5d0ae0a6"
+  },
+  {
+    "Name": "Kamal",
+    "Surname": "Əliyev",
+    "CarModel": "Toyato Prado",
+    "CarNumber": "99-ZZ-44",
+    "Rating": 4.9000000000000004,
+    "Balance": 130,
+    "CarGraphic": "MapPoint[X=49.8735, Y=40.4081, Wkid=4326]",
+    "RouteCount": 5,
+    "RatingAll": 24,
+    "Guid": "cbeb60f9-8cad-4096-8964-5856278ee787"
+  },
+  {
+    "Name": "Amiraslan",
+    "Surname": "Aliyev",
+    "CarModel": "Hyundai Elantra",
+    "CarNumber": "35-AA-035",
+    "Rating": 5,
+    "Balance": 110,
+    "CarGraphic": "MapPoint[X=49.8466, Y=40.3896, Wkid=4326]",
+    "RouteCount": 8,
+    "RatingAll": 40,
+    "Guid": "79454a77-1d37-4093-8f5f-2bce6185ee7a"
+  },
+  {
+    "Name": "Ramiz",
+    "Surname": "Əsgərov",
+    "CarModel": "Ford Focus",
+    "CarNumber": "99-JH-320",
+    "Rating": 4.5,
+    "Balance": 110,
+    "CarGraphic": "MapPoint[X=49.8466, Y=40.3896, Wkid=4326]",
+    "RouteCount": 10,
+    "RatingAll": 45,
+    "Guid": "68cb275a-3077-4aee-a4b1-c037250a1447"
+  }
+]

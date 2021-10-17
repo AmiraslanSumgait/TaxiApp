@@ -14,8 +14,11 @@ namespace TaxiApp.Models
         public string Surname { get; set; }
         public string CarModel { get; set; }
         public string CarNumber { get; set; }
-        public int Rating { get; set; }
+        public double Rating { get; set; }
         public double Balance { get; set; }
-        public MapPoint CarGraphic { get; set; }
+        public string CarGraphic { get; set; }
+        public int RouteCount { get; set; } = 0;
+        public double RatingAll { get; set; } = 0;
+
     }
 }

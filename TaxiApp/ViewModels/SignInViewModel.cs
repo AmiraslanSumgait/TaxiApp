@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using TaxiApp.Command;
@@ -21,7 +22,7 @@ using ToastNotifications.Position;
 
 namespace TaxiApp.ViewModels
 {
-    public class SignInViewModel : INotifyPropertyChanged
+    public class SignInViewModel
     {
         public RelayCommandMain ExitCommand { get; set; }
         public RelayCommandMain SignUpPagePassCommand { get; set; }
@@ -29,7 +30,7 @@ namespace TaxiApp.ViewModels
         public RelayCommandMain ForgotPasswordCommand { get; set; }
         public SignInPage SignInPage { get; set; }
         public UserContext UserContext { get; set; } = new UserContext();
-        public User CurrentUser { get; set; }
+        public User CurrentUser { get; set; } = new User();
         public SignInViewModel(SignInPage signInPage)
         {
             SignInPage = signInPage;
@@ -58,6 +59,7 @@ namespace TaxiApp.ViewModels
                         notifier.ShowInformation("Please enter a valid email address.");
                     else if (UserContext.Users.Any(u => u.Email == SignInPage.tbEmail.Text && u.Password == SignInPage.pbPassword.Password))
                     {
+                        CurrentUser = UserContext.Users.FirstOrDefault(u => u.Email == SignInPage.tbEmail.Text && u.Password == SignInPage.pbPassword.Password);
                         notifier.ShowSuccess("The entry was successful. We'll take you to the main page in a few seconds.");
                         var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2.5) };
                         timer.Start();
@@ -65,13 +67,14 @@ namespace TaxiApp.ViewModels
                         {
                             timer.Stop();
                             var window = Application.Current.MainWindow as InputScreen;
-                            MainView mainView = new MainView();
+                            MainView mainView = new MainView(CurrentUser);
+                            mainView.txbUserName.Text = CurrentUser.Username;
                             window.Close();
                             mainView.ShowDialog();
                         };
                     }
                     else if (UserContext.Users.Any(u => u.Email == SignInPage.tbEmail.Text && u.Password != SignInPage.pbPassword.Password))
-                        notifier.ShowWarning("That's not the right password. Please try again.");
+                        notifier.ShowWarning("Incorrect password. Please try again.");
                     else
                         notifier.ShowWarning("Couldn’t find a Taxi app account associated with this email. Please try again.");
                 },
@@ -102,14 +105,5 @@ namespace TaxiApp.ViewModels
             cfg.Dispatcher = Application.Current.Dispatcher;
         });
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName] string propertyname = null)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyname));
-            }
-        }
     }
 }

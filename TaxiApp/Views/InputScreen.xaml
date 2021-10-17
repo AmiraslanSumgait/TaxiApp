@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaxiApp.Views"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Title="InputScreen" AllowsTransparency="True" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterScreen" Height="550" Width="850">
+        Title="InputScreen" MouseLeftButtonDown="Window_MouseLeftButtonDown" AllowsTransparency="True" Background="Transparent" WindowStyle="None" WindowStartupLocation="CenterScreen" Height="550" Width="850">
 
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">

@@ -5,14 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TaxiApp.Views" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-      xmlns:local1="clr-namespace:TaxiApp.Models" 
-      xmlns:local2="clr-namespace:TaxiApp.Services"
+      xmlns:models="clr-namespace:TaxiApp.Models" 
+      xmlns:services="clr-namespace:TaxiApp.Services"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SignUpPage" ShowsNavigationUI="False" Style="{StaticResource ResourceKey= SignUpPage}">
 
     <Page.Resources>
-        <local1:User x:Key="user"/>
+        <models:User x:Key="user"/>
         <ControlTemplate x:Key="validationTemplate">
             <DockPanel>
                 <TextBlock Foreground="Red" FontSize="10" HorizontalAlignment="Right" Text="{Binding [0].ErrorContent}" DockPanel.Dock="Bottom"></TextBlock>
@@ -76,7 +76,7 @@
                     </Canvas>
 
 
-                    <StackPanel HorizontalAlignment="Center">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
                         <TextBlock 
                         Text="Welcome Back!"
@@ -84,8 +84,7 @@
                         FontSize="26"
                         FontFamily="Leelawadee UI"
                         FontWeight="Bold"
-                        HorizontalAlignment="Center"
-                        Margin="0 150 0 0"/>
+                        HorizontalAlignment="Center"/>
                         <TextBlock 
                         Text="Please enter your personal information and then log in to your account"
                         TextWrapping="Wrap"
@@ -116,16 +115,16 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation 
-                                Storyboard.TargetProperty="Width"
-                                To="190"
-                                Duration="0:0:0.3"
-                                                 AutoReverse="True"/>
+                                                Storyboard.TargetProperty="Width"
+                                                To="190"
+                                                Duration="0:0:0.3"
+                                                AutoReverse="True"/>
 
                                             <DoubleAnimation 
-                                Storyboard.TargetProperty="Height"
-                                To="45"
-                                Duration="0:0:0.3"
-                                                 AutoReverse="True"/>
+                                                Storyboard.TargetProperty="Height"
+                                                To="45"
+                                                Duration="0:0:0.3"
+                                                AutoReverse="True"/>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
@@ -139,7 +138,7 @@
 
                 <Grid Grid.Column="1">
                     <Border CornerRadius="0 10 10 0" Background="Snow">
-                        <Grid>
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
 
                             <StackPanel>
                                 <TextBlock 
@@ -185,7 +184,7 @@
                                         <TextBox.Text>
                                             <Binding Path="Firstname" Source="{StaticResource user}" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
-                                                    <local2:NameValidationRuleService/>
+                                                    <services:NameValidationRuleService/>
                                                 </Binding.ValidationRules>
                                             </Binding>
                                         </TextBox.Text>
@@ -210,7 +209,7 @@
                                         <TextBox.Text>
                                             <Binding Path="Lastname" Source="{StaticResource user}" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
-                                                    <local2:NameValidationRuleService/>
+                                                    <services:NameValidationRuleService/>
                                                 </Binding.ValidationRules>
                                             </Binding>
                                         </TextBox.Text>
@@ -221,11 +220,12 @@
                                              Validation.ErrorTemplate="{StaticResource validationTemplate}"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              Margin="0 10 60 0"
-                                        Width="200"
-                                        Height="50"
-                                        BorderBrush="#769DF7"
-                                        FontSize="14"
-                                        materialDesign:TextFieldAssist.HasClearButton="True">
+                                             Width="200"
+                                             Height="50"
+                                             BorderBrush="#769DF7"
+                                             FontSize="14"
+                                             materialDesign:HintAssist.HelperText="E.g   055-123-45-67"
+                                             materialDesign:TextFieldAssist.HasClearButton="True">
                                         <materialDesign:HintAssist.Hint>
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="Phone" VerticalAlignment="Center" Height="25" Width="20"/>
@@ -235,7 +235,7 @@
                                         <TextBox.Text>
                                             <Binding Path="PhoneNumber" Source="{StaticResource user}" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
-                                                    <local2:PhoneValidationRuleService/>
+                                                    <services:PhoneValidationRuleService/>
                                                 </Binding.ValidationRules>
                                             </Binding>
                                         </TextBox.Text>
@@ -259,7 +259,7 @@
                                         <TextBox.Text>
                                             <Binding Path="Email" Source="{StaticResource user}" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
-                                                    <local2:EmailValidationRuleService/>
+                                                    <services:EmailValidationRuleService/>
                                                 </Binding.ValidationRules>
                                             </Binding>
                                         </TextBox.Text>
@@ -268,7 +268,7 @@
 
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <PasswordBox x:Name="pbPassword"
-                                        Margin="0 10 60 0"
+                                        Margin="0 20 60 0"
                                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                         Width="200"
                                         Height="50"
@@ -285,7 +285,7 @@
                                     </PasswordBox>
 
                                     <PasswordBox x:Name="pbConfirmPassword"
-                                        Margin="0 10 0 0"
+                                        Margin="0 20 0 0"
                                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                         Width="200"
                                         Height="50"
@@ -305,7 +305,7 @@
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
                                     <TextBox x:Name="tbUsername"
-                                        Margin="0 20 60 0"
+                                        Margin="0 20 60 33"
                                              Validation.ErrorTemplate="{StaticResource validationTemplate}"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Width="200"
@@ -322,13 +322,15 @@
                                         <TextBox.Text>
                                             <Binding Path="Username" Source="{StaticResource user}" UpdateSourceTrigger="PropertyChanged">
                                                 <Binding.ValidationRules>
-                                                    <local2:UsernameValidationRuleService/>
+                                                    <services:UsernameValidationRuleService/>
                                                 </Binding.ValidationRules>
                                             </Binding>
                                         </TextBox.Text>
                                     </TextBox>
 
-                                    <TextBox x:Name="tbregisterCode"
+                                    <StackPanel>
+
+                                        <TextBox x:Name="tbregisterCode"
                                              IsEnabled="False"
                                              Margin="0 20 0 0"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -338,38 +340,28 @@
                                              FontSize="14"
                                              MaxLength="5"
                                              materialDesign:TextFieldAssist.HasClearButton="True">
-                                        <materialDesign:HintAssist.Hint>
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="EmailEditOutline" VerticalAlignment="Center" Height="25" Width="20"/>
-                                                <TextBlock Text="Register code" Padding="10 0 0 0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </materialDesign:HintAssist.Hint>
-                                    </TextBox>
-                                </StackPanel>
-                                <Grid>
-                                    <!--<CheckBox
-                                        Margin="130 10 0 0"
-                                            x:Name="cbTerms">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock x:Name="tbMainTerms" Text="I have read and accepted the" FontSize="12" />
-                                            <TextBlock Text=" Terms of Use" FontSize="{Binding ElementName=tbMainTerms, Path=FontSize}"/>
-                                            <TextBlock Text=" and" FontSize="{Binding ElementName=tbMainTerms, Path=FontSize}"/>
-                                            <TextBlock Text=" Privacy Policy." FontSize="{Binding ElementName=tbMainTerms, Path=FontSize}"/>
-                                        </StackPanel>
-                                    </CheckBox>-->
-                                    <Button x:Name="btnSendCode"
+                                            <materialDesign:HintAssist.Hint>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="EmailEditOutline" VerticalAlignment="Center" Height="25" Width="20"/>
+                                                    <TextBlock Text="Register code" Padding="10 0 0 0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </materialDesign:HintAssist.Hint>
+                                        </TextBox>
+                                        <Button x:Name="btnSendCode"
                                         BorderThickness="1"
                                         Foreground="White"
                                         Background="LightBlue"
                                         Height="30"
                                         Width="108"
-                                        Margin="0 3 136 0"
-                                        materialDesign:ButtonAssist.CornerRadius="0"
+                                        Margin="0 3 0 0"
+                                        materialDesign:ButtonAssist.CornerRadius="5"
                                         HorizontalAlignment="Right"
                                         Content="Send Code"
                                         Command="{Binding SendCodeEmailCommand}"
                                         ToolTip="Email send code"/>
-                                </Grid>
+                                    </StackPanel>
+                                </StackPanel>
+
                                 <Button x:Name="btnSignUp"
                                         Margin="0 20 0 0"
                                         Style="{StaticResource MaterialDesignRaisedDarkButton}"

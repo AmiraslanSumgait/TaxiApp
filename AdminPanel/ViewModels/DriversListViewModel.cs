@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using TaxiApp.Command;
 using TaxiApp.Models;
+using TaxiApp.Repository;
 using TaxiApp.Services;
 
 namespace AdminPanel.ViewModels
@@ -37,76 +39,10 @@ namespace AdminPanel.ViewModels
                 action => AddButton_Click(),
                 pre => true);
 
-
-            Drivers = new ObservableCollection<Driver>
-            {
-                new Driver
-                {
-                    Balance = 30,
-                    CarNumber = "35-NN-270",
-                    CarModel="Bmw X5 ",
-                    Name="Nebi",
-                    Rating=4,
-                    Surname="Nebili"
-                },
-                new Driver
-                {
-                    Balance = 120,
-                    CarNumber = "99-KK-444",
-                    CarModel="Bmw M5",
-                    Name="Kenan",
-                    Rating=5,
-                    Surname="Idayatov"
-                },
-                new Driver
-                {
-                    Balance = 223,
-                    CarNumber = "99-EC-255",
-                    CarModel="Hyundai I30",
-                    Name="Hörmət",
-                    Rating=4,
-                    Surname="Həmidov"
-                },
-                new Driver
-                {
-                    Balance = 110,
-                    CarNumber = "99-AC-190",
-                    CarModel="Nissa Juke",
-                    Name="Fərid",
-                    Rating=3,
-                    Surname="Abizadə"
-                },
-                new Driver
-                {
-                    Balance = 40,
-                    CarNumber = "20-KE-222",
-                    CarModel="Opel Zafira",
-                    Name="Raul",
-                    Rating=4,
-                    Surname="Qasimov"
-                },
-                new Driver
-                {
-                    Balance = 40,
-                    CarNumber = "50-YP-755",
-                    CarModel="Vaz2107",
-                    Name="Ramin",
-                    Rating=4,
-                    Surname="Abdullayev"
-                },
-                new Driver
-                {
-                    Balance = 40,
-                    CarNumber = "99-ZZ-044",
-                    CarModel="Toyato Prado",
-                    Name="Kamal",
-                    Rating=4,
-                    Surname="Əliyev"
-                }
-
-            };
-
+            Drivers = DriversRepository.GetAllDrivers();
             TempDrivers = Drivers;
+            // Drivers list sort
+            DriversListPage.lbDrivers.Items.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
 
         }
 
@@ -114,6 +50,7 @@ namespace AdminPanel.ViewModels
         {
             var removeDriver = DriversListPage.lbDrivers.SelectedItem as Driver;
             Drivers.Remove(removeDriver);
+            JsonService.WriteToJsonFile(Drivers, @"C:\Users\user\source\repos\TaxiApp\TaxiApp\Resources\Drivers.json");
         }
 
         private void SearchTextBox_Changed(object sender, TextChangedEventArgs e)

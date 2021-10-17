@@ -29,10 +29,10 @@ namespace TaxiApp.Services
                 ErrorService.IsError = true;
                 return new ValidationResult(false, $"Cannot empty");
             }
-            else if (!Regex.IsMatch(valueString, @"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}"))
+            else if (!Regex.IsMatch(valueString, @"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{2}[\s.-]\d{2}$"))
             {
                 ErrorService.IsError = true;
-                return new ValidationResult(false, $"Invalid phone number format");
+                return new ValidationResult(false, $"Invalid format");
             }
             ErrorService.IsError = false;
             return new ValidationResult(true, null);

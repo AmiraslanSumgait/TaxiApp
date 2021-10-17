@@ -11,6 +11,7 @@ namespace TaxiApp.Services
 {
     class EmailValidationRuleService : ValidationRule
     {
+        public ValidationResult ValidationResult { get; set; }
         public EmailValidationRuleService()
         {
 
@@ -32,7 +33,8 @@ namespace TaxiApp.Services
             else if (!Regex.IsMatch(valueString, @"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$"))
             {
                 ErrorService.IsError = true;
-                return new ValidationResult(false, $"Invalid email format");
+                ValidationResult = new ValidationResult(false, $"Invalid email format");
+                return ValidationResult;
             }
             ErrorService.IsError = false;
             return new ValidationResult(true, null);

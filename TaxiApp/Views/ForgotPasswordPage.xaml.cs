@@ -24,9 +24,16 @@ namespace TaxiApp.Views
         public ForgotPasswordViewModel ForgotPasswordViewModel { get; set; }
         public ForgotPasswordPage()
         {
-            InitializeComponent();
-            ForgotPasswordViewModel = new ForgotPasswordViewModel(this);
-            DataContext = ForgotPasswordViewModel;
+            try
+            {
+                InitializeComponent();
+                ForgotPasswordViewModel = new ForgotPasswordViewModel(this);
+                DataContext = ForgotPasswordViewModel;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
