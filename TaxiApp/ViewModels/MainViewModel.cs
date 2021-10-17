@@ -35,7 +35,7 @@ namespace TaxiApp.ViewModels
         private Graphic _startGraphic;
         private Graphic _endGraphic;
         Graphic nearestTaxi = new Graphic();
-       
+
         public RelayCommandMain StartNavigationCommand { get; set; }
         public RelayCommandMain RecenterCommand { get; set; }
         public RelayCommandMain SearchAdressCommand { get; set; }
@@ -100,7 +100,7 @@ namespace TaxiApp.ViewModels
         private Uri _personUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/4bb29cac50bd46b3b8f63edb949a0db6/data");
 
         private readonly Uri _routingUri = new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
-        private  MapPoint _taxi1 = new MapPoint(49.846275, 40.414404, SpatialReferences.Wgs84);
+        private MapPoint _taxi1 = new MapPoint(49.846275, 40.414404, SpatialReferences.Wgs84);
         private readonly MapPoint _taxi2 = new MapPoint(49.726979, 40.478204, SpatialReferences.Wgs84);
         private readonly MapPoint _taxi3 = new MapPoint(49.71113, 40.5541, SpatialReferences.Wgs84);
         private Graphic _graphicTaxi1 = new Graphic();
@@ -144,6 +144,7 @@ namespace TaxiApp.ViewModels
             _graphicTaxi2.Symbol = taxiSymbol;
             _graphicTaxi3.Geometry = _taxi3;
             _graphicTaxi3.Symbol = taxiSymbol;
+
             Driver driver1 = new Driver
             {
                 Balance = 30,
@@ -173,8 +174,9 @@ namespace TaxiApp.ViewModels
                 Rating = 4,
                 Surname = "Həmidov",
                 CarGraphic = _graphicTaxi3.Geometry as MapPoint
-
             };
+
+
             Drivers.Add(driver1);
             Drivers.Add(driver2);
             Drivers.Add(driver3);
@@ -217,7 +219,8 @@ namespace TaxiApp.ViewModels
                 pre => true
                 );
             InfoDestinationCommand = new RelayCommandMain(
-               action => {
+               action =>
+               {
                    MainView.InfoUcPanel.UserControl.Visibility = Visibility.Visible;
                    MainView.InfoUcPanel.UserControl.IsEnabled = true;
                },
@@ -313,7 +316,7 @@ namespace TaxiApp.ViewModels
             //_graphicTaxi1 = new Graphic(_taxi1,taxiSymbol);
             //_graphicTaxi2 = new Graphic(_taxi2, taxiSymbol);
             //_graphicTaxi3 = new Graphic(_taxi3, taxiSymbol);
-            routeAndStopsOverlay.Graphics.AddRange(new[] { _graphicTaxi1, _graphicTaxi2,_graphicTaxi3, _startGraphic, _endGraphic });
+            routeAndStopsOverlay.Graphics.AddRange(new[] { _graphicTaxi1, _graphicTaxi2, _graphicTaxi3, _startGraphic, _endGraphic });
         }
         private async void Ongvtapped(GeoViewInputEventArgs e)
         {
@@ -575,7 +578,7 @@ namespace TaxiApp.ViewModels
 
                 statusMessageBuilder1.AppendLine(status.RouteProgress.RemainingDistance.DisplayText + " " +
                                              status.RouteProgress.RemainingDistance.DisplayTextUnits.PluralDisplayName);
-                                          ;
+                ;
                 statusMessageBuilder.AppendLine("Time remaining: " +
                                                 status.RouteProgress.RemainingTime.ToString(@"hh\:mm\:ss"));
 

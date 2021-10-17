@@ -35,6 +35,7 @@
                                 <Setter Property="Foreground" Value="Snow"/>
                                 <Setter Property="FontWeight" Value="Bold"/>
                             </Trigger>
+
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -98,7 +99,7 @@
 
         </Grid>
         <Grid Grid.Row="1" Margin="7 0 7 0">
-            
+
             <ScrollViewer>
                 <ListBox Name="lbDrivers"
                          ScrollViewer.VerticalScrollBarVisibility="Visible" 
@@ -158,8 +159,9 @@
                                 <TextBlock FontSize="13"  Padding="15 0 0 0" Text="{Binding Balance}" Grid.Column="4"></TextBlock>
                                 <TextBlock FontSize="13"  Padding="20 0 0 0" Text="{Binding Rating}" Grid.Column="5"></TextBlock>
                                 <materialDesign:PackIcon Kind="CheckDecagram" Foreground="Green" Margin="17 0 0 0" Grid.Column="6"/>
-                                <Button x:Name="btnRemove" Tag="{Binding Guid}" Background="Transparent" BorderThickness="1" BorderBrush="LightCoral" 
-                                        Command="{Binding DataContext.RemoveDriverCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" Grid.Column="7">
+                                <Button x:Name="btnRemove" IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}, AncestorLevel=1}, Path=IsSelected}" Background="Transparent" BorderThickness="1" BorderBrush="LightCoral" 
+                                        Command="{Binding ElementName=lbDrivers, Path=DataContext.RemoveDriverCommand}"
+                                        Grid.Column="7">
                                     <materialDesign:PackIcon Kind="AccountOffOutline" Foreground="Red" />
                                 </Button>
                             </Grid>

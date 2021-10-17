@@ -18,7 +18,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="1 one km  route price"  FontSize="40"></TextBlock>
+        <TextBlock Text="1 one km  route price" FontSize="40"></TextBlock>
         <TextBlock Grid.Row="5" Text="1 one km  route price"  FontSize="40"/>
     </Grid>
 </Page>
