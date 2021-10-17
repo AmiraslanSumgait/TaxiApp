@@ -37,5 +37,10 @@ namespace AdminPanel.Views
         {
             Frame.Content = new RoutePrice();
         }
+
+        private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Frame.Content = new GainView();
+        }
     }
 }

@@ -481,3 +481,5 @@ C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\System.Threading.Tasks.E
 C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\System.Buffers.xml
 C:\Users\user\source\repos\TaxiApp\AdminPanel\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\user\source\repos\TaxiApp\AdminPanel\obj\Debug\Views\GainView.g.cs
+C:\Users\user\source\repos\TaxiApp\AdminPanel\obj\Debug\Views\GainView.baml
