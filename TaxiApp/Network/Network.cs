@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -16,17 +17,17 @@ namespace TaxiApp.Network
             MailMessage message = new MailMessage();
             SmtpClient smtp = new SmtpClient();
 
-            message.From = new MailAddress("emiraslaneliyev12@gmail.com"); // sender email
+            message.From = new MailAddress(ConfigurationManager.AppSettings["SenderEmail"]); // sender email
 
             message.To.Add(new MailAddress(receiveMail));
             message.Subject = messageSubject;
             message.Body = messageBody;
 
-            smtp.Port = 587;
-            smtp.Host = "smtp.gmail.com";
+            smtp.Port = int.Parse(ConfigurationManager.AppSettings["SMTP_PORT"]);
+            smtp.Host = ConfigurationManager.AppSettings["SMTP_HOST"];
             smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("emiraslaneliyev12@gmail.com", "isakamal10");
+            smtp.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["SenderEmail"], ConfigurationManager.AppSettings["Password"]);
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             try
             {

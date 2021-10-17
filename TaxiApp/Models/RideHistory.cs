@@ -8,7 +8,7 @@ namespace TaxiApp.Models
 {
     public class Ridehistory
     {
-        
+        public string ForUsername { get; set; }
         public string YourLocation { get; set; }
         public string Destination { get; set; }
         public double Payment { get; set; }

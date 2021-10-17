@@ -29,10 +29,17 @@ namespace TaxiApp.Views
 
         public SignInPage()
         {
-            InitializeComponent();
-            SignInViewModel = new SignInViewModel(this);
-            DataContext = SignInViewModel;
+            try
+            {
+                InitializeComponent();
+                SignInViewModel = new SignInViewModel(this);
+                DataContext = SignInViewModel;
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
     }

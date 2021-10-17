@@ -25,10 +25,17 @@ namespace TaxiApp.Views
         public SignUpViewModel SignUpViewModel { get; set; }
         public SignUpPage()
         {
-            InitializeComponent();
-            ShowsNavigationUI = false;
-            SignUpViewModel = new SignUpViewModel(this);
-            DataContext = SignUpViewModel;
+            try
+            {
+                InitializeComponent();
+                ShowsNavigationUI = false;
+                SignUpViewModel = new SignUpViewModel(this);
+                DataContext = SignUpViewModel;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         
     }

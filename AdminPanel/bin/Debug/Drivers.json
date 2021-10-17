@@ -1,0 +1,82 @@
+[
+  {
+    "Name": "Nebi",
+    "Surname": "Nebili",
+    "CarModel": "Bmw X5",
+    "CarNumber": "35-NN-270",
+    "Rating": 4,
+    "Balance": 30,
+    "CarGraphic": "MapPoint[X=49.82193, Y=40.40526, Wkid=4326]",
+    "Guid": "8d0acf97-0558-4b47-a166-e42f55db80a2"
+  },
+  {
+    "Name": "Kenan",
+    "Surname": "Idayatov",
+    "CarModel": "Bmw M5",
+    "CarNumber": "99-KK-444",
+    "Rating": 5,
+    "Balance": 120,
+    "CarGraphic": "MapPoint[X=49.726979, Y=40.478204, Wkid=4326]",
+    "Guid": "afd7e465-7c72-4f86-aa62-3069101f7949"
+  },
+  {
+    "Name": "Hörmət",
+    "Surname": "Həmidov",
+    "CarModel": "Hyundai I30",
+    "CarNumber": "99-EC-255",
+    "Rating": 4,
+    "Balance": 223,
+    "CarGraphic": "MapPoint[X=49.71113, Y=40.5541, Wkid=4326]",
+    "Guid": "1776757b-7b38-4e66-967a-bcc73859c9bd"
+  },
+  {
+    "Name": "Fərid",
+    "Surname": "Abizadə",
+    "CarModel": "Nissa Juke",
+    "CarNumber": "99-AC-190",
+    "Rating": 3,
+    "Balance": 110,
+    "CarGraphic": "MapPoint[X=49.7418, Y=40.4569, Wkid=4326]",
+    "Guid": "64b47908-e2b1-42c2-9f87-bda213282a86"
+  },
+  {
+    "Name": "Raul",
+    "Surname": "Qasimov",
+    "CarModel": "Opel Zafira",
+    "CarNumber": "20-KE-222",
+    "Rating": 4,
+    "Balance": 40,
+    "CarGraphic": "MapPoint[X=49.7556, Y=40.4442, Wkid=4326]",
+    "Guid": "50f8e764-514b-4b16-ad96-b98ffaee4d0c"
+  },
+  {
+    "Name": "Ramin",
+    "Surname": "Abdullayev",
+    "CarModel": "Vaz2107",
+    "CarNumber": "50-YP-755",
+    "Rating": 4,
+    "Balance": 402,
+    "CarGraphic": "MapPoint[X=49.7729, Y=40.4415, Wkid=4326]",
+    "Guid": "349a8506-a8b2-4892-88a9-beccf841d13e"
+  },
+  {
+    "Name": "Kamal",
+    "Surname": "Əliyev",
+    "CarModel": "Toyato Prado",
+    "CarNumber": "99-ZZ-44",
+    "Rating": 4,
+    "Balance": 130,
+    "CarGraphic": "MapPoint[X=49.8735, Y=40.4081, Wkid=4326]",
+    "Guid": "3aee8fa3-be59-4de6-a547-cf0922c5fd89"
+  },
+  {
+    "Name": "Amiraslan",
+    "Surname": "Aliyev",
+    "CarModel": "Hyundai Elantra",
+    "CarNumber": "35-AA-035",
+    "Rating": 4,
+    "Balance": 110,
+    "CarGraphic": "MapPoint[X=49.8466, Y=40.3896, Wkid=4326]",
+    "Guid": "37fc5c06-5bde-41cd-bf69-df3167913016"
+  }
+]

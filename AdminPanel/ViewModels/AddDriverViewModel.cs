@@ -10,6 +10,7 @@ using System.Windows;
 using TaxiApp;
 using TaxiApp.Command;
 using TaxiApp.Models;
+using TaxiApp.Services;
 using ToastNotifications;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
@@ -59,6 +60,7 @@ namespace AdminPanel.ViewModels
                     driver.Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(driver.Name.ToLower());
                     driver.Surname = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(driver.Surname.ToLower());
                     _drivers.Add(driver);
+                    JsonService.WriteToJsonFile(_drivers, @"C:\Users\user\source\repos\TaxiApp\TaxiApp\Resources\Drivers.json");
                     AddDriverView.Close();
                 }
                 else

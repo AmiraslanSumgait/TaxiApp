@@ -152,12 +152,12 @@
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock FontSize="13" Text="{Binding Name}" Grid.Column="0"></TextBlock>
-                                <TextBlock FontSize="13" Padding="5 0 0 0" Text="{Binding Surname}" Grid.Column="1"></TextBlock>
-                                <TextBlock FontSize="13"  Padding="5 0 0 0" Text="{Binding CarNumber}" Grid.Column="2"></TextBlock>
-                                <TextBlock FontSize="13"  Padding="5 0 0 0" Text="{Binding CarModel}" Grid.Column="3"></TextBlock>
-                                <TextBlock FontSize="13"  Padding="15 0 0 0" Text="{Binding Balance}" Grid.Column="4"></TextBlock>
-                                <TextBlock FontSize="13"  Padding="20 0 0 0" Text="{Binding Rating}" Grid.Column="5"></TextBlock>
+                                <TextBlock  TextWrapping="Wrap" FontSize="13" Text="{Binding Name}" Grid.Column="0"></TextBlock>
+                                <TextBlock  TextWrapping="Wrap" FontSize="13" Padding="5 0 0 0" Text="{Binding Surname}" Grid.Column="1"></TextBlock>
+                                <TextBlock  TextWrapping="Wrap" FontSize="13"  Padding="5 0 0 0" Text="{Binding CarNumber}" Grid.Column="2"></TextBlock>
+                                <TextBlock  TextWrapping="Wrap" FontSize="13"  Padding="5 0 0 0" Text="{Binding CarModel}" Grid.Column="3"></TextBlock>
+                                <TextBlock  TextWrapping="Wrap" FontSize="13"  Padding="15 0 0 0" Text="{Binding Balance}" Grid.Column="4"></TextBlock>
+                                <TextBlock  TextWrapping="Wrap" FontSize="13"  Padding="20 0 0 0" Text="{Binding Rating}" Grid.Column="5"></TextBlock>
                                 <materialDesign:PackIcon Kind="CheckDecagram" Foreground="Green" Margin="17 0 0 0" Grid.Column="6"/>
                                 <Button x:Name="btnRemove" IsEnabled="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}, AncestorLevel=1}, Path=IsSelected}" Background="Transparent" BorderThickness="1" BorderBrush="LightCoral" 
                                         Command="{Binding ElementName=lbDrivers, Path=DataContext.RemoveDriverCommand}"

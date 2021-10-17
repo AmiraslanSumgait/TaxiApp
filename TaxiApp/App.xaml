@@ -6,7 +6,7 @@
              d1p1:Ignorable="d" 
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             StartupUri="Views/MainView.xaml">
+             StartupUri="Views/InputScreen.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -28,9 +28,9 @@
                                     <ThicknessAnimation.From>
                                         <Thickness 
                                         Left="0"
-                                        Top="-225"
+                                        Top="-550"
                                         Right="-800"
-                                        Bottom="-225"/>
+                                        Bottom="0"/>
                                     </ThicknessAnimation.From>
                                     <ThicknessAnimation.To>
                                         <Thickness 
@@ -55,9 +55,9 @@
                                     <ThicknessAnimation.From>
                                         <Thickness 
                                         Left="-800"
-                                        Top="-225"
+                                        Top="-550"
                                         Right="0"
-                                        Bottom="-225"/>
+                                        Bottom="0"/>
                                     </ThicknessAnimation.From>
                                     <ThicknessAnimation.To>
                                         <Thickness 

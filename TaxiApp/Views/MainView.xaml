@@ -191,6 +191,31 @@
                                  Margin="-11,0,0,0"
                                 Foreground="White"/>
                             </Button>
+                            <StackPanel Orientation="Horizontal"
+                                        Canvas.Top="30"
+                                       Canvas.Left="10">
+                                
+                            <materialDesign:PackIcon 
+                                Kind="User" 
+                                Foreground="White"
+                                Width="30"
+                                Height="40"
+                                VerticalAlignment="Center"
+                                Visibility="{Binding Visibility, ElementName=buttonCloseMenu}"/>
+                                <TextBlock
+                                       FontSize="16" 
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center"
+                                       Margin="10 0 0 0"
+                                       FontFamily="Century Gothic" 
+                                       Foreground="White" 
+                                       FontWeight="DemiBold"
+                                       x:Name="txbUserName"
+                                       Visibility="{Binding Visibility, ElementName=buttonCloseMenu}"
+                                       />
+                            </StackPanel>
+                            
+                            
 
                             <Button
                             Background="Transparent"

@@ -24,6 +24,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TaxiApp.Data;
+using TaxiApp.Models;
 using TaxiApp.ViewModels;
 
 namespace TaxiApp.Views
@@ -31,19 +32,20 @@ namespace TaxiApp.Views
 
     public partial class MainView : Window
     {
-
         public MainViewModel MainViewModel { get; set; }
-        public MainView()
+        public MainView(User currentUser)
         {
-            InitializeComponent();
-            MainViewModel = new MainViewModel(this);
-            DataContext = MainViewModel;
+            try
+            {
+                InitializeComponent();
+                MainViewModel = new MainViewModel(this,currentUser);
+                DataContext = MainViewModel;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage();
-        //    frame.Navigate(forgotPasswordPage);
-        //}
     }
 }

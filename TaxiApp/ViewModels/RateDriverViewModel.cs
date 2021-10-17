@@ -15,13 +15,13 @@ namespace TaxiApp.ViewModels
     {
         public int RatingValue { get; set; }
         public RelayCommandMain CloseCommand { get; set; }
-        public RateDriverView  RateDriverView { get; set; }
+        public RateDriverView RateDriverView { get; set; }
         public RateDriverViewModel(RateDriverView rateDriverView)
         {
-            
+
             RateDriverView = rateDriverView;
             CloseCommand = new RelayCommandMain(
-                action => {rateDriverView.Hide();},
+                action => RateDriverView.Close(),
                 pre => true
              );
             rateDriverView.gridHead.MouseLeftButtonDown += Grid_MouseLeftButtonDown;

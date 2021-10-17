@@ -4,20 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TaxiApp.Views" 
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:TaxiApp.Models" xmlns:local2="clr-namespace:TaxiApp.Services"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      xmlns:models="clr-namespace:TaxiApp.Models" 
+      xmlns:services="clr-namespace:TaxiApp.Services"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SignInPage" ShowsNavigationUI="False" Style="{StaticResource ResourceKey= SignInPage}">
 
-    <Page.Resources>
-        <local1:User x:Key="user"/>
-        <ControlTemplate x:Key="validationTemplate">
-            <DockPanel>
-                <TextBlock Foreground="Red" FontSize="10" HorizontalAlignment="Right" Text="{Binding [0].ErrorContent}" DockPanel.Dock="Bottom"></TextBlock>
-                <AdornedElementPlaceholder/>
-            </DockPanel>
-        </ControlTemplate>
-    </Page.Resources>
 
     <Grid>
         <Grid>
@@ -29,21 +22,17 @@
             <Grid Grid.Column="0">
                 <Border CornerRadius="10 0 0 10" Background="Snow">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.7*"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="0.4*"/>
+                                <RowDefinition Height="0.1*"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="12*"/>
+                                    <ColumnDefinition MaxWidth="35" />
+                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Grid Grid.Column="0">
                                     <Canvas>
@@ -68,7 +57,7 @@
                             </Grid>
 
 
-                            <Grid Grid.Row="1">
+                            <Grid Grid.Row="1" VerticalAlignment="Center">
                                 <StackPanel>
                                     <TextBlock 
                                             Margin="0 15 0 0"
@@ -94,41 +83,25 @@
                                                 FontFamily="Leelawadee UI"
                                                 Foreground="DarkGray"
                                             HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
 
-                        <Grid Grid.Row="1">
-                            <StackPanel>
-
-                                <TextBox x:Name="tbEmail"
+                                    <TextBox x:Name="tbEmail"
                                         Margin="0 10 0 0"
-                                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Width="300"
                                         Height="50"
                                         BorderBrush="#769DF7"
                                         FontSize="14"
                                         materialDesign:TextFieldAssist.HasClearButton="True">
-                                    <materialDesign:HintAssist.Hint>
-                                        <StackPanel Orientation="Horizontal">
-                                            <materialDesign:PackIcon Kind="EmailOutline" VerticalAlignment="Center" Height="25" Width="20"/>
-                                            <TextBlock Text="Email" Padding="10 0 0 0" VerticalAlignment="Center"/>
-                                        </StackPanel>
-                                    </materialDesign:HintAssist.Hint>
-                                    <TextBox.Text>
-                                        <Binding Path="Email" Source="{StaticResource user}" UpdateSourceTrigger="PropertyChanged">
-                                            <Binding.ValidationRules>
-                                                <local2:EmailValidationRuleService/>
-                                            </Binding.ValidationRules>
-                                        </Binding>
-                                    </TextBox.Text>
-                                </TextBox>
+                                        <materialDesign:HintAssist.Hint>
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="EmailOutline" VerticalAlignment="Center" Height="25" Width="20"/>
+                                                <TextBlock Text="Email" Padding="10 0 0 0" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </materialDesign:HintAssist.Hint>
+                                    </TextBox>
 
-                                <Grid>
                                     <PasswordBox x:Name="pbPassword"
                                         Margin="0 10 0 0"
-                                        Validation.ErrorTemplate="{StaticResource validationTemplate}"
                                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                         BorderBrush="#769DF7"
                                         MaxWidth="300"
@@ -142,9 +115,8 @@
                                             </StackPanel>
                                         </materialDesign:HintAssist.Hint>
                                     </PasswordBox>
-                                </Grid>
 
-                                <Button 
+                                    <Button 
                                         Margin="0 20 0 0"
                                         FontSize="13"
                                         Command="{Binding ForgotPasswordCommand}"
@@ -156,41 +128,41 @@
                                         BorderBrush="LightGray"
                                         Width="200"
                                         Height="33">
-                                    <Button.Triggers>
-                                        <EventTrigger RoutedEvent="MouseEnter">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation
+                                        <Button.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
                                                             Storyboard.TargetProperty="FontSize"
                                                             Duration="0:0:0.3"
                                                             To="14"/>
-                                                    <DoubleAnimation
+                                                        <DoubleAnimation
                                                             Storyboard.TargetProperty="Height"
                                                             Duration="0:0:0.3"
                                                             To="36"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
 
-                                        <EventTrigger RoutedEvent="MouseLeave">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
                                                             Storyboard.TargetProperty="FontSize"
                                                             Duration="0:0:0.3"
                                                             To="13"/>
-                                                    <DoubleAnimation
+                                                        <DoubleAnimation
                                                             Storyboard.TargetProperty="Height"
                                                             Duration="0:0:0.3"
                                                             To="33"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                    </Button.Triggers>
-                                </Button>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Button.Triggers>
+                                    </Button>
 
-                                <Grid Margin="0 20 0 0">
-                                    <Button
+                                    <Grid Margin="0 20 0 0">
+                                        <Button
                                             Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                             Width="200"
                                             Height="50"
@@ -201,12 +173,12 @@
                                             BorderThickness="0"
                                             materialDesign:ButtonAssist.CornerRadius="25"
                                             Command="{Binding SignInCommand}">
-                                        <TextBlock Text="SIGN IN"/>
-                                    </Button>
-                                </Grid>
-                            </StackPanel>
+                                            <TextBlock Text="SIGN IN"/>
+                                        </Button>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
-
                     </Grid>
                 </Border>
                 <Frame x:Name="frameForgotPassword" NavigationUIVisibility="Hidden"/>
@@ -269,7 +241,7 @@
                         <materialDesign:PackIcon Name="icnPower" BorderThickness="0" Kind="Power" Foreground="#363636" Height="auto" Width="auto"/>
                     </Button>
                 </Canvas>
-                <StackPanel HorizontalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
                     <TextBlock 
                         Text="Welcome Taxi App!"
@@ -277,8 +249,7 @@
                         FontSize="26"
                         FontFamily="Leelawadee UI"
                         FontWeight="Bold"
-                        HorizontalAlignment="Center"
-                        Margin="0 150 0 0"/>
+                        HorizontalAlignment="Center"/>
                     <TextBlock 
                         Text="Enter your personal details, register and start your journey with us"
                         TextWrapping="Wrap"
