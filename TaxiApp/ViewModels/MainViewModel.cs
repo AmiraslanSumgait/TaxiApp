@@ -33,9 +33,8 @@ namespace TaxiApp.ViewModels
         public int countCliclMaximize;
         public ICommand gvtapped { get; set; }
         private Graphic _startGraphic;
-        private Graphic _endGraphic;
+        private Graphic _endGraphic = new Graphic();
         Graphic nearestTaxi = new Graphic();
-
         public RelayCommandMain StartNavigationCommand { get; set; }
         public RelayCommandMain RecenterCommand { get; set; }
         public RelayCommandMain SearchAdressCommand { get; set; }
@@ -100,20 +99,31 @@ namespace TaxiApp.ViewModels
         private Uri _personUri = new Uri("https://nbkgu89qyqdofvzw.maps.arcgis.com/sharing/rest/content/items/4bb29cac50bd46b3b8f63edb949a0db6/data");
 
         private readonly Uri _routingUri = new Uri("https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
-        private MapPoint _taxi1 = new MapPoint(49.846275, 40.414404, SpatialReferences.Wgs84);
-        private readonly MapPoint _taxi2 = new MapPoint(49.726979, 40.478204, SpatialReferences.Wgs84);
-        private readonly MapPoint _taxi3 = new MapPoint(49.71113, 40.5541, SpatialReferences.Wgs84);
+        private MapPoint _taxi1 = new MapPoint(49.82193, 40.40526, SpatialReferences.Wgs84);//Baki
+        private readonly MapPoint _taxi2 = new MapPoint(49.726979, 40.478204, SpatialReferences.Wgs84);//Xirdalan
+        private readonly MapPoint _taxi3 = new MapPoint(49.71113, 40.5541, SpatialReferences.Wgs84);//Sumqayit
+        private readonly MapPoint _taxi4 = new MapPoint(49.7418, 40.4569, SpatialReferences.Wgs84);//Xirdalan
+        private readonly MapPoint _taxi5 = new MapPoint(49.7556, 40.4442, SpatialReferences.Wgs84);//Xirdalan
+        private readonly MapPoint _taxi6 = new MapPoint(49.7729, 40.4415, SpatialReferences.Wgs84);//Xirdalan
+        private readonly MapPoint _taxi7 = new MapPoint(49.8735, 40.4081, SpatialReferences.Wgs84);//Baki 
+        private readonly MapPoint _taxi8 = new MapPoint(49.8466, 40.3896, SpatialReferences.Wgs84);//Baki
+        private readonly MapPoint _taxi9 = new MapPoint(49.67962, 40.57477, SpatialReferences.Wgs84);//Sumqayit
         private Graphic _graphicTaxi1 = new Graphic();
         private Graphic _graphicTaxi2 = new Graphic();
         private Graphic _graphicTaxi3 = new Graphic();
+        private Graphic _graphicTaxi4 = new Graphic();
+        private Graphic _graphicTaxi5 = new Graphic();
+        private Graphic _graphicTaxi6 = new Graphic();
+        private Graphic _graphicTaxi7 = new Graphic();
+        private Graphic _graphicTaxi8 = new Graphic();
+        private Graphic _graphicTaxi9 = new Graphic();
+        public RateDriverView rateDriverView { get; set; } = new RateDriverView();
 
         private LocatorTask _geocoder;
         private readonly Uri _serviceUri = new Uri("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer");
         IReadOnlyList<GeocodeResult> resultAdresses;
         public Ridehistory RideHistory { get; set; }
         public List<Ridehistory> RideHistories { get; set; } = new List<Ridehistory>();
-        //-----------------------------------------------------------------
-        //----------------------------------------------------------------------
 
         public MainView MainView { get; set; }
         PictureMarkerSymbol locationSymbol = new PictureMarkerSymbol(_locationUri)
@@ -137,14 +147,15 @@ namespace TaxiApp.ViewModels
             Initialize();
             var text = File.ReadAllText("RideHistory.json");
             RideHistories = JsonSerializer.Deserialize<List<Ridehistory>>(text);
-
-            _graphicTaxi1.Geometry = _taxi1;
-            _graphicTaxi1.Symbol = taxiSymbol;
-            _graphicTaxi2.Geometry = _taxi2;
-            _graphicTaxi2.Symbol = taxiSymbol;
-            _graphicTaxi3.Geometry = _taxi3;
-            _graphicTaxi3.Symbol = taxiSymbol;
-
+            _graphicTaxi1.Geometry = _taxi1; _graphicTaxi1.Symbol = taxiSymbol;
+            _graphicTaxi2.Geometry = _taxi2; _graphicTaxi2.Symbol = taxiSymbol;
+            _graphicTaxi3.Geometry = _taxi3; _graphicTaxi3.Symbol = taxiSymbol;
+            _graphicTaxi4.Geometry = _taxi4; _graphicTaxi4.Symbol = taxiSymbol;
+            _graphicTaxi5.Geometry = _taxi5; _graphicTaxi5.Symbol = taxiSymbol;
+            _graphicTaxi6.Geometry = _taxi6; _graphicTaxi6.Symbol = taxiSymbol;
+            _graphicTaxi7.Geometry = _taxi7; _graphicTaxi7.Symbol = taxiSymbol;
+            _graphicTaxi8.Geometry = _taxi8; _graphicTaxi8.Symbol = taxiSymbol;
+            _graphicTaxi9.Geometry = _taxi8; _graphicTaxi9.Symbol = taxiSymbol;
             Driver driver1 = new Driver
             {
                 Balance = 30,
@@ -174,12 +185,80 @@ namespace TaxiApp.ViewModels
                 Rating = 4,
                 Surname = "Həmidov",
                 CarGraphic = _graphicTaxi3.Geometry as MapPoint
+
+            };
+            Driver driver4 = new Driver
+            {
+                Balance = 110,
+                CarNumber = "99-AC-190",
+                CarModel = "Nissa Juke",
+                Name = "Fərid",
+                Rating = 3,
+                Surname = "Abizadə",
+                CarGraphic = _graphicTaxi4.Geometry as MapPoint
+            };
+            Driver driver5 = new Driver
+            {
+                Balance = 40,
+                CarNumber = "20-KE-222",
+                CarModel = "Opel Zafira",
+                Name = "Raul",
+                Rating = 4,
+                Surname = "Qasimov",
+                CarGraphic = _graphicTaxi5.Geometry as MapPoint
+
             };
 
-
+            Driver driver6 = new Driver
+            {
+                Balance = 402,
+                CarNumber = "50-YP-755",
+                CarModel = "Vaz2107",
+                Name = "Ramin",
+                Rating = 4,
+                Surname = "Abdullayev",
+                CarGraphic = _graphicTaxi6.Geometry as MapPoint
+            };
+            Driver driver7 = new Driver
+            {
+                Balance = 130,
+                CarNumber = "99-ZZ-44",
+                CarModel = "Toyato Prado",
+                Name = "Kamal",
+                Rating = 4,
+                Surname = "Əliyev",
+                CarGraphic = _graphicTaxi7.Geometry as MapPoint
+            };
+            Driver driver8 = new Driver
+            {
+                Balance = 110,
+                CarNumber = "35-AA-035",
+                CarModel = "Hyundai Elantra",
+                Name = "Amiraslan",
+                Rating = 4,
+                Surname = "Aliyev",
+                CarGraphic = _graphicTaxi8.Geometry as MapPoint
+            };
+            Driver driver9 = new Driver
+            {
+                Balance = 110,
+                CarNumber = "99-JH-320",
+                CarModel = "Ford Focus",
+                Name = "Ramiz",
+                Rating = 4,
+                Surname = "Əsgərov",
+                CarGraphic = _graphicTaxi9.Geometry as MapPoint
+            };
             Drivers.Add(driver1);
             Drivers.Add(driver2);
             Drivers.Add(driver3);
+            Drivers.Add(driver4);
+            Drivers.Add(driver5);
+            Drivers.Add(driver6);
+            Drivers.Add(driver7);
+            Drivers.Add(driver8);
+            Drivers.Add(driver9);
+
             mainView.gridHead.MouseLeftButtonDown += Grid_MouseLeftButtonDown;
             StartNavigationCommand = new RelayCommandMain(
                 action => { StartNavigation(); },
@@ -266,24 +345,8 @@ namespace TaxiApp.ViewModels
                 Rating = 4,
                 Surname = "Həmidov"
             };
-            Driver driver4 = new Driver
-            {
-                Balance = 110,
-                CarNumber = "99AC190",
-                CarModel = "Nissa Juke",
-                Name = "Fərid",
-                Rating = 3,
-                Surname = "Abizadə"
-            };
-            Driver driver5 = new Driver
-            {
-                Balance = 40,
-                CarNumber = "20KE222",
-                CarModel = "Opel Zafira",
-                Name = "Raul",
-                Rating = 4,
-                Surname = "Qasimov"
-            };
+
+
             Driver driver6 = new Driver
             {
                 Balance = 402,
@@ -313,13 +376,24 @@ namespace TaxiApp.ViewModels
             };
             _startGraphic = new Graphic(null, currentLocationSymbol);
             _endGraphic = new Graphic(null, locationSymbol);
-            //_graphicTaxi1 = new Graphic(_taxi1,taxiSymbol);
-            //_graphicTaxi2 = new Graphic(_taxi2, taxiSymbol);
-            //_graphicTaxi3 = new Graphic(_taxi3, taxiSymbol);
-            routeAndStopsOverlay.Graphics.AddRange(new[] { _graphicTaxi1, _graphicTaxi2, _graphicTaxi3, _startGraphic, _endGraphic });
+            _graphicTaxi1 = new Graphic(_taxi1, taxiSymbol);
+            _graphicTaxi2 = new Graphic(_taxi2, taxiSymbol);
+            _graphicTaxi3 = new Graphic(_taxi3, taxiSymbol);
+            routeAndStopsOverlay.Graphics.Add(_graphicTaxi1);
+            routeAndStopsOverlay.Graphics.Add(_graphicTaxi2);
+            routeAndStopsOverlay.Graphics.Add(_graphicTaxi3);
+            routeAndStopsOverlay.Graphics.Add(_graphicTaxi4);
+            routeAndStopsOverlay.Graphics.Add(_graphicTaxi5);
+            routeAndStopsOverlay.Graphics.Add(_graphicTaxi6);
+            routeAndStopsOverlay.Graphics.Add(_graphicTaxi7);
+            routeAndStopsOverlay.Graphics.Add(_graphicTaxi8);
+            routeAndStopsOverlay.Graphics.Add(_graphicTaxi9);
+            routeAndStopsOverlay.Graphics.Add(_startGraphic);
+            routeAndStopsOverlay.Graphics.Add(_endGraphic);
         }
         private async void Ongvtapped(GeoViewInputEventArgs e)
         {
+           
             ++count;
             try
             {
@@ -443,9 +517,12 @@ namespace TaxiApp.ViewModels
         {
             switch (_currentState)
             {
+
                 case RouteBuilderStatus.NotStarted:
                     ResetState();
+
                     _endGraphic.Geometry = tappedPoint;
+
                     _startGraphic.Geometry = MainView.MyMapView.LocationDisplay.Location.Position;
                     _currentState = RouteBuilderStatus.SelectedStartAndEnd;
                     await FindRoute();
@@ -458,6 +535,7 @@ namespace TaxiApp.ViewModels
         public async Task FindRoute()
         {
             var myCurrenLocation = MainView.MyMapView.LocationDisplay.Location.Position as MapPoint;
+            
             double distance = 0;
             double distanceTemp = 100;
             foreach (var graphic in routeAndStopsOverlay.Graphics)
@@ -472,6 +550,16 @@ namespace TaxiApp.ViewModels
                 }
             }
             IEnumerable<Stop> stops = new[] { nearestTaxi, _startGraphic, _endGraphic, }.Select(graphic => new Stop(graphic.Geometry as MapPoint));
+            foreach (var driver in Drivers)
+            {
+                if (driver.CarGraphic == nearestTaxi.Geometry as MapPoint)
+                {
+                    MainView.InfoUcPanel.txtB_Carmodel.Text = $"{driver.CarNumber} {driver.CarModel}";
+                    MainView.InfoUcPanel.txtB_Name.Text = $"{driver.Name}";
+                    MainView.InfoUcPanel.txtB_Surname.Text = $"{driver.Surname}";
+                    rateDriverView.tb_Name.Text = $"{driver.Name} {driver.Surname}";
+                }
+            }
             var routeTask = await RouteTask.CreateAsync(_routingUri);
             RouteParameters parameters = await routeTask.CreateDefaultParametersAsync();
             parameters.ReturnDirections = true;
@@ -521,15 +609,7 @@ namespace TaxiApp.ViewModels
             RideHistories.Add(RideHistory);
             JsonService.WriteToJsonFile(RideHistories, "RideHistory.json");
             // MessageBox.Show(.ToString());
-            foreach (var driver in Drivers)
-            {
-                if (driver.CarGraphic == nearestTaxi.Geometry as MapPoint)
-                {
-                    MainView.InfoUcPanel.txtB_Carmodel.Text = $"{driver.CarNumber} {driver.CarModel}";
-                    MainView.InfoUcPanel.txtB_Name.Text = $"{driver.Name}";
-                    MainView.InfoUcPanel.txtB_Surname.Text = $"{driver.Surname}";
-                }
-            }
+
             MainView.InfoUcPanel.UserControl.Visibility = Visibility.Collapsed;
             MainView.btn_info.IsEnabled = true;
             // Disable the start navigation button.
@@ -604,14 +684,18 @@ namespace TaxiApp.ViewModels
                 {
                     _tracker.SwitchToNextDestinationAsync();
                 }
+
                 else
                 {
                     MainView.Dispatcher.BeginInvoke((Action)delegate ()
                     {
-                        // Stop the simulated location data source.
+                        MapPoint point = new MapPoint(MainView.MyMapView.LocationDisplay.Location.Position.X, MainView.MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
+                        nearestTaxi.Geometry = point;
+                        routeAndStopsOverlay.Graphics.Insert(0, nearestTaxi);
                         MainView.MyMapView.LocationDisplay.DataSource.StopAsync();
                         MainView.MyMapView.LocationDisplay.DataSource.StopAsync();
                         MainView.InfoUcPanel.txtB_YourLocation.Text = MainView.InfoUcPanel.txtB_Destination.Text;
+                        rateDriverView.ShowDialog();
                         MainView.InfoUcPanel.txtB_Destination.Text = null;
                     });
                 }
@@ -656,7 +740,6 @@ namespace TaxiApp.ViewModels
             Canvas.SetLeft(MainView.buttonOpenMenu, 13);
 
         }
-
         private void OpenMenuButton_Click()
         {
             MainView.buttonOpenMenu.Visibility = Visibility.Collapsed;
