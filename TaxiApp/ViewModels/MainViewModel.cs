@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Device.Location;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -410,6 +411,18 @@ namespace TaxiApp.ViewModels
                 MainView.InfoUcPanel.txtB_Destination.Text = resultAdresses.First().Label;
                 resultAdresses = await _geocoder.ReverseGeocodeAsync(MainView.MyMapView.LocationDisplay.Location.Position);
                 MainView.InfoUcPanel.txtB_YourLocation.Text = resultAdresses.First().Label;
+                MapPoint point = new MapPoint(e.Location.X, e.Location.Y, SpatialReferences.Wgs84);
+                double tolerance = 14;
+
+                // Convert the tolerance to map units
+                double mapTolerance = tolerance * MainView.MyMapView.UnitsPerPixel;
+
+                // Define the envelope around the tap location for selecting features
+                var selectionEnvelope = new Envelope(e.Location.X - mapTolerance, e.Location.Y - mapTolerance, e.Location.X + mapTolerance,
+                    e.Location.Y + mapTolerance, MainView. MyMapView.Map.SpatialReference);
+               
+                MessageBox.Show(selectionEnvelope.XMax.ToString());
+                // MessageBox.Show(point.ToString());
                 await HandleTap(e.Location);
             }
             catch (Exception ex)
@@ -522,10 +535,12 @@ namespace TaxiApp.ViewModels
         {
             switch (_currentState)
             {
-
+               
                 case RouteBuilderStatus.NotStarted:
                     ResetState();
 
+                    var mapPoint = new MapPoint(tappedPoint.X, tappedPoint.Y, SpatialReferences.WebMercator);
+                   // MessageBox.Show(mapPoint.X.ToString());
                     _endGraphic.Geometry = tappedPoint;
 
                     _startGraphic.Geometry = MainView.MyMapView.LocationDisplay.Location.Position;
@@ -540,7 +555,11 @@ namespace TaxiApp.ViewModels
         public async Task FindRoute()
         {
             var myCurrenLocation = MainView.MyMapView.LocationDisplay.Location.Position as MapPoint;
-            
+            //MessageBox.Show(MainView.MyMapView.LocationDisplay.Location.Position.X.ToString(), MainView.MyMapView.LocationDisplay.Location.Position.Y.ToString());
+            var sCoord = new GeoCoordinate(MainView.MyMapView.LocationDisplay.Location.Position.X, MainView.MyMapView.LocationDisplay.Location.Position.Y);
+            var eCoord = new GeoCoordinate(_taxi3.X, _taxi3.Y);  // Mousenen qoyanda
+            MessageBox.Show((sCoord.GetDistanceTo(eCoord) / 1000).ToString());
+            MessageBox.Show(_endGraphic.Geometry.Extent.XMax.ToString());
             double distance = 0;
             double distanceTemp = 100;
             foreach (var graphic in routeAndStopsOverlay.Graphics)
@@ -598,7 +617,7 @@ namespace TaxiApp.ViewModels
 
             // Enable the navigation button.
             MainView.StartNavigationButton.IsEnabled = true;
-
+            
         }
 
         private void StartNavigation()
@@ -747,9 +766,8 @@ namespace TaxiApp.ViewModels
         private void OpenMenuButton_Click()
         {
             MainView.buttonOpenMenu.Visibility = Visibility.Collapsed;
-            MainView.buttonCloseMenu.Visibility = Visibility.Visible;
+          MainView.buttonCloseMenu.Visibility = Visibility.Visible;
         }
-
         private void ExitAppButton_Click() => Application.Current.Shutdown();
         private void MaximizeAppButton_Click()
         {
