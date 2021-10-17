@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -35,6 +36,8 @@ namespace TaxiApp.ViewModels
         private Graphic _startGraphic;
         private Graphic _endGraphic = new Graphic();
         Graphic nearestTaxi = new Graphic();
+        Graphic textGraphic1 = new Graphic();
+       
         public RelayCommandMain StartNavigationCommand { get; set; }
         public RelayCommandMain RecenterCommand { get; set; }
         public RelayCommandMain SearchAdressCommand { get; set; }
@@ -102,7 +105,7 @@ namespace TaxiApp.ViewModels
         private MapPoint _taxi1 = new MapPoint(49.82193, 40.40526, SpatialReferences.Wgs84);//Baki
         private readonly MapPoint _taxi2 = new MapPoint(49.726979, 40.478204, SpatialReferences.Wgs84);//Xirdalan
         private readonly MapPoint _taxi3 = new MapPoint(49.71113, 40.5541, SpatialReferences.Wgs84);//Sumqayit
-        private readonly MapPoint _taxi4 = new MapPoint(49.7418, 40.4569, SpatialReferences.Wgs84);//Xirdalan
+        private readonly MapPoint _taxi4 = new MapPoint(49.8771, 40.3887,  SpatialReferences.Wgs84);//Baki
         private readonly MapPoint _taxi5 = new MapPoint(49.7556, 40.4442, SpatialReferences.Wgs84);//Xirdalan
         private readonly MapPoint _taxi6 = new MapPoint(49.7729, 40.4415, SpatialReferences.Wgs84);//Xirdalan
         private readonly MapPoint _taxi7 = new MapPoint(49.8735, 40.4081, SpatialReferences.Wgs84);//Baki 
@@ -480,9 +483,11 @@ namespace TaxiApp.ViewModels
                 Graphic markerGraphic = new Graphic(geocodeResult.DisplayLocation, geocodeResult.Attributes);
                 Marker = markerGraphic;
                 // Create a graphic to display the result address label.
-                TextSymbol textSymbol = new TextSymbol(geocodeResult.Label, System.Drawing.Color.Red, 18, Esri.ArcGISRuntime.Symbology.HorizontalAlignment.Center, Esri.ArcGISRuntime.Symbology.VerticalAlignment.Bottom);
+                
+                TextSymbol textSymbol = new TextSymbol(geocodeResult.Label, System.Drawing.Color.Red, 15, Esri.ArcGISRuntime.Symbology.HorizontalAlignment.Center, Esri.ArcGISRuntime.Symbology.VerticalAlignment.Bottom);
                 Graphic textGraphic = new Graphic(geocodeResult.DisplayLocation, textSymbol);
-
+                textGraphic1.Geometry = geocodeResult.DisplayLocation;
+                textGraphic1.Symbol = textSymbol;
                 // InfoUC Destionation added text
                 MainView.InfoUcPanel.txtB_Destination.Text = geocodeResult.Label;
                 resultAdresses = await _geocoder.ReverseGeocodeAsync(MainView.MyMapView.LocationDisplay.Location.Position);
@@ -490,13 +495,13 @@ namespace TaxiApp.ViewModels
 
                 // Add the location and label graphics to the graphics overlay.
                 routeAndStopsOverlay.Graphics.Add(markerGraphic);
-                routeAndStopsOverlay.Graphics.Add(textGraphic);
+                routeAndStopsOverlay.Graphics.Add(textGraphic1);
                 addressLocation = geocodeResult.DisplayLocation;
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                System.Windows.MessageBox.Show("Couldn't find address: " + ex.Message);
+                //System.Windows.MessageBox.Show("Couldn't find address: " + ex.Message);
                 //ResetState();
             }
 
@@ -579,8 +584,8 @@ namespace TaxiApp.ViewModels
                 ResetState();
                 throw new Exception("Route not found");
             }
-
-            _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.Solid, System.Drawing.Color.LightBlue, 5) };
+            SolidBrush routeColor = new SolidBrush(Color.FromArgb(109, 219, 149));
+            _routeAheadGraphic = new Graphic(_route.RouteGeometry) { Symbol = new SimpleLineSymbol(SimpleLineSymbolStyle.ShortDash, routeColor.Color, 5) };
 
             // Create a graphic (solid) to represent the route that's been traveled (initially empty).
 
@@ -605,7 +610,6 @@ namespace TaxiApp.ViewModels
                 Payment = Convert.ToDouble(MainView.InfoUcPanel.txtB_Payment.Text),
                 Date = DateTime.Now
             };
-
             RideHistories.Add(RideHistory);
             JsonService.WriteToJsonFile(RideHistories, "RideHistory.json");
             // MessageBox.Show(.ToString());
@@ -648,7 +652,6 @@ namespace TaxiApp.ViewModels
             // Start building a status message for the UI.
             StringBuilder statusMessageBuilder = new System.Text.StringBuilder("Route Status:\n");
             StringBuilder statusMessageBuilder1 = new System.Text.StringBuilder();
-
             // Check the destination status.
             if (status.DestinationStatus == DestinationStatus.NotReached || status.DestinationStatus == DestinationStatus.Approaching)
             {
@@ -689,6 +692,7 @@ namespace TaxiApp.ViewModels
                 {
                     MainView.Dispatcher.BeginInvoke((Action)delegate ()
                     {
+                        routeAndStopsOverlay.Graphics.Remove(textGraphic1);
                         MapPoint point = new MapPoint(MainView.MyMapView.LocationDisplay.Location.Position.X, MainView.MyMapView.LocationDisplay.Location.Position.Y, SpatialReferences.Wgs84);
                         nearestTaxi.Geometry = point;
                         routeAndStopsOverlay.Graphics.Insert(0, nearestTaxi);
