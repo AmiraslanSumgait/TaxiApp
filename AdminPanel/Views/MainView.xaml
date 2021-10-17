@@ -138,10 +138,10 @@
                     </ListBoxItem>
                 </Grid>
                 <Grid Grid.Row="3">
-                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center" MouseDoubleClick="ListBoxItem_MouseDoubleClick">
                         <StackPanel Style="{StaticResource menuItemStackpanel}">
-                            <materialDesign:PackIcon Kind="Account" Style="{StaticResource menuItemIcons}"/>
-                            <TextBlock Text="Riders" Style="{StaticResource menuItemText}"/>
+                            <materialDesign:PackIcon Kind="CashMultiple" Style="{StaticResource menuItemIcons}"/>
+                            <TextBlock Text="Gain" Style="{StaticResource menuItemText}"/>
                         </StackPanel>
                     </ListBoxItem>
                 </Grid>

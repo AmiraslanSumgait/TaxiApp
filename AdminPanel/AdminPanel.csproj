@@ -102,6 +102,9 @@
     <Compile Include="Views\DriversListPage.xaml.cs">
       <DependentUpon>DriversListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GainView.xaml.cs">
+      <DependentUpon>GainView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -142,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DriversListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

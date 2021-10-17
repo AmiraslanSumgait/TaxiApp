@@ -575,7 +575,6 @@ namespace TaxiApp.ViewModels
                         MainView.MyMapView.LocationDisplay.DataSource.StopAsync();
                         MainView.MyMapView.LocationDisplay.DataSource.StopAsync();
                         MainView.InfoUcPanel.txtB_YourLocation.Text = MainView.InfoUcPanel.txtB_Destination.Text;
-                        //var currentDriver = Drivers.FirstOrDefault(d => d.Guid == CurrentDriver.Guid);
                         CurrentDriver.RouteCount += 1;
                         RateDriverView = new RateDriverView();
                         RateDriverView.tb_Name.Text = $"{CurrentDriver.Name} {CurrentDriver.Surname}";
@@ -587,7 +586,7 @@ namespace TaxiApp.ViewModels
                         MainView.InfoUcPanel.txtB_Destination.Text = null;
                         MainView.SearchAddressButton.IsEnabled = true;
                         MainView.AddressTextBox.IsEnabled = true;
-                        JsonService.WriteToJsonFile(Drivers, @"C:\Users\user\source\repos\TaxiApp\TaxiApp\Resources\Drivers.json");
+                        JsonService.WriteToJsonFile(Drivers, @"../../Resources/Drivers.json");
                     });
                 }
             }
