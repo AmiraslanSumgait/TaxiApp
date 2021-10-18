@@ -7,7 +7,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="RideHistory" Height="500" 
-        Width="800">
+        Width="800"
+        Icon="pack://application:,,,/TaxiApp;component/Images/history.ico">
 
     <Window.Resources>
         <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">

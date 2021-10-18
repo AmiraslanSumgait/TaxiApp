@@ -12,7 +12,8 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         AllowsTransparency="True"
-        Background="{x:Null}">
+        Background="{x:Null}"
+        Icon="pack://application:,,,/TaxiApp;component/Images/rating_64px.ico">
 
     <materialDesign:Card UniformCornerRadius="5">
 
