@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AdminPanel.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Title="MainView" Height="600" Width="1100" MinHeight="600" MinWidth="1000">
+        Title="ADMIN PANEL" Icon="pack://application:,,,/AdminPanel;component/Images/admin.ico" Height="600" Width="1100" MinHeight="600" MinWidth="1000">
     <Window.Resources>
         <Style x:Key="menuItemIcons" TargetType="materialDesign:PackIcon">
             <Setter Property="Foreground" Value="#929496"/>
@@ -138,7 +138,7 @@
                     </ListBoxItem>
                 </Grid>
                 <Grid Grid.Row="3">
-                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center" MouseDoubleClick="ListBoxItem_MouseDoubleClick">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center" MouseDoubleClick="Profit_MouseDoubleClick">
                         <StackPanel Style="{StaticResource menuItemStackpanel}">
                             <materialDesign:PackIcon Kind="CashMultiple" Style="{StaticResource menuItemIcons}"/>
                             <TextBlock Text="Gain" Style="{StaticResource menuItemText}"/>
@@ -186,7 +186,7 @@
                     </ListBoxItem>
                 </Grid>
                 <Grid Grid.Row="9">
-                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center">
+                    <ListBoxItem  BorderThickness="0" VerticalContentAlignment= "Center" MouseDoubleClick="Exit_MouseDoubleClick">
                         <StackPanel Style="{StaticResource menuItemStackpanel}">
                             <materialDesign:PackIcon Kind="ExitToApp" Style="{StaticResource menuItemIcons}"/>
                             <TextBlock Text="Exit App" Style="{StaticResource menuItemText}"/>

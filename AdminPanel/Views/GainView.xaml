@@ -14,7 +14,7 @@
                    Foreground="Green"
                    FontWeight="SemiBold"
                    Margin="0 40 0 0"/>
-        <TextBlock Text="10 AZN" VerticalAlignment="Top" HorizontalAlignment="Center"
+        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center"
                    FontSize="60"
                    Foreground="MediumSeaGreen"
                    FontWeight="SemiBold"

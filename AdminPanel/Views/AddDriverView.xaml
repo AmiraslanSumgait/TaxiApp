@@ -9,7 +9,7 @@
         xmlns:local1="clr-namespace:TaxiApp.Models;assembly=TaxiApp" 
         xmlns:local21="clr-namespace:AdminPanel"
         mc:Ignorable="d"
-        Title="AddDriverView" WindowStyle="None" Height="270.761" MinHeight="330" Width="520" MinWidth="520" MaxWidth="550" WindowStartupLocation="CenterScreen">
+        Title="AddDriverView" Icon="pack://application:,,,/AdminPanel;component/Images/add_male.ico" WindowStyle="None" Height="270.761" MinHeight="330" Width="520" MinWidth="520" MaxWidth="550" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <local1:Driver x:Key="drive"/>

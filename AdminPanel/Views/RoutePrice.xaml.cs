@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TaxiApp.Repository;
+using TaxiApp.Services;
 
 namespace AdminPanel.Views
 {
@@ -20,9 +22,27 @@ namespace AdminPanel.Views
     /// </summary>
     public partial class RoutePrice : Page
     {
+        public double Price { get; set; }
         public RoutePrice()
         {
             InitializeComponent();
+            txbPrice.Text = RoutePriceRepository.GetRoutePrice().ToString();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (txbPrice.Text != string.Empty)
+            {
+                if (txbPrice.Text.Contains("."))
+                {
+                    txbPrice.Text = txbPrice.Text.Replace('.', ',');
+                }
+                Price = double.Parse(txbPrice.Text);
+                JsonService.WriteToJsonFile(Price, @"../../Resources/RoutePrice.json");
+                MessageBox.Show("Save succesfully!", "", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            }
+            else
+                MessageBox.Show("Please enter route price!");
         }
     }
 }

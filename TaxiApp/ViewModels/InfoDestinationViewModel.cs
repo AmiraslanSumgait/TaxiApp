@@ -24,10 +24,7 @@ namespace TaxiApp.ViewModels
               );
            
         }
-        public static void adss()
-        {
 
-        }
         public void ExitButtonClick()
         {
             InfoUC.UserControl.Visibility = Visibility.Collapsed;

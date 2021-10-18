@@ -109,7 +109,6 @@ namespace TaxiApp.ViewModels
         private readonly MapPoint _taxi4 = new MapPoint(49.7418, 40.4569, SpatialReferences.Wgs84);//Xirdalan
         private readonly MapPoint _taxi5 = new MapPoint(49.7556, 40.4442, SpatialReferences.Wgs84);//Xirdalan
         private readonly MapPoint _taxi6 = new MapPoint(49.7729, 40.4415, SpatialReferences.Wgs84);//Xirdalan Ramin
-        //private readonly MapPoint _taxi6 = new MapPoint(49.765483, 40.441140, SpatialReferences.Wgs84);//Xirdalan
         private readonly MapPoint _taxi7 = new MapPoint(49.8735, 40.4081, SpatialReferences.Wgs84);//Baki 
         private readonly MapPoint _taxi8 = new MapPoint(49.8466, 40.3896, SpatialReferences.Wgs84);//Baki
         private readonly MapPoint _taxi9 = new MapPoint(49.67962, 40.57477, SpatialReferences.Wgs84);//Sumqayit
@@ -277,7 +276,10 @@ namespace TaxiApp.ViewModels
                 MainView.InfoUcPanel.txtB_Destination.Text = resultAdresses.First().Label;
                 resultAdresses = await _geocoder.ReverseGeocodeAsync(MainView.MyMapView.LocationDisplay.Location.Position);
                 MainView.InfoUcPanel.txtB_YourLocation.Text = resultAdresses.First().Label;
-                await HandleTap(e.Location);
+
+                var outputPoint = (MapPoint)GeometryEngine.Project(e.Location, SpatialReferences.Wgs84);
+
+                await HandleTap(outputPoint);
             }
             catch (Exception ex)
             {
@@ -382,7 +384,7 @@ namespace TaxiApp.ViewModels
             _currentState = RouteBuilderStatus.NotStarted;
         }
 
-
+        double tappedX, tappedY;
         public async Task HandleTap(MapPoint tappedPoint)
         {
             switch (_currentState)
@@ -390,14 +392,9 @@ namespace TaxiApp.ViewModels
 
                 case RouteBuilderStatus.NotStarted:
                     ResetState();
-
+                    tappedX = tappedPoint.X;
+                    tappedY = tappedPoint.Y;
                     _endGraphic.Geometry = tappedPoint;
-                    tappedPoint = new MapPoint((_endGraphic.Geometry as MapPoint).X, (_endGraphic.Geometry as MapPoint).Y, SpatialReferences.Wgs84);
-
-                    //MessageBox.Show((_endGraphic.Geometry as MapPoint).X.ToString(), (_endGraphic.Geometry as MapPoint).Y.ToString());
-                    //var sCoord = new GeoCoordinate(MainView.MyMapView.LocationDisplay.Location.Position.X, MainView.MyMapView.LocationDisplay.Location.Position.Y);
-                    //var eCoord = new GeoCoordinate(tappedPoint.X, tappedPoint.Y);  // Mousenen qoyanda
-                    //MessageBox.Show((sCoord.GetDistanceTo(eCoord) / 1000).ToString());
 
                     _startGraphic.Geometry = MainView.MyMapView.LocationDisplay.Location.Position;
                     _currentState = RouteBuilderStatus.SelectedStartAndEnd;
@@ -411,6 +408,19 @@ namespace TaxiApp.ViewModels
         }
         public async Task FindRoute()
         {
+            var start = new GeoCoordinate(MainView.MyMapView.LocationDisplay.Location.Position.X, MainView.MyMapView.LocationDisplay.Location.Position.Y);
+            var end = new GeoCoordinate(tappedX, tappedY);
+            double distanceRoute = start.GetDistanceTo(end) / 1000;
+
+            if (distanceRoute >= 1)
+            {
+                MainView.InfoUcPanel.txtB_Payment.Text = (distanceRoute * RoutePriceRepository.GetRoutePrice()).ToString("0.00");
+            }
+            else
+            {
+                MainView.InfoUcPanel.txtB_Payment.Text = "1,2";
+            }
+
             var myCurrenLocation = MainView.MyMapView.LocationDisplay.Location.Position as MapPoint;
 
             double distance = 0;
@@ -427,6 +437,7 @@ namespace TaxiApp.ViewModels
                 }
             }
             IEnumerable<Stop> stops = new[] { nearestTaxi, _startGraphic, _endGraphic, }.Select(graphic => new Stop(graphic.Geometry as MapPoint));
+
             foreach (var driver in Drivers)
             {
                 if (driver.CarGraphic == (nearestTaxi.Geometry as MapPoint).ToString())

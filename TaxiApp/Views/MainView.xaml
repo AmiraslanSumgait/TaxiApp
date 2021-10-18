@@ -15,7 +15,8 @@
         Height="630"
         Width="1100" 
         AllowsTransparency="True"
-        Background="{x:Null}">
+        Background="{x:Null}"
+        Icon="pack://application:,,,/TaxiApp;component/Images/taxi_48px.ico">
 
     <!--Qalsin burda lazim olcag BY KENAN-->
     <!--<Window.Triggers>

@@ -139,7 +139,7 @@
                     <TextBlock
                         x:Name="txtB_Carmodel"
                         FontSize="8"
-                        Text="Opel Astra 99-XX-999"
+                        Text="XXXX 99-XX-999"
                         Width="105"
                         Margin="205,18,0,0"
                         TextWrapping="Wrap"
@@ -173,20 +173,29 @@
                         VerticalAlignment="Top">
 
                     </Label>
+                    <StackPanel Orientation="Horizontal">
 
-                    <TextBlock
+                        <TextBlock
                         x:Name="txtB_Payment"
                         FontSize="8"
-                        Text="1.50"
-                        Width="50"
+                        Text="0.00"
                         Margin="205,61,0,0"
                         TextWrapping="Wrap"
                         Foreground="Black"
                         FontWeight="DemiBold"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-
-                    </TextBlock>
+                        </TextBlock>
+                        <TextBlock
+                        FontSize="8"
+                        Text=" AZN"
+                        Width="50"
+                        Foreground="Black"
+                        FontWeight="DemiBold"
+                        VerticalAlignment="Bottom"
+                            Margin="0 0 10 14">
+                        </TextBlock>
+                    </StackPanel>
                     <Border 
                       Height="15" 
                       Width="15" 
@@ -211,7 +220,7 @@
                     <TextBlock
                         x:Name="txtB_Name"
                         FontSize="8"
-                        Text="Nabi"
+                        Text="XXXX"
                         Width="50"
                         Margin="365,20,0,0"
                         TextWrapping="Wrap"
@@ -244,7 +253,7 @@
                     <TextBlock
                         x:Name="txtB_Surname"
                         FontSize="8"
-                        Text="Nabili"
+                        Text="XXXX"
                         Width="50"
                         Margin="365,61,0,0"
                         TextWrapping="Wrap"
@@ -280,7 +289,6 @@
                         
                         x:Name="txB_km"
                         FontSize="11"
-                        Text=""
                         Width="85"
                         Margin="445,49,0,0"
                         TextWrapping="Wrap"

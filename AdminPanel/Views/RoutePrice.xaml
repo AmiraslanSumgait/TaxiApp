@@ -4,21 +4,50 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdminPanel.Views"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RoutePrice">
 
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
+    <Grid>
 
-        <TextBlock Text="1 one km  route price" FontSize="40"></TextBlock>
-        <TextBlock Grid.Row="5" Text="1 one km  route price"  FontSize="40"/>
+        <StackPanel Background="White">
+            <TextBlock Text="1 km route price" VerticalAlignment="Top" HorizontalAlignment="Center"
+                   FontSize="60"
+                   Foreground="Green"
+                   FontWeight="SemiBold"
+                   Margin="0 40 0 0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox 
+                   MaxLength="4"
+                   FontSize="60"
+                   Foreground="MediumSeaGreen"
+                   FontWeight="SemiBold"
+                   Margin="0 40 0 0"
+                   x:Name="txbPrice"/>
+                <TextBlock Text=" AZN"
+                   FontSize="60"
+                   Foreground="MediumSeaGreen"
+                   FontWeight="SemiBold"
+                   Margin="0 40 0 0"/>
+            </StackPanel>
+
+        </StackPanel>
+        
+        <Button
+                  Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                  Width="180"
+                  Height="50"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Bottom"
+                  Margin="0,0,30,15"
+                  BorderThickness="0"
+                  Background="#2eb875"
+                  FontSize="20"
+                  materialDesign:ButtonAssist.CornerRadius="15" Click="Button_Click">
+            <TextBlock
+                      Text="Save" />
+        </Button>
+
     </Grid>
 </Page>
