@@ -40,7 +40,7 @@ namespace TaxiApp.Views
                         this.Content = signInPage;
                     }
                     else if (pbInput.Value < 30)
-                        pbInput.Value += 100;
+                        pbInput.Value += 1;
                     else
                         pbInput.Value += 10;
                 };

@@ -50,7 +50,7 @@ namespace AdminPanel.ViewModels
         {
             var removeDriver = DriversListPage.lbDrivers.SelectedItem as Driver;
             Drivers.Remove(removeDriver);
-            JsonService.WriteToJsonFile(Drivers, @"C:\Users\user\source\repos\TaxiApp\TaxiApp\Resources\Drivers.json");
+            JsonService.WriteToJsonFile(Drivers, @"C:\Users\Amiraslan\source\repos\TaxiApp\TaxiApp\Resources\Drivers.json");
         }
 
         private void SearchTextBox_Changed(object sender, TextChangedEventArgs e)

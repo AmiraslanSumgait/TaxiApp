@@ -60,7 +60,7 @@ namespace AdminPanel.ViewModels
                     driver.Name = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(driver.Name.ToLower());
                     driver.Surname = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(driver.Surname.ToLower());
                     _drivers.Add(driver);
-                    JsonService.WriteToJsonFile(_drivers, @"C:\Users\user\source\repos\TaxiApp\TaxiApp\Resources\Drivers.json");
+                    JsonService.WriteToJsonFile(_drivers, @"C:\Users\Amiraslan\source\repos\TaxiApp\TaxiApp\Resources\Drivers.json");
                     AddDriverView.Close();
                 }
                 else

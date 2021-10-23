@@ -17,18 +17,7 @@
         AllowsTransparency="True"
         Background="{x:Null}"
         Icon="pack://application:,,,/TaxiApp;component/Images/taxi_48px.ico">
-
-    <!--Qalsin burda lazim olcag BY KENAN-->
-    <!--<Window.Triggers>
-        <EventTrigger RoutedEvent="Loaded">
-            <BeginStoryboard>
-                <Storyboard Duration="00:00:5" Storyboard.TargetProperty="Opacity">
-                    <DoubleAnimation From="0" To="1"/>
-                </Storyboard>
-            </BeginStoryboard>
-        </EventTrigger>
-    </Window.Triggers>-->
-
+    
     <Window.Resources>
         <Storyboard x:Key="MenuOpen">
             <DoubleAnimationUsingKeyFrames

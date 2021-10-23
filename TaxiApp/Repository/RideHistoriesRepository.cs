@@ -15,7 +15,7 @@ namespace TaxiApp.Repository
         {
             List<Ridehistory> Ridehistories;
             //var json = File.ReadAllText("../../Resources/RideHistory.json");
-            var json = File.ReadAllText(@"C:\Users\user\source\repos\TaxiApp\TaxiApp\Resources\RideHistory.json");
+            var json = File.ReadAllText(@"C:\Users\Amiraslan\source\repos\TaxiApp\TaxiApp\Resources\RideHistory.json");
             Ridehistories = JsonSerializer.Deserialize<List<Ridehistory>>(json);
 
             return Ridehistories;

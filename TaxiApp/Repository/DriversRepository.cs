@@ -18,7 +18,7 @@ namespace TaxiApp.Repository
         {
             ObservableCollection<Driver> Drivers;
             //var json = File.ReadAllText("../../Resources/Drivers.json"); 
-            var json = File.ReadAllText(@"C:\Users\user\source\repos\TaxiApp\TaxiApp\Resources\Drivers.json"); 
+            var json = File.ReadAllText(@"C:\Users\Amiraslan\source\repos\TaxiApp\TaxiApp\Resources\Drivers.json"); 
               Drivers = JsonSerializer.Deserialize<ObservableCollection<Driver>>(json);
             return Drivers;
         }

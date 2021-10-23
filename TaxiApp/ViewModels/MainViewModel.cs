@@ -38,6 +38,7 @@ namespace TaxiApp.ViewModels
         private Graphic _startGraphic;
         private Graphic _endGraphic = new Graphic();
         Graphic nearestTaxi = new Graphic();
+        Graphic textGraphic = new Graphic();
         public RelayCommandMain StartNavigationCommand { get; set; }
         public RelayCommandMain RecenterCommand { get; set; }
         public RelayCommandMain SearchAdressCommand { get; set; }
@@ -264,6 +265,7 @@ namespace TaxiApp.ViewModels
         private async void Ongvtapped(GeoViewInputEventArgs e)
         {
             ++count;
+            routeAndStopsOverlay.Graphics.Remove(textGraphic);
             try
             {
                 if (count != 1)
@@ -324,6 +326,7 @@ namespace TaxiApp.ViewModels
                 }
                 catch (Exception)
                 {
+
                 }
             }
             else
@@ -353,7 +356,8 @@ namespace TaxiApp.ViewModels
                 Marker = markerGraphic;
                 // Create a graphic to display the result address label.
                 TextSymbol textSymbol = new TextSymbol(geocodeResult.Label, System.Drawing.Color.Red, 18, Esri.ArcGISRuntime.Symbology.HorizontalAlignment.Center, Esri.ArcGISRuntime.Symbology.VerticalAlignment.Bottom);
-                Graphic textGraphic = new Graphic(geocodeResult.DisplayLocation, textSymbol);
+                textGraphic.Geometry = geocodeResult.DisplayLocation;
+                textGraphic.Symbol = textSymbol;
 
                 // InfoUC Destionation added text
                 MainView.InfoUcPanel.txtB_Destination.Text = geocodeResult.Label;
@@ -366,9 +370,9 @@ namespace TaxiApp.ViewModels
                 addressLocation = geocodeResult.DisplayLocation;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                System.Windows.MessageBox.Show("Couldn't find address: " + ex.Message);
+                
                 //ResetState();
             }
 
@@ -597,6 +601,7 @@ namespace TaxiApp.ViewModels
                         MainView.InfoUcPanel.txtB_Destination.Text = null;
                         MainView.SearchAddressButton.IsEnabled = true;
                         MainView.AddressTextBox.IsEnabled = true;
+                        routeAndStopsOverlay.Graphics.Remove(textGraphic);
                         JsonService.WriteToJsonFile(Drivers, @"../../Resources/Drivers.json");
                     });
                 }
@@ -604,7 +609,7 @@ namespace TaxiApp.ViewModels
             MainView.Dispatcher.BeginInvoke((Action)delegate ()
             {
                 // Show the status information in the UI.
-                MainView.MessagesTextBlock.Text = statusMessageBuilder.ToString();
+               // MainView.MessagesTextBlock.Text = statusMessageBuilder.ToString();
                 MainView.InfoUcPanel.txB_km.Text = statusMessageBuilder1.ToString();
             });
         }

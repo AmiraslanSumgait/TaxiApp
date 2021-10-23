@@ -14,7 +14,7 @@ namespace TaxiApp.Repository
         {
             double RoutePrice;
             //var json = File.ReadAllText("../../Resources/RideHistory.json");
-            var json = File.ReadAllText(@"C:\Users\user\source\repos\TaxiApp\AdminPanel\Resources\RoutePrice.json");
+            var json = File.ReadAllText(@"C:\Users\Amiraslan\source\repos\TaxiApp\AdminPanel\Resources\RoutePrice.json");
             RoutePrice = JsonSerializer.Deserialize<double>(json);
 
             return RoutePrice;

@@ -28,11 +28,11 @@
     "Surname": "Həmidov",
     "CarModel": "Hyundai I30",
     "CarNumber": "99-EC-255",
-    "Rating": 4,
+    "Rating": 4.25,
     "Balance": 223,
     "CarGraphic": "MapPoint[X=49.71113, Y=40.5541, Wkid=4326]",
-    "RouteCount": 6,
-    "RatingAll": 24,
+    "RouteCount": 8,
+    "RatingAll": 34,
     "Guid": "632e0f81-d210-4a9a-84e7-c1e6705b2db7"
   },
   {
@@ -76,11 +76,11 @@
     "Surname": "Əliyev",
     "CarModel": "Toyato Prado",
     "CarNumber": "99-ZZ-44",
-    "Rating": 4.9000000000000004,
+    "Rating": 4.8499999999999996,
     "Balance": 130,
     "CarGraphic": "MapPoint[X=49.8735, Y=40.4081, Wkid=4326]",
-    "RouteCount": 5,
-    "RatingAll": 24,
+    "RouteCount": 7,
+    "RatingAll": 34,
     "Guid": "3c76c592-e913-4608-bf91-e6be04fd4b12"
   },
   {
@@ -106,5 +106,29 @@
     "RouteCount": 10,
     "RatingAll": 45,
     "Guid": "5429fd3b-d1a8-47a7-889c-64eac2eadc32"
+  },
+  {
+    "Name": "Nicat",
+    "Surname": "Seferli",
+    "CarModel": "Honda CRV",
+    "CarNumber": "99-RR-240",
+    "Rating": 0,
+    "Balance": 0,
+    "CarGraphic": null,
+    "RouteCount": 0,
+    "RatingAll": 0,
+    "Guid": "64de16b5-816c-4f60-b2a6-b319ec94bd0a"
+  },
+  {
+    "Name": "Samir",
+    "Surname": "Hesenov",
+    "CarModel": "Infiniti ",
+    "CarNumber": "62-SH-669",
+    "Rating": 0,
+    "Balance": 0,
+    "CarGraphic": null,
+    "RouteCount": 0,
+    "RatingAll": 0,
+    "Guid": "10534046-a8d8-448d-964c-30151a220c68"
   }
 ]
