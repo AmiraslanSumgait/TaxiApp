@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Amiraslan\Source\Repos\TaxiApp\AdminPanel\obj\Debug\
+C:\Users\Amiraslan\source\repos\TaxiApp\AdminPanel\obj\Debug\
 AdminPanel
 none
 false
 DEBUG;TRACE
-C:\Users\Amiraslan\Source\Repos\TaxiApp\AdminPanel\App.xaml
-51984602417
+C:\Users\Amiraslan\source\repos\TaxiApp\AdminPanel\App.xaml
+5-1357121280
 
-15169497153
-124-813918619
+15-545903244
+1241117591733
 Views\AddDriverView.xaml;Views\DriversListPage.xaml;Views\GainView.xaml;Views\MainView.xaml;Views\RoutePrice.xaml;
 
 False

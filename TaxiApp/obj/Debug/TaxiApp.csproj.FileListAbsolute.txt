@@ -1030,3 +1030,4 @@ C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\System.Threading.Tasks
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\bin\Debug\System.ValueTuple.xml
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\RideHistory.g.cs
 C:\Users\Amiraslan\Source\Repos\TaxiApp\TaxiApp\obj\Debug\Views\RideHistory.baml
+C:\Users\Amiraslan\source\repos\TaxiApp\TaxiApp\obj\Debug\TaxiApp.csproj.SuggestedBindingRedirects.cache

@@ -504,3 +504,4 @@ C:\Users\Amiraslan\Source\Repos\TaxiApp\AdminPanel\obj\Debug\Views\GainView.g.cs
 C:\Users\Amiraslan\Source\Repos\TaxiApp\AdminPanel\obj\Debug\App.baml
 C:\Users\Amiraslan\Source\Repos\TaxiApp\AdminPanel\obj\Debug\Views\AddDriverView.baml
 C:\Users\Amiraslan\Source\Repos\TaxiApp\AdminPanel\obj\Debug\Views\GainView.baml
+C:\Users\Amiraslan\source\repos\TaxiApp\AdminPanel\obj\Debug\AdminPanel.csproj.SuggestedBindingRedirects.cache

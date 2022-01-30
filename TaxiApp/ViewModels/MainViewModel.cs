@@ -367,7 +367,11 @@ namespace TaxiApp.ViewModels
                 // Add the location and label graphics to the graphics overlay.
                 routeAndStopsOverlay.Graphics.Add(markerGraphic);
                 routeAndStopsOverlay.Graphics.Add(textGraphic);
+              
                 addressLocation = geocodeResult.DisplayLocation;
+                addressLocation = (MapPoint)GeometryEngine.Project(addressLocation, SpatialReferences.Wgs84);
+                tappedX = addressLocation.X;
+                tappedY = addressLocation.Y;
 
             }
             catch (Exception)
@@ -534,7 +538,6 @@ namespace TaxiApp.ViewModels
             // Enable the location display (this wil start the location data source).
             MainView.MyMapView.LocationDisplay.IsEnabled = true;
             routeAndStopsOverlay.Graphics.Remove(nearestTaxi);
-
         }
         private void TrackingStatusUpdated(object sender, RouteTrackerTrackingStatusChangedEventArgs e)
         {

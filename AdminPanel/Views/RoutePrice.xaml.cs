@@ -33,10 +33,10 @@ namespace AdminPanel.Views
         {
             if (txbPrice.Text != string.Empty)
             {
-                if (txbPrice.Text.Contains("."))
-                {
-                    txbPrice.Text = txbPrice.Text.Replace('.', ',');
-                }
+                //if (txbPrice.Text.Contains("."))
+                //{
+                //    txbPrice.Text = txbPrice.Text.Replace('.', ',');
+                //}
                 Price = double.Parse(txbPrice.Text);
                 JsonService.WriteToJsonFile(Price, @"../../Resources/RoutePrice.json");
                 MessageBox.Show("Save succesfully!", "", MessageBoxButton.OK, MessageBoxImage.Asterisk);

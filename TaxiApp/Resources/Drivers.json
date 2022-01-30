@@ -16,11 +16,11 @@
     "Surname": "Idayatov",
     "CarModel": "Bmw M5",
     "CarNumber": "99-KK-444",
-    "Rating": 4.75,
+    "Rating": 4.6600000000000001,
     "Balance": 120,
     "CarGraphic": "MapPoint[X=49.726979, Y=40.478204, Wkid=4326]",
-    "RouteCount": 4,
-    "RatingAll": 19,
+    "RouteCount": 6,
+    "RatingAll": 28,
     "Guid": "29891e33-e29c-4a57-8920-6ed1b3d8c3f8"
   },
   {
@@ -28,11 +28,11 @@
     "Surname": "Həmidov",
     "CarModel": "Hyundai I30",
     "CarNumber": "99-EC-255",
-    "Rating": 4.25,
+    "Rating": 4,
     "Balance": 223,
     "CarGraphic": "MapPoint[X=49.71113, Y=40.5541, Wkid=4326]",
-    "RouteCount": 8,
-    "RatingAll": 34,
+    "RouteCount": 15,
+    "RatingAll": 60,
     "Guid": "632e0f81-d210-4a9a-84e7-c1e6705b2db7"
   },
   {
